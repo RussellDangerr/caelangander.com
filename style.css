@@ -303,8 +303,6 @@ a {
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   transition: all 0.25s ease;
-  cursor: pointer;
-  text-decoration: none;
 }
 
 .project-card:hover {
@@ -313,9 +311,6 @@ a {
   transform: translateY(-3px);
 }
 
-.project-card:hover .card-arrow {
-  transform: translate(2px, -2px);
-}
 
 .card-top {
   display: flex;
@@ -339,6 +334,12 @@ a {
   font-size: 1.125rem;
   color: var(--text-tertiary);
   transition: transform 0.25s ease;
+}
+
+.card-year {
+  font-size: 0.6875rem;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
 }
 
 .card-title {

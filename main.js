@@ -54,6 +54,6 @@
   const count = document.querySelector('.section-count');
   const cards = document.querySelectorAll('.project-card');
   if (count && cards.length) {
-    count.textContent = String(cards.length).padStart(2, '0') + ' projects';
+    count.textContent = String(cards.length).padStart(2, '0') + ' roles';
   }
 })();
