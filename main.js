@@ -50,10 +50,5 @@
   tick();
   setInterval(tick, 30000);
 
-  // Project count
-  const count = document.querySelector('.section-count');
-  const cards = document.querySelectorAll('.project-card');
-  if (count && cards.length) {
-    count.textContent = String(cards.length).padStart(2, '0') + ' roles';
-  }
+
 })();
