@@ -342,7 +342,7 @@ a {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
-  transition: all 0.25s ease;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
   border-top: 3px solid var(--orange-line);
 }
 
@@ -351,6 +351,10 @@ a {
   border-color: var(--text-tertiary);
   border-top-color: var(--orange-line);
   transform: translateY(-3px);
+}
+
+.card-static {
+  display: block;
 }
 
 .card-top {
@@ -377,19 +381,63 @@ a {
   font-variant-numeric: tabular-nums;
 }
 
-.card-title {
-  font-size: 1.25rem;
+.card-role {
+  font-size: 1.375rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin-bottom: 8px;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.card-company {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--orange);
+  letter-spacing: -0.005em;
+  margin-bottom: 20px;
+  transition: color var(--transition);
+}
+
+/* ── Flip area ────────────────────────────── */
+
+.card-flip {
+  position: relative;
+  perspective: 1200px;
+  margin-top: auto;
+  flex-grow: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.card-flip-inner {
+  position: relative;
+  width: 100%;
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-flip.is-flipped .card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  grid-area: 1 / 1;
+  position: relative;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  padding-right: 40px;
+}
+
+.card-face--back {
+  transform: rotateY(180deg);
 }
 
 .card-desc {
   font-size: 0.875rem;
   color: var(--text-secondary);
-  margin-bottom: 20px;
-  flex-grow: 1;
   line-height: 1.6;
+  margin: 0;
 }
 
 .card-tech {
@@ -397,6 +445,7 @@ a {
   gap: 6px;
   list-style: none;
   flex-wrap: wrap;
+  margin: 0;
 }
 
 .card-tech li {
@@ -408,6 +457,73 @@ a {
   padding: 2px 8px;
   border-radius: 4px;
   transition: background var(--transition), border-color var(--transition);
+}
+
+/* ── Spin button ──────────────────────────── */
+
+.card-spin {
+  position: absolute;
+  top: -4px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 0;
+  perspective: 200px;
+  transition: color var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.card-spin:hover,
+.card-spin:focus-visible {
+  color: var(--orange);
+  border-color: var(--orange);
+  box-shadow: 0 2px 8px rgba(232, 113, 58, 0.15);
+  outline: none;
+}
+
+.card-spin:focus-visible {
+  box-shadow: 0 0 0 3px rgba(232, 113, 58, 0.25);
+}
+
+.card-spin-icon {
+  display: block;
+  transform-style: preserve-3d;
+  animation: card-spin-idle 4.5s ease-in-out infinite;
+}
+
+.card-spin:hover .card-spin-icon,
+.card-spin:focus-visible .card-spin-icon {
+  animation: card-spin-hover 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.card-spin:active .card-spin-icon {
+  animation: none;
+  transform: rotateY(180deg);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes card-spin-idle {
+  0%, 100% { transform: rotateY(0deg); }
+  50%      { transform: rotateY(14deg); }
+}
+
+@keyframes card-spin-hover {
+  0%   { transform: rotateY(0deg); }
+  45%  { transform: rotateY(55deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-flip-inner { transition: none; }
+  .card-spin-icon,
+  .card-spin:hover .card-spin-icon,
+  .card-spin:focus-visible .card-spin-icon { animation: none; transform: none; }
 }
 
 /* ── About Grid ───────────────────────────── */
