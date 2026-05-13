@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#e8713a"/>
-  <text x="16" y="17"
+  <rect width="32" height="32" rx="6" fill="#40826D"/>
+  <text x="16" y="16"
         fill="#ffffff"
-        font-family="Roboto, system-ui, -apple-system, sans-serif"
-        font-size="18"
-        font-weight="700"
+        font-family="'IBM Plex Sans', system-ui, -apple-system, sans-serif"
+        font-size="20"
+        font-weight="600"
         letter-spacing="-0.5"
         text-anchor="middle"
-        dominant-baseline="central">cg</text>
+        dominant-baseline="central">CG</text>
 </svg>
