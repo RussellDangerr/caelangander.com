@@ -17,54 +17,62 @@
     localStorage.setItem('theme', next);
   });
 
-  /* ── View switcher ────────────────────── */
-  const panels = {
-    home:  document.querySelector('[data-view-panel="home"]'),
-    learn: document.querySelector('[data-view-panel="learn"]'),
-    talk:  document.querySelector('[data-view-panel="talk"]'),
+  /* ── Cluster expand/collapse ──────────── */
+  const validTargets = new Set(['talk', 'learn', 'explore']);
+
+  const updateAria = () => {
+    const active = body.dataset.active || null;
+    document.querySelectorAll('[data-go]').forEach((tile) => {
+      const target = tile.getAttribute('data-go');
+      const isOpen = target === active;
+      tile.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    document.querySelectorAll('.panel').forEach((panel) => {
+      const isOpen = panel.id === `panel-${active}`;
+      panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    });
   };
 
-  const setView = (next) => {
-    if (!panels[next]) return;
-    const current = body.dataset.view;
-    if (current === next) return;
-
-    // Make all panels visible during the transition so the leaving one can animate out
-    Object.values(panels).forEach((p) => p.removeAttribute('hidden'));
-
-    body.dataset.view = next;
-
-    // After the transition ends, re-hide the inactive panels for SR / tab order hygiene
-    window.setTimeout(() => {
-      Object.entries(panels).forEach(([name, p]) => {
-        if (name !== next) p.setAttribute('hidden', '');
-      });
-      const heading = panels[next].querySelector('.view-heading, .banner-name');
-      heading?.focus?.({ preventScroll: true });
-    }, 520);
+  const setActive = (next) => {
+    if (next && !validTargets.has(next)) return;
+    if (next) {
+      body.dataset.active = next;
+    } else {
+      delete body.dataset.active;
+    }
+    updateAria();
   };
 
   document.addEventListener('click', (e) => {
-    const trigger = e.target.closest('[data-go]');
-    if (!trigger) return;
-    const target = trigger.getAttribute('data-go');
-    if (!target || !panels[target]) return;
-    e.preventDefault();
-    setView(target);
-  });
+    const goTrigger = e.target.closest('[data-go]');
+    const backTrigger = e.target.closest('[data-back]');
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && body.dataset.view !== 'home') {
-      setView('home');
+    if (goTrigger) {
+      e.preventDefault();
+      const target = goTrigger.getAttribute('data-go');
+      const current = body.dataset.active || null;
+      setActive(current === target ? null : target);
+      return;
+    }
+
+    if (backTrigger) {
+      e.preventDefault();
+      setActive(null);
     }
   });
 
-  /* ── First-load intro: remove gate after choreography finishes ── */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && body.dataset.active) {
+      setActive(null);
+    }
+  });
+
+  /* ── Intro: lift the gate after choreography finishes ── */
   if (body.classList.contains('has-intro')) {
     window.setTimeout(() => body.classList.remove('has-intro'), 1500);
   }
 
-  /* ── Card flip (Learn view) ───────────── */
+  /* ── Card flip (inside Learn panel) ───── */
   document.querySelectorAll('[data-flip]').forEach((flip) => {
     const front = flip.querySelector('.card-face--front');
     const back  = flip.querySelector('.card-face--back');
@@ -84,7 +92,8 @@
     };
 
     buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // don't bubble to the tile button
         setFlipped(!flip.classList.contains('is-flipped'));
       });
     });
@@ -105,4 +114,6 @@
   };
   tick();
   window.setInterval(tick, 30000);
+
+  updateAria();
 })();
