@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Caelan Gander</title>
-  <meta name="description" content="Caelan Gander — product delivery, solution design, and healthcare SaaS.">
+  <meta name="description" content="Caelan Gander — product management and project delivery in healthcare SaaS.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
@@ -12,197 +12,189 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="has-intro" data-view="home">
 
   <!-- ── Nav ──────────────────────────────── -->
   <header class="header">
     <nav class="nav container">
-      <a href="/" class="logo">Caelan Gander</a>
-      <ul class="nav-links">
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#about">About</a></li>
-      </ul>
-      <button class="theme-toggle" aria-label="Toggle theme">
+      <button type="button" class="logo" data-go="home" aria-label="Home">Caelan Gander</button>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">
         <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
     </nav>
   </header>
 
-  <main>
+  <main class="stage">
 
-    <!-- ── Hero ────────────────────────────── -->
-    <section class="hero container">
-      <h1 class="hero-name">Product<br>&amp; Delivery</h1>
-      <div class="hero-meta">
-        <span class="meta-item">Solution Design</span>
-        <span class="meta-divider">/</span>
-        <span class="meta-item">Healthcare SaaS</span>
-        <span class="meta-divider">/</span>
-        <span class="meta-item">Kansas City</span>
-      </div>
-    </section>
+    <!-- ── Home view ──────────────────────────── -->
+    <section class="view view--home" data-view-panel="home" aria-labelledby="home-name">
+      <div class="container view-inner">
+        <div class="banner">
+          <h1 id="home-name" class="banner-name">Caelan Gander</h1>
+          <p class="banner-title">Senior Product Analyst</p>
+          <p class="banner-about">Product management and project delivery in healthcare SaaS. Solution-oriented and focused on bridging client and development.</p>
+        </div>
 
-    <!-- ── Get in Touch (above fold) ───────── -->
-    <section id="contact" class="section section--contact container">
-      <div class="section-header">
-        <h2 class="section-label">Get in Touch</h2>
-      </div>
-      <div class="contact-row">
-        <div class="contact-links">
-          <a href="mailto:caelan.gander@gmail.com" class="contact-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span>Email</span>
-          </a>
-          <a href="https://github.com/RussellDangerr" target="_blank" rel="noopener" class="contact-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            <span>Projects</span>
+        <div class="tiles">
+          <button type="button" class="tile" data-go="talk">
+            <span class="tile-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </span>
+            <span class="tile-verb">Talk</span>
+            <span class="tile-sub">Get in touch</span>
+          </button>
+
+          <button type="button" class="tile" data-go="learn">
+            <span class="tile-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </span>
+            <span class="tile-verb">Learn</span>
+            <span class="tile-sub">About my work</span>
+          </button>
+
+          <a class="tile" href="https://github.com/RussellDangerr" target="_blank" rel="noopener">
+            <span class="tile-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </span>
+            <span class="tile-verb">Explore</span>
+            <span class="tile-sub">Code &amp; projects</span>
           </a>
         </div>
-        <a href="https://calendar.google.com" target="_blank" rel="noopener" class="schedule-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <span>Schedule a Meeting</span>
-        </a>
       </div>
     </section>
 
-    <!-- ── Experience ──────────────────────── -->
-    <section id="work" class="section container reveal">
-      <div class="section-header">
-        <h2 class="section-label">Experience</h2>
-      </div>
-      <div class="project-grid">
+    <!-- ── Learn view ─────────────────────────── -->
+    <section class="view view--learn" data-view-panel="learn" aria-labelledby="learn-heading" hidden>
+      <div class="container view-inner">
+        <header class="view-header">
+          <button type="button" class="back-btn" data-go="home" aria-label="Back to home">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <span>Back</span>
+          </button>
+          <h2 id="learn-heading" class="view-heading">Experience</h2>
+        </header>
 
-        <article class="project-card">
-          <header class="card-static">
-            <div class="card-top">
-              <span class="card-tag">Current</span>
-              <span class="card-year">2024 &ndash; Present</span>
-            </div>
-            <h3 class="card-role">Senior Product Analyst</h3>
-            <p class="card-company">WellSky</p>
-          </header>
-          <div class="card-flip" data-flip>
-            <div class="card-flip-inner">
-              <div class="card-face card-face--front">
-                <ul class="card-tech">
-                  <li>Solution Design</li>
-                  <li>Scrum</li>
-                  <li>Stakeholder Comms</li>
-                  <li>SaaS Migration</li>
-                </ul>
-                <button class="card-spin" type="button" aria-pressed="false" aria-label="Show details">
-                  <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
-                    <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
-                  </svg>
-                </button>
-              </div>
-              <div class="card-face card-face--back" aria-hidden="true">
-                <p class="card-desc">Owning end-to-end delivery for a multi-vertical healthcare platform migration spanning 200+ business processes and 1,300+ backlog stories.</p>
-                <button class="card-spin" type="button" aria-pressed="true" aria-label="Hide details" tabindex="-1">
-                  <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
-                    <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
+        <div class="project-grid">
 
-        <article class="project-card">
-          <header class="card-static">
-            <div class="card-top">
-              <span class="card-tag">Federal</span>
-              <span class="card-year">2023 &ndash; 2024</span>
-            </div>
-            <h3 class="card-role">Program Analyst</h3>
-            <p class="card-company">Aptive Resources</p>
-          </header>
-          <div class="card-flip" data-flip>
-            <div class="card-flip-inner">
-              <div class="card-face card-face--front">
-                <ul class="card-tech">
-                  <li>EHR Modernization</li>
-                  <li>Clinician Workflows</li>
-                  <li>Council Coordination</li>
-                  <li>Federal / VA</li>
-                </ul>
-                <button class="card-spin" type="button" aria-pressed="false" aria-label="Show details">
-                  <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
-                    <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
-                  </svg>
-                </button>
+          <article class="project-card">
+            <header class="card-static">
+              <div class="card-top">
+                <span class="card-tag">Current</span>
+                <span class="card-year">2024 &ndash; Present</span>
               </div>
-              <div class="card-face card-face--back" aria-hidden="true">
-                <p class="card-desc">Council administrator supporting the VA's Electronic Health Records Modernization — translating clinician input into actionable design requirements.</p>
-                <button class="card-spin" type="button" aria-pressed="true" aria-label="Hide details" tabindex="-1">
-                  <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
-                    <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
-                  </svg>
-                </button>
+              <h3 class="card-role">Senior Product Analyst</h3>
+              <p class="card-company">WellSky</p>
+            </header>
+            <div class="card-flip" data-flip>
+              <div class="card-flip-inner">
+                <div class="card-face card-face--front">
+                  <ul class="card-tech">
+                    <li>Solution Design</li>
+                    <li>Scrum</li>
+                    <li>Stakeholder Comms</li>
+                    <li>SaaS Migration</li>
+                  </ul>
+                  <button class="card-spin" type="button" aria-pressed="false" aria-label="Show details">
+                    <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
+                      <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-face card-face--back" aria-hidden="true">
+                  <p class="card-desc">Owning end-to-end delivery for a multi-vertical healthcare platform migration spanning 200+ business processes and 1,300+ backlog stories.</p>
+                  <button class="card-spin" type="button" aria-pressed="true" aria-label="Hide details" tabindex="-1">
+                    <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
+                      <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="project-card">
-          <header class="card-static">
-            <div class="card-top">
-              <span class="card-tag">Enterprise</span>
-              <span class="card-year">2021 &ndash; 2023</span>
-            </div>
-            <h3 class="card-role">Implementation Consultant</h3>
-            <p class="card-company">Oracle Health</p>
-          </header>
-          <div class="card-flip" data-flip>
-            <div class="card-flip-inner">
-              <div class="card-face card-face--front">
-                <ul class="card-tech">
-                  <li>Implementation</li>
-                  <li>Data Migration</li>
-                  <li>Scheduling</li>
-                  <li>Billing</li>
-                  <li>Ambulatory</li>
-                </ul>
-                <button class="card-spin" type="button" aria-pressed="false" aria-label="Show details">
-                  <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
-                    <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
-                  </svg>
-                </button>
+          <article class="project-card">
+            <header class="card-static">
+              <div class="card-top">
+                <span class="card-tag">Federal</span>
+                <span class="card-year">2023 &ndash; 2024</span>
               </div>
-              <div class="card-face card-face--back" aria-hidden="true">
-                <p class="card-desc">16 successful go-lives in a single year across scheduling, billing, and patient accounting — 2022 Ambulatory Consulting Rookie of the Year.</p>
-                <button class="card-spin" type="button" aria-pressed="true" aria-label="Hide details" tabindex="-1">
-                  <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
-                    <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
-                  </svg>
-                </button>
+              <h3 class="card-role">Program Analyst</h3>
+              <p class="card-company">Aptive Resources</p>
+            </header>
+            <div class="card-flip" data-flip>
+              <div class="card-flip-inner">
+                <div class="card-face card-face--front">
+                  <ul class="card-tech">
+                    <li>EHR Modernization</li>
+                    <li>Clinician Workflows</li>
+                    <li>Council Coordination</li>
+                    <li>Federal / VA</li>
+                  </ul>
+                  <button class="card-spin" type="button" aria-pressed="false" aria-label="Show details">
+                    <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
+                      <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-face card-face--back" aria-hidden="true">
+                  <p class="card-desc">Council administrator supporting the VA's Electronic Health Records Modernization — translating clinician input into actionable design requirements.</p>
+                  <button class="card-spin" type="button" aria-pressed="true" aria-label="Hide details" tabindex="-1">
+                    <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
+                      <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-      </div>
-    </section>
+          <article class="project-card">
+            <header class="card-static">
+              <div class="card-top">
+                <span class="card-tag">Enterprise</span>
+                <span class="card-year">2021 &ndash; 2023</span>
+              </div>
+              <h3 class="card-role">Implementation Consultant</h3>
+              <p class="card-company">Oracle Health</p>
+            </header>
+            <div class="card-flip" data-flip>
+              <div class="card-flip-inner">
+                <div class="card-face card-face--front">
+                  <ul class="card-tech">
+                    <li>Implementation</li>
+                    <li>Data Migration</li>
+                    <li>Scheduling</li>
+                    <li>Billing</li>
+                    <li>Ambulatory</li>
+                  </ul>
+                  <button class="card-spin" type="button" aria-pressed="false" aria-label="Show details">
+                    <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
+                      <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-face card-face--back" aria-hidden="true">
+                  <p class="card-desc">16 successful go-lives in a single year across scheduling, billing, and patient accounting — 2022 Ambulatory Consulting Rookie of the Year.</p>
+                  <button class="card-spin" type="button" aria-pressed="true" aria-label="Hide details" tabindex="-1">
+                    <svg class="card-spin-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M3 7h13"/><polyline points="13 4 16 7 13 10"/>
+                      <path d="M21 17H8"/><polyline points="11 14 8 17 11 20"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
 
-    <!-- ── About ───────────────────────────── -->
-    <section id="about" class="section container reveal">
-      <div class="section-header">
-        <h2 class="section-label">About</h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-bio">
-          <p>Caelan is currently a Senior Solutions Analyst at WellSky supporting WellSky Specialty Care — a scalable and comprehensive healthcare information system built for long-term acute care hospitals. He has experience in product management, project implementation, consulting, and process improvement, with a skill set spanning technical depth, persuasive client engagement, and effective communication.</p>
-          <p>He is adept at reviewing workflows, identifying gaps, tracking progress, and evaluating build items and development solutions. Caelan provides project management and strategic communications support — identifying target stakeholders, developing comprehensive executive outreach plans, and coordinating the collaborative tasks of multiple project teams. Single point of contact for client requirements and the main client-engineering go-between, translating evolving client scenarios into implementable scope.</p>
         </div>
-        <div class="about-details">
+
+        <div class="learn-details">
           <div class="detail-group">
             <h3 class="detail-label">Tooling</h3>
             <ul class="pill-list">
@@ -229,6 +221,61 @@
               <li>B.A. International Studies</li>
             </ul>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Talk view ──────────────────────────── -->
+    <section class="view view--talk" data-view-panel="talk" aria-labelledby="talk-heading" hidden>
+      <div class="container view-inner">
+        <header class="view-header">
+          <button type="button" class="back-btn" data-go="home" aria-label="Back to home">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <span>Back</span>
+          </button>
+          <h2 id="talk-heading" class="view-heading">Talk</h2>
+        </header>
+
+        <div class="channels">
+          <a class="channel" href="mailto:caelan.gander@gmail.com">
+            <span class="channel-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            <span class="channel-body">
+              <span class="channel-label">Email</span>
+              <span class="channel-value">caelan.gander@gmail.com</span>
+            </span>
+          </a>
+
+          <a class="channel" href="tel:+15555555555">
+            <span class="channel-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <span class="channel-body">
+              <span class="channel-label">Call</span>
+              <span class="channel-value">(555) 555&#8209;5555 <span class="channel-flag">placeholder</span></span>
+            </span>
+          </a>
+
+          <a class="channel" href="sms:+15555555555">
+            <span class="channel-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </span>
+            <span class="channel-body">
+              <span class="channel-label">Text</span>
+              <span class="channel-value">(555) 555&#8209;5555 <span class="channel-flag">placeholder</span></span>
+            </span>
+          </a>
+
+          <a class="channel channel--primary" href="https://calendar.google.com" target="_blank" rel="noopener">
+            <span class="channel-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </span>
+            <span class="channel-body">
+              <span class="channel-label">Meet</span>
+              <span class="channel-value">Schedule a Google Meet</span>
+            </span>
+          </a>
         </div>
       </div>
     </section>
