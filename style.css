@@ -993,6 +993,33 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   letter-spacing: -0.01em;
 }
 
+.project-badge-head h3 {
+  margin-right: auto;
+}
+
+.badge-status {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.badge-status--public {
+  color: var(--blue);
+  background: var(--blue-soft);
+  border-color: var(--blue);
+}
+
+.badge-status--soon {
+  color: var(--orange);
+  background: var(--orange-soft);
+  border-color: var(--orange-line);
+}
+
 .project-badge .external {
   display: grid;
   place-items: center;
