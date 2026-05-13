@@ -31,9 +31,9 @@
   --ease-out:  cubic-bezier(0.2, 0.9, 0.3, 1);
   --ease-in:   cubic-bezier(0.7, 0, 0.84, 0);
   --ease-snap: cubic-bezier(0.4, 0, 0.6, 1);
-  --d-fast: 200ms;
-  --d-med: 320ms;
-  --d-view: 520ms;
+  --d-fast: 140ms;
+  --d-med: 220ms;
+  --d-view: 320ms;
   --transition: 0.2s ease;
 }
 
@@ -245,7 +245,7 @@ body[data-active] .banner {
 .tiles {
   display: flex;
   gap: 18px;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .cluster {
@@ -256,7 +256,11 @@ body[data-active] .banner {
   transition:
     flex-grow var(--d-view) var(--ease-out),
     flex-basis var(--d-view) var(--ease-out),
-    opacity var(--d-fast) var(--ease-out);
+    opacity 110ms var(--ease-out);
+}
+
+body:not([data-active]) .cluster > .tile {
+  flex: 1 0 auto;
 }
 
 body[data-active] .cluster {
@@ -410,52 +414,57 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .tile-icon {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 12px;
-  transition: opacity var(--d-fast) var(--ease-out), max-height var(--d-view) var(--ease-out), margin var(--d-view) var(--ease-out);
-  max-height: 200px;
+  margin-top: 14px;
+  max-height: 1000px;
   overflow: hidden;
+  min-width: 0;
+  transition:
+    opacity var(--d-fast) var(--ease-out),
+    max-height var(--d-view) var(--ease-out),
+    margin var(--d-view) var(--ease-out);
 }
 
 .tile-preview--list {
   flex-direction: column;
-  gap: 4px;
-  margin-top: 14px;
-}
-
-.preview-pill {
-  font-size: 0.6875rem;
-  font-weight: 500;
-  color: var(--text-tertiary);
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  padding: 4px 10px;
-  border-radius: 999px;
-  transition: background var(--transition), color var(--transition), border-color var(--transition);
-}
-
-.preview-pill--accent {
-  color: var(--blue);
-  border-color: var(--blue);
-  background: var(--blue-soft);
+  gap: 10px;
 }
 
 .preview-row {
-  font-size: 0.8125rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
   display: flex;
-  gap: 6px;
-  align-items: baseline;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
 }
 
 .preview-row strong {
   font-weight: 600;
   color: var(--text);
+  font-size: 0.875rem;
+  line-height: 1.3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .preview-row em {
   font-style: normal;
+  font-weight: 400;
   color: var(--text-tertiary);
+  font-size: 0.75rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meet-logo {
+  flex-shrink: 0;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 body[data-active] .tile-preview {
