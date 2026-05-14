@@ -481,6 +481,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .tile-icon {
   flex-direction: column;
   gap: 1px;
   min-width: 0;
+  max-width: 100%;
 }
 
 .preview-row strong {
@@ -488,12 +489,11 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .tile-icon {
   color: var(--color-text);
   font-size: 0.875rem;
   line-height: 1.3;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .preview-row em {
@@ -502,17 +502,22 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .tile-icon {
   color: var(--color-muted);
   font-size: 0.75rem;
   line-height: 1.3;
+  min-width: 0;
+  max-width: 100%;
+  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.meet-logo {
+.meet-logo,
+.preview-logo {
   flex-shrink: 0;
-  border-radius: 3px;
   display: inline-block;
   vertical-align: middle;
 }
+
+.meet-logo { border-radius: 3px; }
 
 body[data-active] .tile-preview {
   opacity: 0;
@@ -529,7 +534,7 @@ body[data-active] .tile-sub {
 
 .tile-back-affordance {
   grid-area: back;
-  display: inline-flex;
+  display: none;
   align-items: center;
   gap: 6px;
   font-size: 0.8125rem;
@@ -538,12 +543,7 @@ body[data-active] .tile-sub {
   padding: 6px 12px;
   border-radius: var(--radius-md);
   border: 1px solid transparent;
-  opacity: 0;
-  transform: translateX(8px);
-  pointer-events: none;
   transition:
-    opacity var(--d-fast) var(--ease-out),
-    transform var(--d-fast) var(--ease-out),
     color var(--d-fast) var(--ease-out),
     border-color var(--d-fast) var(--ease-out);
 }
@@ -551,9 +551,7 @@ body[data-active] .tile-sub {
 body[data-active="talk"]    .cluster[data-cluster="talk"]    .tile-back-affordance,
 body[data-active="learn"]   .cluster[data-cluster="learn"]   .tile-back-affordance,
 body[data-active="explore"] .cluster[data-cluster="explore"] .tile-back-affordance {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: auto;
+  display: inline-flex;
   border-color: var(--color-hairline);
   background: var(--color-bg);
 }
@@ -935,7 +933,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   background: var(--color-bg);
   border: 1px solid var(--color-text);
   border-radius: var(--radius-lg);
-  margin-bottom: 22px;
+  margin-top: 22px;
   position: relative;
   overflow: hidden;
   transition:
@@ -1006,12 +1004,13 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 18px 20px;
+  padding: 0 20px 18px;
   background: var(--color-bg);
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  border-top: 3px solid var(--color-secondary);
+  border-bottom: 3px solid var(--color-secondary);
+  overflow: hidden;
   transition:
     transform var(--d-fast) var(--ease-out),
     box-shadow var(--d-fast) var(--ease-out),
@@ -1023,8 +1022,38 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: var(--color-muted);
-  border-top-color: var(--color-secondary);
+  border-bottom-color: var(--color-secondary);
   outline: none;
+}
+
+.badge-media {
+  margin: 0 -20px 14px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.badge-media--placeholder {
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-hairline);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-text);
+  letter-spacing: 0.01em;
+}
+
+.project-badge-head {
+  padding-top: 4px;
 }
 
 .project-badge-head {
@@ -1164,6 +1193,8 @@ body[data-active] .footer { opacity: 0.5; }
 
   body[data-active] .cluster {
     flex: 0 0 0;
+    min-height: 0;
+    overflow: hidden;
     margin: 0;
   }
 

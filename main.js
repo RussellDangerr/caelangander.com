@@ -33,14 +33,40 @@
     });
   };
 
-  const setActive = (next) => {
-    if (next && !validTargets.has(next)) return;
-    if (next) {
-      body.dataset.active = next;
-    } else {
-      delete body.dataset.active;
-    }
+  const applyActive = (next) => {
+    if (next && !validTargets.has(next)) next = null;
+    if (next) body.dataset.active = next;
+    else delete body.dataset.active;
     updateAria();
+  };
+
+  const readHash = () => {
+    const h = location.hash.slice(1);
+    return validTargets.has(h) ? h : null;
+  };
+
+  const open = (target) => {
+    if (!validTargets.has(target)) return;
+    const current = body.dataset.active || null;
+    if (current === target) return;
+    if (current) {
+      // Swapping tiles — don't grow the back stack
+      history.replaceState(null, '', `#${target}`);
+      applyActive(target);
+    } else {
+      // Opening from home — push a new entry so back gesture lands here
+      location.hash = target;
+    }
+  };
+
+  const close = () => {
+    if (!body.dataset.active) return;
+    if (location.hash) {
+      // We pushed this entry on open; pop it so back gesture parity is preserved
+      history.back();
+    } else {
+      applyActive(null);
+    }
   };
 
   document.addEventListener('click', (e) => {
@@ -51,24 +77,30 @@
       e.preventDefault();
       const target = goTrigger.getAttribute('data-go');
       const current = body.dataset.active || null;
-      setActive(current === target ? null : target);
+      if (current === target) close();
+      else open(target);
       return;
     }
 
     if (backTrigger) {
       e.preventDefault();
-      setActive(null);
+      close();
     }
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && body.dataset.active) {
-      setActive(null);
-    }
+    if (e.key === 'Escape' && body.dataset.active) close();
   });
 
+  window.addEventListener('hashchange', () => applyActive(readHash()));
+
   /* ── Intro: lift the gate after choreography finishes ── */
-  if (body.classList.contains('has-intro')) {
+  const initialTarget = readHash();
+  if (initialTarget) {
+    // Deep link — skip intro, just show the panel
+    body.classList.remove('has-intro');
+    applyActive(initialTarget);
+  } else if (body.classList.contains('has-intro')) {
     window.setTimeout(() => body.classList.remove('has-intro'), 1500);
   }
 
