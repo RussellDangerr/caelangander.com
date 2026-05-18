@@ -50,11 +50,11 @@
     const current = body.dataset.active || null;
     if (current === target) return;
     if (current) {
-      // Swapping tiles — don't grow the back stack
+      // Swapping tiles – don't grow the back stack
       history.replaceState(null, '', `#${target}`);
       applyActive(target);
     } else {
-      // Opening from home — push a new entry so back gesture lands here
+      // Opening from home – push a new entry so back gesture lands here
       location.hash = target;
     }
   };
@@ -97,7 +97,7 @@
   /* ── Intro: lift the gate after choreography finishes ── */
   const initialTarget = readHash();
   if (initialTarget) {
-    // Deep link — skip intro, just show the panel
+    // Deep link – skip intro, just show the panel
     body.classList.remove('has-intro');
     applyActive(initialTarget);
   } else if (body.classList.contains('has-intro')) {
@@ -128,6 +128,27 @@
         e.stopPropagation(); // don't bubble to the tile button
         setFlipped(!flip.classList.contains('is-flipped'));
       });
+    });
+  });
+
+  /* ── Talk panel: Call/Text dual toggle ── */
+  document.querySelectorAll('[data-toggle-dual]').forEach((el) => {
+    const setOpen = (open) => {
+      el.classList.toggle('is-open', open);
+      el.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('.popout-btn')) return;
+      setOpen(!el.classList.contains('is-open'));
+    });
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setOpen(!el.classList.contains('is-open'));
+      } else if (e.key === 'Escape' && el.classList.contains('is-open')) {
+        e.stopPropagation();
+        setOpen(false);
+      }
     });
   });
 
