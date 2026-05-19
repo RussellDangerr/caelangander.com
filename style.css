@@ -14,13 +14,20 @@
   --color-hairline:  rgba(26, 31, 28, 0.1);
   --color-surface:   #F8F8F8;
 
-  --color-primary:        #40826D;                  /* Viridian */
-  --color-primary-deep:   #2F6557;
-  --color-primary-soft:   rgba(64, 130, 109, 0.1);
+  /* Tailwind green workhorse + purple accent.
+     --color-primary = green-700, the brand workhorse.
+     --color-secondary = purple-700, reserved for secondary action affordances.
+     --color-ink = green-900, depth-grade for headlines, eyebrows, deep borders. */
+  --color-primary:        #15803D;                  /* Tailwind green-700 */
+  --color-primary-deep:   #166534;                  /* Tailwind green-800 */
+  --color-primary-soft:   rgba(21, 128, 61, 0.1);
 
-  --color-secondary:      #B7490E;                  /* Rust */
-  --color-secondary-deep: #8B3608;
-  --color-secondary-soft: rgba(183, 73, 14, 0.1);
+  --color-ink:            #14532D;                  /* Tailwind green-900 */
+  --color-ink-soft:       rgba(20, 83, 45, 0.12);
+
+  --color-secondary:      #7E22CE;                  /* Tailwind purple-700 */
+  --color-secondary-deep: #6B21A8;                  /* Tailwind purple-800 */
+  --color-secondary-soft: rgba(126, 34, 206, 0.1);
 
   /* ── Typography ───────────────────────────────────────────────────── */
   --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
@@ -87,13 +94,16 @@
     --color-hairline:  rgba(255, 255, 255, 0.08);
     --color-surface:   #1A2520;
 
-    --color-primary:        #5FB89A;
-    --color-primary-deep:   #7BCBB0;                /* hover lifts brighter in dark */
-    --color-primary-soft:   rgba(95, 184, 154, 0.15);
+    --color-primary:        #22C55E;                /* Tailwind green-500 — lifted for dark */
+    --color-primary-deep:   #4ADE80;                /* Tailwind green-400 — hover lift */
+    --color-primary-soft:   rgba(34, 197, 94, 0.18);
 
-    --color-secondary:      #EE8E5C;                /* lifted Rust reads as coral */
-    --color-secondary-deep: #F5A57C;                /* hover lifts brighter in dark */
-    --color-secondary-soft: rgba(238, 142, 92, 0.15);
+    --color-ink:            #22C55E;                /* collapses to --primary in dark */
+    --color-ink-soft:       rgba(34, 197, 94, 0.18);
+
+    --color-secondary:      #D8B4FE;                /* Tailwind purple-300 — lifted for dark */
+    --color-secondary-deep: #E9D5FF;                /* Tailwind purple-200 — hover lift */
+    --color-secondary-soft: rgba(216, 180, 254, 0.18);
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
@@ -109,13 +119,16 @@
   --color-hairline:  rgba(255, 255, 255, 0.08);
   --color-surface:   #1A2520;
 
-  --color-primary:        #5FB89A;
-  --color-primary-deep:   #7BCBB0;
-  --color-primary-soft:   rgba(95, 184, 154, 0.15);
+  --color-primary:        #22C55E;                  /* Tailwind green-500 */
+  --color-primary-deep:   #4ADE80;                  /* Tailwind green-400 */
+  --color-primary-soft:   rgba(34, 197, 94, 0.18);
 
-  --color-secondary:      #EE8E5C;
-  --color-secondary-deep: #F5A57C;
-  --color-secondary-soft: rgba(238, 142, 92, 0.15);
+  --color-ink:            #22C55E;                  /* collapses to --primary in dark */
+  --color-ink-soft:       rgba(34, 197, 94, 0.18);
+
+  --color-secondary:      #D8B4FE;                  /* Tailwind purple-300 */
+  --color-secondary-deep: #E9D5FF;                  /* Tailwind purple-200 */
+  --color-secondary-soft: rgba(216, 180, 254, 0.18);
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
@@ -182,7 +195,7 @@ button { font-family: inherit; background: none; border: none; color: inherit; c
 .logo svg {
   display: block;
   border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(183, 73, 14, 0.25);
+  box-shadow: 0 1px 2px rgba(21, 128, 61, 0.25);
 }
 
 .logo:hover,
@@ -193,7 +206,7 @@ button { font-family: inherit; background: none; border: none; color: inherit; c
 
 .logo:hover svg,
 .logo:focus-visible svg {
-  box-shadow: 0 4px 12px rgba(183, 73, 14, 0.35);
+  box-shadow: 0 4px 12px rgba(21, 128, 61, 0.35);
 }
 
 .theme-toggle {
@@ -262,7 +275,7 @@ button { font-family: inherit; background: none; border: none; color: inherit; c
 .banner-title {
   font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
   font-weight: 500;
-  color: var(--color-secondary);
+  color: var(--color-primary);
   letter-spacing: -0.005em;
   margin-bottom: 16px;
 }
@@ -354,7 +367,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, transparent 60%, var(--color-secondary-soft) 100%);
+  background: linear-gradient(135deg, transparent 60%, var(--color-primary-soft) 100%);
   opacity: 0;
   transition: opacity var(--d-med) var(--ease-out);
   pointer-events: none;
@@ -364,7 +377,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] {
 .tile:focus-visible {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--color-secondary);
+  border-color: var(--color-primary);
   outline: none;
 }
 
@@ -385,7 +398,7 @@ body[data-active="learn"]   .cluster[data-cluster="learn"]   .tile,
 body[data-active="explore"] .cluster[data-cluster="explore"] .tile {
   cursor: default;
   transform: none;
-  border-color: var(--color-secondary);
+  border-color: var(--color-primary);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   padding: 22px 24px;
@@ -406,7 +419,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .tile::before {
   height: 48px;
   border-radius: var(--radius-lg);
   background: var(--color-surface);
-  color: var(--color-secondary);
+  color: var(--color-primary);
   flex-shrink: 0;
   transition:
     background var(--d-fast) var(--ease-out),
@@ -418,7 +431,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .tile::before {
 
 .tile:hover .tile-icon,
 .tile:focus-visible .tile-icon {
-  background: var(--color-secondary);
+  background: var(--color-primary);
   color: var(--color-bg);
   transform: rotate(-6deg) scale(1.05);
 }
@@ -426,7 +439,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .tile::before {
 body[data-active="talk"]    .cluster[data-cluster="talk"]    .tile-icon,
 body[data-active="learn"]   .cluster[data-cluster="learn"]   .tile-icon,
 body[data-active="explore"] .cluster[data-cluster="explore"] .tile-icon {
-  background: var(--color-secondary);
+  background: var(--color-primary);
   color: var(--color-bg);
   width: 42px;
   height: 42px;
@@ -559,8 +572,8 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .tile-back-affordan
 body[data-active="talk"]    .cluster[data-cluster="talk"]    .tile:hover .tile-back-affordance,
 body[data-active="learn"]   .cluster[data-cluster="learn"]   .tile:hover .tile-back-affordance,
 body[data-active="explore"] .cluster[data-cluster="explore"] .tile:hover .tile-back-affordance {
-  color: var(--color-secondary);
-  border-color: var(--color-secondary);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 /* ── Panel reveal ────────────────────────── */
@@ -576,7 +589,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .tile:hover .tile-b
   min-height: 0;
   opacity: 0;
   background: var(--color-bg);
-  border: 1px solid var(--color-secondary);
+  border: 1px solid var(--color-primary);
   border-top: none;
   border-bottom-left-radius: var(--radius-lg);
   border-bottom-right-radius: var(--radius-lg);
@@ -630,7 +643,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 .channel:focus-visible {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  border-color: var(--color-secondary);
+  border-color: var(--color-primary);
   outline: none;
 }
 
@@ -646,14 +659,14 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   height: 40px;
   border-radius: var(--radius-lg);
   background: var(--color-surface);
-  color: var(--color-secondary);
+  color: var(--color-primary);
   flex-shrink: 0;
   transition: background var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out);
 }
 
 .channel:hover .channel-icon,
 .channel:focus-visible .channel-icon {
-  background: var(--color-secondary);
+  background: var(--color-primary);
   color: var(--color-bg);
 }
 
@@ -694,7 +707,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 
 .channel--primary { border-color: var(--color-primary); }
 .channel--primary .channel-icon { background: var(--color-primary-soft); color: var(--color-primary); }
-.channel--primary:hover { border-color: var(--color-primary); box-shadow: 0 14px 32px rgba(64, 130, 109, 0.18); }
+.channel--primary:hover { border-color: var(--color-primary); box-shadow: 0 14px 32px rgba(21, 128, 61, 0.18); }
 .channel--primary:hover .channel-icon { background: var(--color-primary); color: var(--color-bg); }
 
 /* ── Learn panel: experience cards (unchanged structure) ─── */
@@ -715,13 +728,13 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-  border-top: 3px solid var(--color-secondary);
+  border-top: 3px solid var(--color-primary);
 }
 
 .project-card:hover {
   box-shadow: var(--shadow-md);
   border-color: var(--color-muted);
-  border-top-color: var(--color-secondary);
+  border-top-color: var(--color-primary);
   transform: translateY(-3px);
 }
 
@@ -762,7 +775,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 .card-company {
   font-size: 1.0625rem;
   font-weight: 500;
-  color: var(--color-secondary);
+  color: var(--color-primary);
   letter-spacing: -0.005em;
   margin-bottom: 18px;
 }
@@ -843,13 +856,13 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 
 .card-spin:hover,
 .card-spin:focus-visible {
-  color: var(--color-secondary);
-  border-color: var(--color-secondary);
-  box-shadow: 0 2px 8px rgba(183, 73, 14, 0.15);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(21, 128, 61, 0.15);
   outline: none;
 }
 
-.card-spin:focus-visible { box-shadow: 0 0 0 3px rgba(183, 73, 14, 0.25); }
+.card-spin:focus-visible { box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.25); }
 
 .card-spin-icon {
   display: block;
@@ -919,7 +932,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 }
 
 .pill-list li:hover {
-  border-color: var(--color-secondary);
+  border-color: var(--color-primary);
   color: var(--color-text);
 }
 
@@ -1009,7 +1022,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  border-bottom: 3px solid var(--color-secondary);
+  border-bottom: 3px solid var(--color-primary);
   overflow: hidden;
   transition:
     transform var(--d-fast) var(--ease-out),
@@ -1022,7 +1035,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: var(--color-muted);
-  border-bottom-color: var(--color-secondary);
+  border-bottom-color: var(--color-primary);
   outline: none;
 }
 
@@ -1091,9 +1104,9 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 }
 
 .badge-status--soon {
-  color: var(--color-secondary);
-  background: var(--color-secondary-soft);
-  border-color: var(--color-secondary);
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
 }
 
 .project-badge .external {
@@ -1104,7 +1117,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 }
 
 .project-badge:hover .external {
-  color: var(--color-secondary);
+  color: var(--color-primary);
   transform: translate(2px, -2px);
 }
 
@@ -1163,7 +1176,7 @@ body.has-intro .banner-wrap { transition: none; }
   align-items: center;
   justify-content: space-between;
   padding: 24px 48px;
-  border-top: 2px solid var(--color-secondary);
+  border-top: 2px solid var(--color-primary);
   font-size: 0.75rem;
   color: var(--color-muted);
   transition: border-color var(--transition), opacity var(--d-view) var(--ease-out);
@@ -1234,7 +1247,7 @@ body[data-active] .footer { opacity: 0.5; }
 }
 
 .channel--dual:focus-visible {
-  outline: 2px solid var(--color-secondary);
+  outline: 2px solid var(--color-secondary);   /* purple — semantic 'alternate path' accent */
   outline-offset: 2px;
 }
 
@@ -1274,12 +1287,12 @@ body[data-active] .footer { opacity: 0.5; }
 
 .channel--dual:hover .channel-toggle-arrow,
 .channel--dual:focus-visible .channel-toggle-arrow {
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 .channel--dual.is-open .channel-toggle-arrow {
   transform: rotate(180deg);
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 .channel-popout {
@@ -1334,7 +1347,7 @@ body[data-active] .footer { opacity: 0.5; }
 }
 
 .popout-btn svg {
-  color: var(--color-secondary);
+  color: var(--color-primary);
   flex-shrink: 0;
   transition: transform 140ms var(--ease-out);
 }
@@ -1342,9 +1355,9 @@ body[data-active] .footer { opacity: 0.5; }
 .popout-btn:hover,
 .popout-btn:focus-visible {
   transform: translateY(-1px);
-  border-color: var(--color-secondary);
+  border-color: var(--color-primary);
   box-shadow: var(--shadow-sm);
-  background: var(--color-secondary-soft);
+  background: var(--color-primary-soft);
   outline: none;
 }
 
@@ -1383,7 +1396,7 @@ body[data-active] .footer { opacity: 0.5; }
 .channel--primary:hover,
 .channel--primary:focus-visible {
   transform: translateY(-3px);
-  box-shadow: 0 18px 40px rgba(64, 130, 109, 0.22);
+  box-shadow: 0 18px 40px rgba(21, 128, 61, 0.22);
 }
 
 .channel-icon--meet {
@@ -1446,7 +1459,7 @@ body[data-active] .footer { opacity: 0.5; }
 
 .resume-tagline {
   font-size: 0.875rem;
-  color: var(--color-secondary);
+  color: var(--color-primary);
   font-weight: 500;
   letter-spacing: 0.01em;
   margin-bottom: 14px;
@@ -1466,7 +1479,7 @@ body[data-active] .footer { opacity: 0.5; }
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--color-secondary);
+  color: var(--color-primary);
   margin: 36px 0 16px;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--color-hairline);
@@ -1498,14 +1511,14 @@ body[data-active] .footer { opacity: 0.5; }
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  border-top: 3px solid var(--color-secondary);
+  border-top: 3px solid var(--color-primary);
   transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
 
 .exp-card:hover {
   box-shadow: var(--shadow-md);
   border-color: var(--color-muted);
-  border-top-color: var(--color-secondary);
+  border-top-color: var(--color-primary);
   transform: translateY(-2px);
 }
 
@@ -1530,7 +1543,7 @@ body[data-active] .footer { opacity: 0.5; }
 .exp-company {
   font-size: 1rem;
   font-weight: 500;
-  color: var(--color-secondary);
+  color: var(--color-primary);
   letter-spacing: -0.005em;
 }
 
@@ -1570,7 +1583,7 @@ body[data-active] .footer { opacity: 0.5; }
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--color-secondary);
+  background: var(--color-primary);
 }
 
 .exp-bullets strong {
@@ -1599,8 +1612,8 @@ body[data-active] .footer { opacity: 0.5; }
 }
 
 .card-tag--alt {
-  color: var(--color-secondary);
-  background: var(--color-secondary-soft);
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
 }
 
 /* ── Learn panel: earlier roles strip ──────── */
@@ -1644,7 +1657,7 @@ body[data-active] .footer { opacity: 0.5; }
 
 .earlier-org {
   font-size: 0.8125rem;
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 .earlier-dates {
@@ -1724,7 +1737,7 @@ body[data-active] .footer { opacity: 0.5; }
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  border-bottom: 3px solid var(--color-secondary);
+  border-bottom: 3px solid var(--color-primary);
   overflow: hidden;
   transition:
     transform var(--d-fast) var(--ease-out),
@@ -1735,7 +1748,7 @@ body[data-active] .footer { opacity: 0.5; }
 .project-badge--wide:hover {
   box-shadow: var(--shadow-md);
   border-color: var(--color-muted);
-  border-bottom-color: var(--color-secondary);
+  border-bottom-color: var(--color-primary);
 }
 
 /* ── Pain Mountain screenshot strip ──────── */
