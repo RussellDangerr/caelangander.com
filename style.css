@@ -344,7 +344,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] {
   grid-template-columns: auto 1fr auto;
   grid-template-areas: "icon body back";
   gap: 16px;
-  align-items: center;
+  align-items: start;          /* top-align icon to title row in default kiosk state — active-state rules override back to center */
   width: 100%;
   padding: 24px 24px 22px;
   background: var(--color-bg);
