@@ -1472,6 +1472,49 @@ body[data-active] .footer { opacity: 0.5; }
   max-width: 75ch;
 }
 
+/* Resume meta — labelled rows for Experience / Skills / Tools.
+   Spacious, obvious, bold labels. Renders as table-like rows on wide
+   screens, stacked on narrow. */
+.resume-meta {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--color-hairline);
+  border-bottom: 1px solid var(--color-hairline);
+  max-width: 75ch;
+}
+.resume-meta-row {
+  display: grid;
+  grid-template-columns: minmax(7rem, max-content) 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--color-hairline);
+}
+.resume-meta-row:last-child {
+  border-bottom: none;
+}
+.resume-meta-label {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-primary);
+  margin: 0;
+}
+.resume-meta-value {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--color-text);
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .resume-meta-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
+
 /* ── Section labels (shared across Learn + Explore) ──────── */
 
 .section-label {
