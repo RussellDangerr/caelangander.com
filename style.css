@@ -206,7 +206,7 @@ button { font-family: inherit; background: none; border: none; color: inherit; c
 
 .logo:hover svg,
 .logo:focus-visible svg {
-  box-shadow: 0 4px 12px rgba(21, 128, 61, 0.35);
+  box-shadow: 0 4px 12px rgba(126, 34, 206, 0.35);
 }
 
 .theme-toggle {
@@ -862,7 +862,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   outline: none;
 }
 
-.card-spin:focus-visible { box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.25); }
+.card-spin:focus-visible { box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.25); }
 
 .card-spin-icon {
   display: block;
@@ -1104,9 +1104,9 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 }
 
 .badge-status--soon {
-  color: var(--color-primary);
-  background: var(--color-primary-soft);
-  border-color: var(--color-primary);
+  color: var(--color-secondary);
+  background: var(--color-secondary-soft);
+  border-color: var(--color-secondary);
 }
 
 .project-badge .external {
@@ -1880,3 +1880,136 @@ body[data-active] .footer { opacity: 0.5; }
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ── PURPLE ACCENT DESIGN PASS (2026-05-21) ─────────────────────────────
+   Six coordinated additions that introduce purple (var(--color-secondary))
+   as a semantic accent across the site without disrupting the green
+   primary action color. See plan: harmonic-napping-taco.md.
+
+   Strategy: keep green for primary action / hover. Use purple for
+   keyboard-focus, in-development state, and structural dark-mode color.
+   Each rule is a SEPARATE :focus-visible selector that adds a purple
+   outline ON TOP OF the existing shared :hover/:focus-visible rules —
+   so mouse hover stays green, keyboard focus adds a purple ring.
+   ─────────────────────────────────────────────────────────────────── */
+
+/* 1. Global purple focus rings — keyboard accessibility + brand consistency */
+
+.logo:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 4px;
+}
+
+.tile:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.channel:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.github-cta:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.project-badge:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.popout-btn:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.channel--primary:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+/* 2. Theme toggle focus ring — previously had no focus-visible indicator */
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-color: var(--color-secondary);
+}
+
+/* 3. Banner purple horizontal divider — small accent between title and about */
+
+.banner-title {
+  position: relative;
+}
+.banner-title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--color-secondary);
+  border-radius: 1px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+/* 4. Tile-hover purple chevron — affordance that fades in on cursor-over */
+
+.tile {
+  position: relative;
+}
+.tile::after {
+  content: '›';
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--color-secondary);
+  line-height: 1;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity .18s ease, transform .18s ease;
+  pointer-events: none;
+}
+.tile:hover::after,
+.tile:focus-visible::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+/* Hide chevron when the tile has morphed into a panel header (active) */
+body[data-active] .cluster .tile::after {
+  display: none;
+}
+
+/* 5. Dark-mode-only architectural purple — soft border on exp-cards
+      + soft glow on the elevated Calendar (channel--primary) channel.
+      Light mode keeps its pared-down white aesthetic; dark mode gets
+      visible structural purple as the second-color anchor. */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .exp-card {
+    border-top: 2px solid var(--color-secondary-soft);
+  }
+  :root:not([data-theme="light"]) .channel--primary {
+    box-shadow: 0 0 0 1px var(--color-secondary-soft), var(--shadow-sm);
+  }
+}
+[data-theme="dark"] .exp-card {
+  border-top: 2px solid var(--color-secondary-soft);
+}
+[data-theme="dark"] .channel--primary {
+  box-shadow: 0 0 0 1px var(--color-secondary-soft), var(--shadow-sm);
+}
+
+/* 6. Project-badge purple border-bottom on interaction — restores the
+      "purple = in-development / secondary state" semantic that the
+      .badge-status--soon pill establishes. Replaces the green
+      border-bottom-color in the shared :hover/:focus-visible rule. */
+
+.project-badge:hover,
+.project-badge:focus-visible {
+  border-bottom-color: var(--color-secondary);
+}
+
