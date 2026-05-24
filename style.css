@@ -209,6 +209,29 @@ button { font-family: inherit; background: none; border: none; color: inherit; c
   box-shadow: 0 4px 12px rgba(126, 34, 206, 0.35);
 }
 
+.nav-name {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: -0.005em;
+  color: var(--color-text);
+  margin-left: 14px;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity var(--d-med) var(--ease-out), transform var(--d-med) var(--ease-out);
+}
+
+body[data-active] .nav-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+  .nav-name { font-size: 0.875rem; margin-left: 10px; }
+}
+
 .theme-toggle {
   display: flex;
   align-items: center;
