@@ -40,9 +40,9 @@
     updateAria();
   };
 
-  const readHash = () => {
-    const h = location.hash.slice(1);
-    return validTargets.has(h) ? h : null;
+  const readPath = () => {
+    const p = location.pathname.slice(1).replace(/\/$/, '');
+    return validTargets.has(p) ? p : null;
   };
 
   const open = (target) => {
@@ -51,17 +51,18 @@
     if (current === target) return;
     if (current) {
       // Swapping tiles – don't grow the back stack
-      history.replaceState(null, '', `#${target}`);
+      history.replaceState(null, '', `/${target}`);
       applyActive(target);
     } else {
       // Opening from home – push a new entry so back gesture lands here
-      location.hash = target;
+      history.pushState(null, '', `/${target}`);
+      applyActive(target);
     }
   };
 
   const close = () => {
     if (!body.dataset.active) return;
-    if (location.hash) {
+    if (location.pathname !== '/') {
       // We pushed this entry on open; pop it so back gesture parity is preserved
       history.back();
     } else {
@@ -92,10 +93,10 @@
     if (e.key === 'Escape' && body.dataset.active) close();
   });
 
-  window.addEventListener('hashchange', () => applyActive(readHash()));
+  window.addEventListener('popstate', () => applyActive(readPath()));
 
   /* ── Intro: lift the gate after choreography finishes ── */
-  const initialTarget = readHash();
+  const initialTarget = readPath();
   if (initialTarget) {
     // Deep link – skip intro, just show the panel
     body.classList.remove('has-intro');
