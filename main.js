@@ -30,6 +30,9 @@
     document.querySelectorAll('.panel').forEach((panel) => {
       const isOpen = panel.id === `panel-${active}`;
       panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      // inert keeps tab focus from landing inside collapsed panels (WCAG)
+      if (isOpen) panel.removeAttribute('inert');
+      else panel.setAttribute('inert', '');
     });
   };
 
