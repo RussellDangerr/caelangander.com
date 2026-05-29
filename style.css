@@ -28,6 +28,7 @@
   --color-surface-2:       #F1EDE4;   /* sunken chips / tags */
   --color-text:            #1A1C19;
   --color-muted:           #67706A;
+  --color-muted-strong:    #586059;   /* AA-safe muted for small text on --color-surface-2 chips */
   --color-hairline:        rgba(26, 28, 25, 0.12);
   --color-hairline-strong: rgba(26, 28, 25, 0.20);
 
@@ -116,6 +117,7 @@
     --color-surface-2:       #1E2723;
     --color-text:            #ECEAE3;
     --color-muted:           #9AA39C;
+    --color-muted-strong:    #9AA39C;   /* dark chips already clear AA — keep muted */
     --color-hairline:        rgba(255, 255, 255, 0.10);
     --color-hairline-strong: rgba(255, 255, 255, 0.18);
 
@@ -1074,7 +1076,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   font-family: var(--font-mono);
   font-size: 0.625rem;
   font-weight: 400;
-  color: var(--color-muted);
+  color: var(--color-muted-strong);
   background: var(--color-surface-2);
   border: 1px solid var(--color-hairline);
   padding: 3px 9px;
@@ -1087,7 +1089,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-primary);
+  color: var(--color-primary-deep);
   background: var(--color-primary-soft);
   padding: 3px 10px;
   border-radius: var(--radius-pill);
@@ -1122,7 +1124,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 .pill-list li {
   font-size: 0.8125rem;
   font-weight: 400;
-  color: var(--color-muted);
+  color: var(--color-muted-strong);
   background: var(--color-surface-2);
   border: 1px solid var(--color-hairline);
   padding: 5px 14px;
@@ -1343,7 +1345,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   font-family: var(--font-mono);
   font-size: 0.625rem;
   font-weight: 400;
-  color: var(--color-muted);
+  color: var(--color-muted-strong);
   background: var(--color-surface-2);
   border: 1px solid var(--color-hairline);
   padding: 2px 8px;
