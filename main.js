@@ -1,21 +1,8 @@
 (() => {
-  const root = document.documentElement;
   const body = document.body;
+  const navVerb = document.querySelector('.nav-verb');
 
-  /* ── Theme toggle ─────────────────────── */
-  const toggle = document.querySelector('.theme-toggle');
-  const saved = localStorage.getItem('theme');
-  if (saved) root.setAttribute('data-theme', saved);
-
-  toggle?.addEventListener('click', () => {
-    const isDark =
-      root.getAttribute('data-theme') === 'dark' ||
-      (!root.getAttribute('data-theme') &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
-    const next = isDark ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-  });
+  /* Theme follows the device (prefers-color-scheme); no manual toggle. */
 
   /* ── Cluster expand/collapse ──────────── */
   const validTargets = new Set(['talk', 'learn', 'explore']);
@@ -40,6 +27,7 @@
     if (next && !validTargets.has(next)) next = null;
     if (next) body.dataset.active = next;
     else delete body.dataset.active;
+    if (navVerb) navVerb.textContent = next ? next[0].toUpperCase() + next.slice(1) : '';
     updateAria();
   };
 
