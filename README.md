@@ -17,7 +17,7 @@ Routing uses the History API plus Cloudflare Pages `_redirects` so refreshes and
 ## Tech
 
 - Vanilla HTML / CSS / JavaScript — no build step, no framework.
-- Hand-written CSS design system (`style.css`) on a bold-editorial palette: roughly 70% warm-neutral, 20% green, 10% purple, with a per-verb accent (Talk green, Learn deep green, Explore purple). Colour values reference [Tailwind](https://tailwindcss.com/)'s green-700 / purple-700 as citable tokens — there is no Tailwind CDN or utility classes.
+- Hand-written CSS design system (`style.css`) on a bold-editorial palette: roughly 70% warm-neutral, 20% green, 10% purple, with a per-verb accent (Talk and Learn green, Explore purple). Colour values reference [Tailwind](https://tailwindcss.com/)'s green-700 / purple-700 as citable tokens — there is no Tailwind CDN or utility classes.
 - Typography: [Fraunces](https://fonts.google.com/specimen/Fraunces) (display serif) paired with IBM Plex Sans / Mono, loaded from Google Fonts.
 - Light and dark themes follow the visitor's device automatically (`prefers-color-scheme`); there is no manual theme toggle.
 - Cloudflare Pages for hosting and path routing.
