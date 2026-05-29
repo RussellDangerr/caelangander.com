@@ -35,8 +35,6 @@
   --color-primary:        #15803D;                 /* green-700 */
   --color-primary-deep:   #166534;                 /* green-800 */
   --color-primary-soft:   rgba(21, 128, 61, 0.10);
-  --color-ink:            #14532D;                 /* green-900 — Learn identity */
-  --color-ink-soft:       rgba(20, 83, 45, 0.10);
   --color-secondary:      #7E22CE;                 /* purple-700 */
   --color-secondary-deep: #6B21A8;                 /* purple-800 */
   --color-secondary-soft: rgba(126, 34, 206, 0.12);
@@ -124,8 +122,6 @@
     --color-primary:        #22C55E;               /* green-500 — lifted */
     --color-primary-deep:   #4ADE80;               /* green-400 */
     --color-primary-soft:   rgba(34, 197, 94, 0.16);
-    --color-ink:            #16A34A;               /* green-600 — keeps Learn distinct */
-    --color-ink-soft:       rgba(22, 163, 74, 0.18);
     --color-secondary:      #C084FC;               /* purple-400 — lifted */
     --color-secondary-deep: #D8B4FE;               /* purple-300 */
     --color-secondary-soft: rgba(192, 132, 252, 0.16);
@@ -146,9 +142,9 @@
   --accent-soft: var(--color-primary-soft);
 }
 .cluster[data-cluster="learn"] {
-  --accent:      var(--color-ink);
+  --accent:      var(--color-primary);   /* same green as Talk — one primary, not two */
   --accent-deep: var(--color-primary-deep);
-  --accent-soft: var(--color-ink-soft);
+  --accent-soft: var(--color-primary-soft);
 }
 .cluster[data-cluster="explore"] {
   --accent:      var(--color-secondary);
@@ -286,7 +282,7 @@ body[data-active] .nav-name { opacity: 1; transform: translateY(0); }
 }
 body[data-active] .nav-verb { opacity: 1; transform: translateY(0) scale(1); }
 body[data-active="talk"]    .nav-verb { background: var(--color-primary); }
-body[data-active="learn"]   .nav-verb { background: var(--color-ink); }
+body[data-active="learn"]   .nav-verb { background: var(--color-primary); }
 body[data-active="explore"] .nav-verb { background: var(--color-secondary); }
 
 @media (max-width: 480px) {
@@ -724,7 +720,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   background: transparent;
   color: var(--accent);
 }
-.channel--dual:hover .channel-icon--dual { background: transparent; color: var(--accent-deep); }
+.channel--dual:hover .channel-icon--dual { background: transparent; color: var(--accent); }
 .channel--dual .channel-icon--dual svg + svg { margin-left: -4px; }
 
 .channel-toggle-arrow {
@@ -794,13 +790,14 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   padding: 24px 28px;
   gap: 22px;
   border: none;
-  background: var(--accent-deep);   /* deeper green → ~7:1 headroom for white + sub-text */
+  background: var(--accent);        /* one green — same as the bands and icons */
   color: var(--color-on-accent);
   box-shadow: var(--shadow-md);
 }
 .channel--primary:hover,
 .channel--primary:focus-visible {
   transform: translateY(-3px);
+  background: var(--accent-deep);   /* the only place the deep green appears — hover only */
   box-shadow: 0 20px 44px color-mix(in srgb, var(--accent) 40%, transparent);
   border: none;
 }
@@ -817,7 +814,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 .channel--primary:hover .channel-icon--meet { background: #FFFFFF; }
 
 .channel-label--primary {
-  color: color-mix(in srgb, var(--color-on-accent) 82%, transparent);
+  color: var(--color-on-accent);
   font-family: var(--font-mono);
   font-weight: 600;
   text-transform: uppercase;
@@ -830,7 +827,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   letter-spacing: -0.015em;
   color: var(--color-on-accent);
 }
-.channel--primary .channel-aux { color: color-mix(in srgb, var(--color-on-accent) 78%, transparent); }
+.channel--primary .channel-aux { color: var(--color-on-accent); }
 
 .channel-arrow {
   display: grid;
