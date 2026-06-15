@@ -107,6 +107,11 @@
   /* ── Atmosphere ───────────────────────────────────────────────────── */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --grain-opacity: 0.04;
+
+  /* Live glow centre — JS nudges these toward the cursor; these are the
+     resting defaults so the page looks identical with JS off. */
+  --gx: 12%;
+  --gy: -6%;
 }
 
 /* ── DARK MODE — auto, follows the device (no manual toggle) ──────────── */
@@ -181,7 +186,7 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(62% 48% at 12% -6%, color-mix(in srgb, var(--color-primary) 13%, transparent), transparent 72%),
+    radial-gradient(62% 48% at var(--gx) var(--gy), color-mix(in srgb, var(--color-primary) 13%, transparent), transparent 72%),
     radial-gradient(46% 40% at 104% -8%, color-mix(in srgb, var(--color-secondary) 10%, transparent), transparent 70%);
 }
 body::after {
@@ -301,6 +306,10 @@ body[data-active="explore"] .nav-verb { background: var(--color-secondary); }
   flex-direction: column;
   gap: 52px;
 }
+/* Home view: float the hero + triptych to the optical centre of the viewport
+   instead of top-aligning them. When a panel is active the stage flows from
+   the top again so the long résumé/explore content scrolls naturally. */
+body:not([data-active]) .stage-inner { justify-content: center; }
 
 /* ── Banner / hero ──────────────────────────────────────────────────── */
 .banner-wrap {
@@ -313,6 +322,29 @@ body[data-active="explore"] .nav-verb { background: var(--color-secondary); }
   min-height: 0;
   position: relative;
   transition: opacity var(--d-fast) var(--ease-out), transform var(--d-fast) var(--ease-out);
+}
+
+/* Masthead eyebrow — same accent-dash idiom as the in-panel .section-label,
+   so the hero reads as part of the same editorial system. */
+.banner-kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-muted);
+  margin-bottom: 22px;
+}
+.banner-kicker::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  flex: 0 0 auto;
 }
 
 .banner-name {
@@ -353,7 +385,12 @@ body[data-active] .banner { opacity: 0; transform: translateY(-12px); }
     flex-basis var(--d-view) var(--ease-out),
     opacity 110ms var(--ease-out);
 }
-body:not([data-active]) .cluster > .tile { flex: 1 0 auto; }
+body:not([data-active]) .cluster > .tile {
+  flex: 1 0 auto;
+  /* Substantial cards that anchor the centred home view; the slack below the
+     content gives the hover arrow its corner and reads as deliberate space. */
+  min-height: clamp(240px, 32vh, 320px);
+}
 body[data-active] .cluster { flex: 0 0 0; opacity: 0; pointer-events: none; }
 body[data-active="talk"]    .cluster[data-cluster="talk"],
 body[data-active="learn"]   .cluster[data-cluster="learn"],
@@ -400,15 +437,15 @@ body[data-active="explore"] .cluster[data-cluster="explore"] {
 .tile::after {
   content: '→';
   position: absolute;
-  top: 24px;
-  right: 24px;
+  bottom: 24px;
+  right: 26px;
   font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   color: var(--accent);
   line-height: 1;
   opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  transform: translateX(-8px);
+  transition: opacity 0.2s ease, transform 0.2s var(--ease-out);
   pointer-events: none;
 }
 .tile:hover,
@@ -444,6 +481,25 @@ body[data-active] .tile {
 }
 body[data-active] .tile::before { opacity: 0; }
 body[data-active] .tile::after { display: none; }
+
+/* Triptych index mark — top-right corner numeral, magazine-style.
+   Brightens to the cluster accent on hover; collapses inside the band. */
+.tile-index {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);   /* muted-on-surface clears AA in both themes (~5.1:1 light, ~6.6:1 dark) */
+  transition: color var(--d-fast) var(--ease-out);
+  pointer-events: none;
+}
+.tile:hover .tile-index,
+.tile:focus-visible .tile-index { color: var(--accent); }
+body[data-active] .tile-index { display: none; }
 
 .tile-icon {
   grid-area: icon;
@@ -1388,17 +1444,19 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+body.has-intro .banner-kicker,
 body.has-intro .banner-name,
 body.has-intro .banner-about,
 body.has-intro .cluster {
   opacity: 0;
   animation: intro-up 720ms var(--ease-out) forwards;
 }
-body.has-intro .banner-name   { animation-delay:   0ms; }
-body.has-intro .banner-about  { animation-delay: 160ms; }
-body.has-intro .cluster:nth-child(1) { animation-delay: 340ms; }
-body.has-intro .cluster:nth-child(2) { animation-delay: 460ms; }
-body.has-intro .cluster:nth-child(3) { animation-delay: 580ms; }
+body.has-intro .banner-kicker { animation-delay:   0ms; }
+body.has-intro .banner-name   { animation-delay:  90ms; }
+body.has-intro .banner-about  { animation-delay: 220ms; }
+body.has-intro .cluster:nth-child(1) { animation-delay: 380ms; }
+body.has-intro .cluster:nth-child(2) { animation-delay: 500ms; }
+body.has-intro .cluster:nth-child(3) { animation-delay: 620ms; }
 body.has-intro .banner-wrap { transition: none; }
 
 /* ── Footer ─────────────────────────────────────────────────────────── */

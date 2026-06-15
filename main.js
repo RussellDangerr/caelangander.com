@@ -161,4 +161,38 @@
   window.setInterval(tick, 30000);
 
   updateAria();
+
+  /* ── Cursor-reactive hero glow ────────── */
+  // The top-left brand glow drifts gently toward the pointer via the --gx/--gy
+  // custom props that position body::before. Runs last so it can never preempt
+  // the essential init above; skipped for coarse pointers and reduced-motion,
+  // where the resting defaults stand.
+  (() => {
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!finePointer.matches || reduceMotion.matches) return;
+
+    const root = document.documentElement;
+    let gx = 12, gy = -6;   // current (damped) centre, %
+    let tx = 12, ty = -6;   // target centre, %
+    let raf = 0;
+
+    const step = () => {
+      gx += (tx - gx) * 0.08;
+      gy += (ty - gy) * 0.08;
+      root.style.setProperty('--gx', gx.toFixed(2) + '%');
+      root.style.setProperty('--gy', gy.toFixed(2) + '%');
+      raf = (Math.abs(tx - gx) > 0.05 || Math.abs(ty - gy) > 0.05)
+        ? requestAnimationFrame(step)
+        : 0;
+    };
+
+    window.addEventListener('pointermove', (e) => {
+      if (document.body.dataset.active) return;   // hero-only effect — idle while a panel is open
+      // Keep the drift subtle — a small range around the resting centre.
+      tx = 12 + ((e.clientX / window.innerWidth) - 0.5) * 22;
+      ty = -6 + ((e.clientY / window.innerHeight) - 0.5) * 14;
+      if (!raf) raf = requestAnimationFrame(step);
+    }, { passive: true });
+  })();
 })();
