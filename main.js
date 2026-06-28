@@ -144,6 +144,26 @@
     });
   });
 
+  /* ── Case-study cards: expand/collapse the deep dive ── */
+  document.querySelectorAll('[data-expand]').forEach((btn) => {
+    const card = btn.closest('.case-card');
+    const detail = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!card || !detail) return;
+
+    const setOpen = (open) => {
+      card.classList.toggle('is-expanded', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      // inert keeps tab focus out of the collapsed region (WCAG)
+      if (open) detail.removeAttribute('inert');
+      else detail.setAttribute('inert', '');
+    };
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation(); // a real <button>, so Enter/Space already fire click
+      setOpen(btn.getAttribute('aria-expanded') !== 'true');
+    });
+  });
+
   /* ── Footer clock + year ──────────────── */
   const clock = document.getElementById('clock');
   const yearEl = document.getElementById('year');
