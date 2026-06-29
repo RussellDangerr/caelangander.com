@@ -3,3 +3,6 @@
 # Local-only dev tools (not for deploy)
 favicon-preview.html
 og-image.html
+
+# Local Claude project notes (not for deploy, not for the live site)
+CLAUDE.md
