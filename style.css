@@ -1186,7 +1186,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   padding: 3px 10px;
   border-radius: var(--radius-pill);
 }
-.card-tag--alt { color: var(--color-muted); background: var(--color-surface-2); }
+.card-tag--alt { color: var(--color-muted-strong); background: var(--color-surface-2); }
 .card-year {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -1421,7 +1421,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   white-space: nowrap;
 }
 .badge-status--public {
-  color: var(--color-primary);
+  color: var(--color-primary-deep);
   background: var(--color-primary-soft);
   border-color: color-mix(in srgb, var(--color-primary) 38%, transparent);
 }
