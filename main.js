@@ -41,22 +41,24 @@
     const current = body.dataset.active || null;
     if (current === target) return;
     if (current) {
-      // Swapping tiles – don't grow the back stack
-      history.replaceState(null, '', `/${target}`);
+      // Swapping tiles – don't grow the back stack; carry the "home sits beneath" flag
+      history.replaceState({ cgHome: !!(history.state && history.state.cgHome) }, '', `/${target}`);
       applyActive(target);
     } else {
-      // Opening from home – push a new entry so back gesture lands here
-      history.pushState(null, '', `/${target}`);
+      // Opening from home – push a flagged entry so back/close can land home again
+      history.pushState({ cgHome: true }, '', `/${target}`);
       applyActive(target);
     }
   };
 
   const close = () => {
     if (!body.dataset.active) return;
-    if (location.pathname !== '/') {
-      // We pushed this entry on open; pop it so back gesture parity is preserved
+    if (history.state && history.state.cgHome) {
+      // We pushed this entry from home; pop it so back-gesture parity is preserved
       history.back();
     } else {
+      // Deep-loaded (or already at root): show home in place without leaving the site
+      if (location.pathname !== '/') history.replaceState(null, '', '/');
       applyActive(null);
     }
   };
