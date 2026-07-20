@@ -90,18 +90,19 @@
   --radius-pill: 999px;
 
   /* ── Elevation (warm-tinted) ──────────────────────────────────────── */
-  --shadow-sm: 0 1px 2px rgba(26, 28, 25, 0.05);
-  --shadow-md: 0 6px 18px rgba(26, 28, 25, 0.08);
-  --shadow-lg: 0 18px 44px rgba(26, 28, 25, 0.12);
+  --edge-highlight: rgba(255, 255, 255, 0.6);   /* top catch-light baked into every card shadow */
+  --shadow-sm: inset 0 1px 0 var(--edge-highlight), 0 1px 2px rgba(26, 28, 25, 0.05);
+  --shadow-md: inset 0 1px 0 var(--edge-highlight), 0 2px 4px rgba(26, 28, 25, 0.05), 0 8px 20px rgba(26, 28, 25, 0.08);
+  --shadow-lg: inset 0 1px 0 var(--edge-highlight), 0 4px 8px rgba(26, 28, 25, 0.06), 0 18px 36px rgba(26, 28, 25, 0.14);
 
   /* ── Motion & layout ──────────────────────────────────────────────── */
   --ease-out:  cubic-bezier(0.2, 0.9, 0.3, 1);
   --ease-in:   cubic-bezier(0.7, 0, 0.84, 0);
   --ease-snap: cubic-bezier(0.4, 0, 0.6, 1);
-  --d-fast:    140ms;
-  --d-med:     220ms;
-  --d-view:    340ms;
-  --transition: 0.2s ease;
+  --d-fast:    60ms;
+  --d-med:     120ms;
+  --d-view:    0ms;      /* section reshape is instant — layout animation stepped pixel-by-pixel (jitter) and VT snapshotting was ~700ms/janky; content still fades via --d-fast */
+  --transition: 0.12s ease;
   --max-width: 1180px;
 
   /* ── Atmosphere ───────────────────────────────────────────────────── */
@@ -134,9 +135,10 @@
     --color-secondary-soft: rgba(192, 132, 252, 0.16);
     --color-on-accent:      #0E1413;               /* dark text on bright fills */
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 18px 44px rgba(0, 0, 0, 0.5);
+    --edge-highlight: rgba(255, 255, 255, 0.05);
+    --shadow-sm: inset 0 1px 0 var(--edge-highlight), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: inset 0 1px 0 var(--edge-highlight), 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.4);
+    --shadow-lg: inset 0 1px 0 var(--edge-highlight), 0 4px 8px rgba(0, 0, 0, 0.35), 0 18px 36px rgba(0, 0, 0, 0.5);
 
     --grain-opacity: 0.05;
   }
@@ -186,8 +188,9 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(62% 48% at var(--gx) var(--gy), color-mix(in srgb, var(--color-primary) 13%, transparent), transparent 72%),
-    radial-gradient(46% 40% at 104% -8%, color-mix(in srgb, var(--color-secondary) 10%, transparent), transparent 70%);
+    radial-gradient(58% 44% at var(--gx) var(--gy), color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 70%),
+    radial-gradient(46% 40% at 104% -8%, color-mix(in srgb, var(--color-secondary) 11%, transparent), transparent 68%),
+    radial-gradient(92% 30% at 50% 118%, color-mix(in srgb, var(--color-primary) 6%, transparent), transparent 75%);
 }
 body::after {
   content: '';
@@ -226,9 +229,7 @@ button:focus-visible,
   position: sticky;
   top: 0;
   z-index: 100;
-  background: color-mix(in srgb, var(--color-bg) 72%, transparent);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: var(--color-bg);   /* opaque, ghost-free. Faux-frost (translucent, no blur) ghosted scrolling headings; a TRUE frosted look needs real backdrop-filter (now safe-ish since the glow is static → only re-blurs on scroll) — left as an opt-in. */
   border-bottom: 1px solid var(--color-hairline);
   transition: border-color var(--transition);
 }
@@ -350,6 +351,13 @@ body:not([data-active]) .stage-inner { justify-content: center; }
 }
 .banner-about strong { color: var(--color-text); font-weight: 600; }
 
+/* ── Editorial type craft: drive Fraunces' opsz display axis (loaded but
+   unused) and balance the heading rag / prose orphans. All free & static. */
+body { font-optical-sizing: auto; }
+.banner-name { font-variation-settings: 'opsz' 144, 'wght' 600; }
+.banner-name, .tile-verb, .resume-headline, .case-title, .exp-role { text-wrap: balance; }
+.banner-about, .exp-lede, .case-scope, .resume-summary { text-wrap: pretty; }
+
 body[data-active] .banner-wrap { grid-template-rows: 0fr; }
 body[data-active] .stage-inner { gap: 24px; }
 body[data-active] .banner { opacity: 0; transform: translateY(-12px); }
@@ -416,7 +424,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] {
   inset: 0;
   background: linear-gradient(135deg, transparent 55%, color-mix(in srgb, var(--accent) 10%, transparent) 100%);
   opacity: 0;
-  transition: opacity var(--d-med) var(--ease-out);
+  transition: opacity var(--d-fast) var(--ease-out);
   pointer-events: none;
 }
 .tile::after {
@@ -430,7 +438,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] {
   line-height: 1;
   opacity: 0;
   transform: translateX(-8px);
-  transition: opacity 0.2s ease, transform 0.2s var(--ease-out);
+  transition: opacity var(--d-fast) var(--ease-out), transform var(--d-fast) var(--ease-out);
   pointer-events: none;
 }
 .tile:hover,
@@ -453,7 +461,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] {
 /* Active tile morphs into a solid accent-filled header band.
    Only the active cluster is visible, so the broad selector is safe. */
 body[data-active] .tile {
-  cursor: default;
+  cursor: pointer;   /* the band is the close/back control — main.js closes on click */
   transform: none;
   background: var(--accent);
   border-color: var(--accent);
@@ -526,7 +534,7 @@ body[data-active] .tile-sub { color: var(--color-on-accent); opacity: 0.95; }
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 16px;
-  max-height: 1000px;
+  max-height: 240px;   /* ~= tallest preview (181px) + buffer; keeps the collapse eased, not abrupt */
   overflow: hidden;
   min-width: 0;
   transition:
@@ -822,7 +830,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 .channel--primary:focus-visible {
   transform: translateY(-3px);
   background: var(--accent-deep);   /* the only place the deep green appears — hover only */
-  box-shadow: 0 20px 44px color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 14px 28px color-mix(in srgb, var(--accent) 46%, transparent);
   border: none;
 }
 .channel-icon--meet {
@@ -1221,7 +1229,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   border: 1px solid var(--color-hairline);
   padding: 5px 14px;
   border-radius: var(--radius-pill);
-  transition: all var(--transition);
+  transition: border-color var(--transition), color var(--transition);
 }
 .pill-list li:hover { border-color: var(--accent); color: var(--color-text); }
 
@@ -1519,6 +1527,19 @@ body.has-intro .banner-wrap { transition: none; }
 body[data-active] .footer { opacity: 0.5; }
 .footer-time { font-variant-numeric: tabular-nums; }
 
+/* ── Lit-paper cards: a ~2% top-to-bottom grade so surfaces read as real
+   material, not flat template white. Stacks with the grain + edge-highlight.
+   The active accent band uses the `background` shorthand, so it stays solid. */
+.tile,
+.channel,
+.case-card,
+.exp-card,
+.edu-card,
+.project-badge {
+  background-image: linear-gradient(180deg, var(--color-surface) 0%,
+    color-mix(in srgb, var(--color-surface-2) 40%, var(--color-surface)) 100%);
+}
+
 /* ── Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 960px) {
   .container { padding: 0 32px; }
@@ -1548,6 +1569,11 @@ body[data-active] .footer { opacity: 0.5; }
   .footer { padding: 22px 24px; }
   .stage-inner { padding-top: 36px; padding-bottom: 48px; gap: 36px; }
 
+  /* open panel: stop the stage stretching to fill the viewport so the footer
+     hugs the content instead of stranding a void below a short section */
+  body[data-active] .stage { flex: 0 0 auto; }
+  body[data-active] .footer { margin-top: 0; }
+
   .pm-shots { grid-template-columns: 1fr; aspect-ratio: auto; }
   .pm-shot {
     aspect-ratio: 16 / 9;
@@ -1576,6 +1602,7 @@ body[data-active] .footer { opacity: 0.5; }
 
 /* ── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
