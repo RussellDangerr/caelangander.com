@@ -1023,6 +1023,8 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 
 /* Flagship case study spans the full Selected Work row */
 .case-card--flagship { grid-column: 1 / -1; }
+/* A fourth card spans it too, rather than sitting alone in the last row */
+.case-card--research { grid-column: 1 / -1; }
 
 /* Expandable deep-dive disclosure inside a case card */
 .case-expand {
