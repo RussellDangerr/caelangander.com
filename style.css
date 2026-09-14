@@ -1576,15 +1576,17 @@ body[data-active] .footer { opacity: 0.5; }
     align-items: start;
     padding: 20px;
   }
-  .project-badge--wide .badge-media {
+  .project-badge--wide .badge-media,
+  .project-badge--wide .pm-shots {
     grid-column: 1;
     grid-row: 1 / -1;
     margin: 0;
-    aspect-ratio: 1000 / 720;
     border-radius: var(--radius-md);
     border: 1px solid var(--color-hairline);
     box-shadow: var(--shadow-sm);
+    overflow: hidden;
   }
+  .project-badge--wide .badge-media { aspect-ratio: 1000 / 720; }
   .project-badge--wide .badge-media img { object-position: top; }
   .project-badge--wide .project-badge-head,
   .project-badge--wide .project-badge-desc,
