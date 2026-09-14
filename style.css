@@ -1531,9 +1531,9 @@ body[data-active] .footer { opacity: 0.5; }
 
 /* ── Lit-paper cards: a ~2% top-to-bottom grade so surfaces read as real
    material, not flat template white. Stacks with the grain + edge-highlight.
-   The active accent band uses the `background` shorthand, so it stays solid. */
+   The active accent band and the Meet CTA use the `background` shorthand, so they stay solid. */
 .tile,
-.channel,
+.channel:not(.channel--primary),
 .case-card,
 .exp-card,
 .edu-card,
