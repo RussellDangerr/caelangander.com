@@ -103,7 +103,7 @@
   --d-med:     120ms;
   --d-view:    0ms;      /* section reshape is instant — layout animation stepped pixel-by-pixel (jitter) and VT snapshotting was ~700ms/janky; content still fades via --d-fast */
   --transition: 0.12s ease;
-  --max-width: 1180px;
+  --max-width: clamp(1180px, 60vw, 1600px);
 
   /* ── Atmosphere ───────────────────────────────────────────────────── */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -1531,9 +1531,9 @@ body[data-active] .footer { opacity: 0.5; }
 
 /* ── Lit-paper cards: a ~2% top-to-bottom grade so surfaces read as real
    material, not flat template white. Stacks with the grain + edge-highlight.
-   The active accent band uses the `background` shorthand, so it stays solid. */
+   The active accent band and the Meet CTA use the `background` shorthand, so they stay solid. */
 .tile,
-.channel,
+.channel:not(.channel--primary),
 .case-card,
 .exp-card,
 .edu-card,
