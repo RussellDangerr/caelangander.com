@@ -1,6 +1,7 @@
 (() => {
   const body = document.body;
   const navVerb = document.querySelector('.nav-verb');
+  let markLearnSection = () => {};   // set up by the Learn section bar below
 
   /* Theme follows the device (prefers-color-scheme); no manual toggle. */
 
@@ -29,6 +30,7 @@
     else delete body.dataset.active;
     if (navVerb) navVerb.textContent = next ? next[0].toUpperCase() + next.slice(1) : '';
     updateAria();
+    markLearnSection();
   };
 
   const readPath = () => {
@@ -97,6 +99,44 @@
   });
 
   window.addEventListener('popstate', () => applyActive(readPath()));
+
+  /* ── Learn section bar: jump without a history entry, mark the section in view ── */
+  const learnNav = document.querySelector('.learn-nav');
+  if (learnNav) {
+    const links = [...learnNav.querySelectorAll('a[href^="#"]')];
+    const headings = links.map((a) => document.getElementById(a.hash.slice(1)));
+
+    learnNav.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      e.preventDefault();   // a #hash entry would drop the router's cgHome flag, like the skip link
+      document.getElementById(link.hash.slice(1))?.scrollIntoView({ block: 'start' });
+    });
+
+    markLearnSection = () => {
+      if (body.dataset.active !== 'learn') return;
+      const line = learnNav.getBoundingClientRect().bottom + 24;
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      let current = 0;
+      headings.forEach((h, i) => { if (h && h.getBoundingClientRect().top <= line) current = i; });
+      if (atBottom) current = headings.length - 1;
+      links.forEach((a, i) => {
+        if (i === current) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+      // on a narrow screen the bar scrolls sideways: keep the current link in view
+      const bar = learnNav.getBoundingClientRect();
+      const chip = links[current].getBoundingClientRect();
+      if (chip.left < bar.left || chip.right > bar.right) learnNav.scrollLeft += chip.left - bar.left - 16;
+    };
+
+    let queued = false;
+    window.addEventListener('scroll', () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; markLearnSection(); });
+    }, { passive: true });
+  }
 
   /* ── Intro: lift the gate after choreography finishes ── */
   const initialTarget = readPath();

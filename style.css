@@ -737,6 +737,7 @@ body[data-active] .tile:hover .tile-back-affordance {
   overflow: hidden;
   overflow: clip;   /* clips like hidden but isn't a scroll container, so the Learn section bar can stick */
   min-height: 0;
+  min-width: 0;     /* not being a scroll container, it would otherwise grow to its widest unwrapped line */
   opacity: 0;
   background: var(--color-surface);
   border: 1px solid var(--accent);
@@ -1046,6 +1047,43 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 }
 .section-label:first-of-type { margin-top: 0; }
 .resume-header + .section-label { margin-top: 0; }
+
+/* ── Learn: section bar, stuck under the header while Learn scrolls ─── */
+.learn-nav {
+  position: sticky;
+  top: 61px;   /* the header: 60px bar + 1px border */
+  z-index: 5;
+  display: flex;
+  gap: 6px;
+  margin: -36px -32px 28px;
+  padding: 12px 32px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-hairline);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.learn-nav::-webkit-scrollbar { display: none; }
+.learn-nav a {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-muted-strong);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
+}
+.learn-nav a:hover { color: var(--color-text); border-color: var(--accent); }
+.learn-nav a[aria-current="true"] {
+  color: var(--color-on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+#panel-learn .section-label[id] { scroll-margin-top: 128px; }   /* header + section bar + breathing room */
 
 /* ── Learn: résumé header ───────────────────────────────────────────── */
 .resume-header {
@@ -1737,7 +1775,7 @@ body[data-active] .footer { opacity: 0.5; }
   body[data-active="talk"]    .cluster[data-cluster="talk"],
   body[data-active="learn"]   .cluster[data-cluster="learn"],
   body[data-active="explore"] .cluster[data-cluster="explore"] { flex: 0 0 auto; }
-  body[data-active] .cluster { flex: 0 0 0; min-height: 0; overflow: hidden; margin: 0; }
+  body[data-active] .cluster { flex: 0 0 0; min-height: 0; overflow: hidden; overflow: clip; margin: 0; }   /* clip: not a scroll container, so the Learn bar can stick */
 
   .learn-details { grid-template-columns: 1fr; gap: 24px; }
   .channels { grid-template-columns: 1fr; }
@@ -1782,6 +1820,7 @@ body[data-active] .footer { opacity: 0.5; }
   body[data-active="talk"]    .cluster[data-cluster="talk"]    .panel-inner,
   body[data-active="learn"]   .cluster[data-cluster="learn"]   .panel-inner,
   body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner { padding: 26px 18px 30px; }
+  .learn-nav { margin: -26px -18px 20px; padding: 10px 18px; }
   .exp-card { padding: 20px 18px 18px; }
   .resume-headline { font-size: 1.25rem; }
   .channel--primary { padding: 18px 18px; gap: 14px; }
