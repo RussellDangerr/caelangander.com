@@ -1,6 +1,7 @@
 (() => {
   const body = document.body;
   const navVerb = document.querySelector('.nav-verb');
+  let markLearnSection = () => {};   // set up by the Learn section bar below
 
   /* Theme follows the device (prefers-color-scheme); no manual toggle. */
 
@@ -29,6 +30,7 @@
     else delete body.dataset.active;
     if (navVerb) navVerb.textContent = next ? next[0].toUpperCase() + next.slice(1) : '';
     updateAria();
+    markLearnSection();
   };
 
   const readPath = () => {
@@ -64,6 +66,16 @@
   };
 
   document.addEventListener('click', (e) => {
+    // Skip link: move focus without a #main history entry, which would drop
+    // the cgHome flag that lets Back return home through history.
+    if (e.target.closest('.skip-link')) {
+      e.preventDefault();
+      const main = document.getElementById('main');
+      main.focus({ preventScroll: true });
+      main.scrollIntoView();
+      return;
+    }
+
     const goTrigger = e.target.closest('[data-go]');
     const backTrigger = e.target.closest('[data-back]');
 
@@ -87,6 +99,76 @@
   });
 
   window.addEventListener('popstate', () => applyActive(readPath()));
+
+  /* ── Learn section bar: jump without a history entry, mark the section in view ── */
+  const learnNav = document.querySelector('.learn-nav');
+  if (learnNav) {
+    const links = [...learnNav.querySelectorAll('a[href^="#"]')];
+    const headings = links.map((a) => document.getElementById(a.hash.slice(1)));
+
+    // A clicked link keeps the highlight until the visitor scrolls on their own. Otherwise a
+    // short section near the end lands at the bottom of the page and the at-bottom rule below
+    // lights the last link instead of the one clicked.
+    let pinned = null;
+    let settledY = null;
+    let settleTimer = 0;
+    const unpin = () => { pinned = null; settledY = null; };
+    const settleSoon = () => {
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => { if (pinned !== null) settledY = window.scrollY; }, 150);
+    };
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((type) =>
+      window.addEventListener(type, unpin, { passive: true }));
+    // once the jump has settled, any further scroll (scrollbar, find-in-page, a script) hands it back too
+    window.addEventListener('scroll', () => {
+      if (pinned === null) return;
+      if (settledY !== null && Math.abs(window.scrollY - settledY) > 4) unpin();
+      else settleSoon();
+    }, { passive: true });
+
+    learnNav.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      e.preventDefault();   // a #hash entry would drop the router's cgHome flag, like the skip link
+      const heading = document.getElementById(link.hash.slice(1));
+      if (!heading) return;
+      pinned = links.indexOf(link);
+      settledY = null;
+      settleSoon();
+      markLearnSection();
+      heading.focus({ preventScroll: true });   // Tab and screen readers carry on from the section
+      heading.scrollIntoView({ block: 'start' });
+    });
+
+    markLearnSection = () => {
+      if (body.dataset.active !== 'learn') { pinned = null; return; }
+      let current = 0;
+      if (pinned !== null) {
+        current = pinned;
+      } else {
+        const line = learnNav.getBoundingClientRect().bottom + 24;
+        const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+        headings.forEach((h, i) => { if (h && h.getBoundingClientRect().top <= line) current = i; });
+        if (atBottom) current = headings.length - 1;
+      }
+      links.forEach((a, i) => {
+        if (i === current) a.setAttribute('aria-current', 'location');
+        else a.removeAttribute('aria-current');
+      });
+      // on a narrow screen the bar scrolls sideways: nudge the current link into view
+      const bar = learnNav.getBoundingClientRect();
+      const chip = links[current].getBoundingClientRect();
+      if (chip.left < bar.left) learnNav.scrollLeft += chip.left - bar.left - 16;
+      else if (chip.right > bar.right) learnNav.scrollLeft += chip.right - bar.right + 16;
+    };
+
+    let queued = false;
+    window.addEventListener('scroll', () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; markLearnSection(); });
+    }, { passive: true });
+  }
 
   /* ── Intro: lift the gate after choreography finishes ── */
   const initialTarget = readPath();
@@ -125,23 +207,24 @@
     });
   });
 
-  /* ── Talk panel: Call/Text dual toggle ── */
-  document.querySelectorAll('[data-toggle-dual]').forEach((el) => {
+  /* ── Talk panel: Call/Text disclosure ── */
+  document.querySelectorAll('[data-dual]').forEach((el) => {
+    const toggle = el.querySelector('[data-dual-toggle]');
+    const popout = el.querySelector('.channel-popout');
+    if (!toggle || !popout) return;
     const setOpen = (open) => {
       el.classList.toggle('is-open', open);
-      el.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      // inert keeps the hidden Call/Text links out of the tab order (WCAG)
+      if (open) popout.removeAttribute('inert');
+      else popout.setAttribute('inert', '');
     };
-    el.addEventListener('click', (e) => {
-      if (e.target.closest('.popout-btn')) return;
-      setOpen(!el.classList.contains('is-open'));
-    });
+    toggle.addEventListener('click', () => setOpen(!el.classList.contains('is-open')));
     el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        setOpen(!el.classList.contains('is-open'));
-      } else if (e.key === 'Escape' && el.classList.contains('is-open')) {
-        e.stopPropagation();
+      if (e.key === 'Escape' && el.classList.contains('is-open')) {
+        e.stopPropagation(); // close only the popout; the section stays open
         setOpen(false);
+        toggle.focus();
       }
     });
   });
@@ -171,10 +254,11 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // the visitor's own time, labelled with its zone
   const tick = () => {
     if (!clock) return;
     clock.textContent = new Date().toLocaleTimeString('en-US', {
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
       timeZoneName: 'short',
     });
