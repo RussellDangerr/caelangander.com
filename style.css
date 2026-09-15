@@ -317,6 +317,26 @@ button:focus-visible,
   outline-offset: 3px;
 }
 
+/* skip link: parked above the viewport until a keyboard user tabs onto it */
+.skip-link {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  z-index: 200;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-on-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+main:focus { outline: none; }
+
 /* ── Header ───────────────────────────────────────────────────────────── */
 .header {
   position: sticky;

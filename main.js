@@ -64,6 +64,16 @@
   };
 
   document.addEventListener('click', (e) => {
+    // Skip link: move focus without a #main history entry, which would drop
+    // the cgHome flag that lets Back return home through history.
+    if (e.target.closest('.skip-link')) {
+      e.preventDefault();
+      const main = document.getElementById('main');
+      main.focus({ preventScroll: true });
+      main.scrollIntoView();
+      return;
+    }
+
     const goTrigger = e.target.closest('[data-go]');
     const backTrigger = e.target.closest('[data-back]');
 
