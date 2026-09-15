@@ -1826,6 +1826,121 @@ body[data-active] .footer { opacity: 0.5; }
   .channel--primary { padding: 18px 18px; gap: 14px; }
 }
 
+/* ── Print: the Learn panel as a résumé, whichever section is open ──── */
+.print-contact { display: none; }
+
+@media print {
+  :root {
+    --color-bg: #fff;
+    --color-surface: #fff;
+    --color-surface-2: #fff;
+    --color-text: #000;
+    --color-muted: #333;
+    --color-muted-strong: #333;
+    --color-hairline: rgba(0, 0, 0, 0.22);
+    --color-hairline-strong: rgba(0, 0, 0, 0.35);
+    --color-primary: #000;
+    --color-primary-deep: #000;
+    --color-primary-soft: transparent;
+    --color-secondary: #000;
+    --color-secondary-deep: #000;
+    --color-secondary-soft: transparent;
+    --color-on-accent: #fff;
+    --edge-highlight: transparent;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+  }
+  @page { size: letter; margin: 0.5in 0.6in; }
+
+  html, body { background: #fff; }
+  body { display: block; min-height: 0; }
+  *, *::before, *::after { transition: none !important; }
+
+  body::before,
+  body::after,
+  .skip-link,
+  .header,
+  .banner-wrap,
+  .footer,
+  .tile,
+  .learn-nav,
+  .case-expand,
+  .cluster:not([data-cluster="learn"]) { display: none !important; }
+
+  .container { max-width: none; padding: 0; }
+  .stage-inner { display: block; padding: 0; }
+  .tiles { display: block; }
+  .cluster[data-cluster="learn"] {
+    display: block;
+    opacity: 1 !important;
+    animation: none !important;
+    overflow: visible !important;
+  }
+  .cluster[data-cluster="learn"] .panel { display: block !important; }
+  .cluster[data-cluster="learn"] .panel-inner {
+    opacity: 1 !important;
+    padding: 0 !important;
+    border: 0;
+    overflow: visible;
+  }
+  .case-detail { display: block; }
+  .case-detail-inner { opacity: 1; overflow: visible; }
+
+  .print-contact {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+
+  .case-card,
+  .exp-card,
+  .edu-card { background: #fff !important; transform: none !important; }
+
+  /* paper is narrower than the screen: tighter cards, and the short lists
+     go back to their desktop columns */
+  .case-card,
+  .exp-card,
+  .edu-card { padding: 16px 18px; gap: 8px; }
+  .earlier-roles,
+  .internship-list { padding: 14px 18px; }
+  .case-grid,
+  .exp-grid { gap: 12px; margin-bottom: 12px; }
+  .section-label { margin: 22px 0 12px; }
+  .resume-header { margin-bottom: 18px; padding-bottom: 16px; }
+  .learn-details,
+  .edu-detail-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .earlier-list li { grid-template-columns: 1fr 1fr auto; }
+
+  /* cards may run across pages (keeping them whole left half-empty pages);
+     the small pieces inside them stay whole. Pill groups may split: kept
+     whole, Chrome strands the Toolkit label at the foot of a page. */
+  .resume-meta-row,
+  .exp-head,
+  .exp-bullets li,
+  .earlier-list li,
+  .exp-tags,
+  .edu-degrees,
+  .earlier-roles,
+  .internship-list { break-inside: avoid; }
+  .section-label,
+  .earlier-label,
+  .case-q,
+  .exp-top,
+  .case-title,
+  .exp-head { break-after: avoid; }
+  .section-label + * { break-before: avoid; }   /* belt and braces: a label never ends a page */
+
+  a.print-href::after {
+    content: " (" attr(href) ")";
+    overflow-wrap: anywhere;
+    font-size: 0.85em;
+    font-weight: 400;
+  }
+}
+
 /* ── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
