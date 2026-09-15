@@ -336,6 +336,7 @@ button:focus-visible,
 }
 .skip-link:focus { transform: none; }
 main:focus { outline: none; }
+#main { scroll-margin-top: 61px; }   /* the skip link's scroll stops below the sticky header */
 
 /* ── Header ───────────────────────────────────────────────────────────── */
 .header {
@@ -1084,6 +1085,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   border-color: var(--accent);
 }
 #panel-learn .section-label[id] { scroll-margin-top: 128px; }   /* header + section bar + breathing room */
+#panel-learn .section-label[id]:focus { outline: none; }        /* focused by the bar's jump, like main */
 
 /* ── Learn: résumé header ───────────────────────────────────────────── */
 .resume-header {
@@ -1826,7 +1828,7 @@ body[data-active] .footer { opacity: 0.5; }
   .channel--primary { padding: 18px 18px; gap: 14px; }
 }
 
-/* ── Print: the Learn panel as a résumé, whichever section is open ──── */
+/* ── Print: the Learn panel alone, whichever section is open ────────── */
 .print-contact { display: none; }
 
 @media print {

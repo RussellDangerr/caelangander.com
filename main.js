@@ -110,7 +110,10 @@
       const link = e.target.closest('a[href^="#"]');
       if (!link) return;
       e.preventDefault();   // a #hash entry would drop the router's cgHome flag, like the skip link
-      document.getElementById(link.hash.slice(1))?.scrollIntoView({ block: 'start' });
+      const heading = document.getElementById(link.hash.slice(1));
+      if (!heading) return;
+      heading.focus({ preventScroll: true });   // Tab and screen readers carry on from the section
+      heading.scrollIntoView({ block: 'start' });
     });
 
     markLearnSection = () => {
@@ -229,7 +232,7 @@
     const time = new Date().toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: '2-digit',
-      timeZone: 'America/Chicago',
+      timeZone: 'US/Central',
     });
     clock.textContent = `${time} where I am`;
   };
