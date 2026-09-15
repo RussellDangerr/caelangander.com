@@ -121,13 +121,14 @@
       headings.forEach((h, i) => { if (h && h.getBoundingClientRect().top <= line) current = i; });
       if (atBottom) current = headings.length - 1;
       links.forEach((a, i) => {
-        if (i === current) a.setAttribute('aria-current', 'true');
+        if (i === current) a.setAttribute('aria-current', 'location');
         else a.removeAttribute('aria-current');
       });
-      // on a narrow screen the bar scrolls sideways: keep the current link in view
+      // on a narrow screen the bar scrolls sideways: nudge the current link into view
       const bar = learnNav.getBoundingClientRect();
       const chip = links[current].getBoundingClientRect();
-      if (chip.left < bar.left || chip.right > bar.right) learnNav.scrollLeft += chip.left - bar.left - 16;
+      if (chip.left < bar.left) learnNav.scrollLeft += chip.left - bar.left - 16;
+      else if (chip.right > bar.right) learnNav.scrollLeft += chip.right - bar.right + 16;
     };
 
     let queued = false;

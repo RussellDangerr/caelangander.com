@@ -1078,7 +1078,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   padding: 5px 12px;
 }
 .learn-nav a:hover { color: var(--color-text); border-color: var(--accent); }
-.learn-nav a[aria-current="true"] {
+.learn-nav a[aria-current] {
   color: var(--color-on-accent);
   background: var(--accent);
   border-color: var(--accent);
@@ -1884,8 +1884,8 @@ body[data-active] .footer { opacity: 0.5; }
     border: 0;
     overflow: visible;
   }
-  .case-detail { display: block; }
-  .case-detail-inner { opacity: 1; overflow: visible; }
+  .case-detail { display: block !important; }
+  .case-detail-inner { opacity: 1 !important; overflow: visible !important; }
 
   .print-contact {
     display: block;
