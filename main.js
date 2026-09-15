@@ -106,23 +106,51 @@
     const links = [...learnNav.querySelectorAll('a[href^="#"]')];
     const headings = links.map((a) => document.getElementById(a.hash.slice(1)));
 
+    // A clicked link keeps the highlight until the visitor scrolls on their own. Otherwise a
+    // short section near the end lands at the bottom of the page and the at-bottom rule below
+    // lights the last link instead of the one clicked.
+    let pinned = null;
+    let settledY = null;
+    let settleTimer = 0;
+    const unpin = () => { pinned = null; settledY = null; };
+    const settleSoon = () => {
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => { if (pinned !== null) settledY = window.scrollY; }, 150);
+    };
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((type) =>
+      window.addEventListener(type, unpin, { passive: true }));
+    // once the jump has settled, any further scroll (scrollbar, find-in-page, a script) hands it back too
+    window.addEventListener('scroll', () => {
+      if (pinned === null) return;
+      if (settledY !== null && Math.abs(window.scrollY - settledY) > 4) unpin();
+      else settleSoon();
+    }, { passive: true });
+
     learnNav.addEventListener('click', (e) => {
       const link = e.target.closest('a[href^="#"]');
       if (!link) return;
       e.preventDefault();   // a #hash entry would drop the router's cgHome flag, like the skip link
       const heading = document.getElementById(link.hash.slice(1));
       if (!heading) return;
+      pinned = links.indexOf(link);
+      settledY = null;
+      settleSoon();
+      markLearnSection();
       heading.focus({ preventScroll: true });   // Tab and screen readers carry on from the section
       heading.scrollIntoView({ block: 'start' });
     });
 
     markLearnSection = () => {
-      if (body.dataset.active !== 'learn') return;
-      const line = learnNav.getBoundingClientRect().bottom + 24;
-      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (body.dataset.active !== 'learn') { pinned = null; return; }
       let current = 0;
-      headings.forEach((h, i) => { if (h && h.getBoundingClientRect().top <= line) current = i; });
-      if (atBottom) current = headings.length - 1;
+      if (pinned !== null) {
+        current = pinned;
+      } else {
+        const line = learnNav.getBoundingClientRect().bottom + 24;
+        const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+        headings.forEach((h, i) => { if (h && h.getBoundingClientRect().top <= line) current = i; });
+        if (atBottom) current = headings.length - 1;
+      }
       links.forEach((a, i) => {
         if (i === current) a.setAttribute('aria-current', 'location');
         else a.removeAttribute('aria-current');
