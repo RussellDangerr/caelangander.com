@@ -254,15 +254,14 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // my clock (Central), not the visitor's
+  // the visitor's own time, labelled with its zone
   const tick = () => {
     if (!clock) return;
-    const time = new Date().toLocaleTimeString('en-US', {
+    clock.textContent = new Date().toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: '2-digit',
-      timeZone: 'US/Central',
+      timeZoneName: 'short',
     });
-    clock.textContent = `${time} where I am`;
   };
   tick();
   window.setInterval(tick, 30000);
