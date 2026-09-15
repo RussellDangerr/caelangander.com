@@ -57,6 +57,63 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Stand-ins shown for the moment before the web fonts arrive: local fonts
+   scaled to the real ones' widths and vertical metrics (measured in Chrome on
+   this page's own text) so the swap doesn't rewrap lines. Where the local
+   font doesn't exist the face is skipped and the stack carries on. */
+/* Fraunces draws wider at small optical sizes: headings (17 to 34px) measure
+   91.5 to 93.5% of Georgia Bold, the 92px hero name 77.6%. */
+@font-face {
+  font-family: 'Fraunces Fallback';
+  font-weight: 600;
+  src: local('Georgia Bold'), local('Georgia-Bold');
+  size-adjust: 92.5%;
+  ascent-override: 105.9%;
+  descent-override: 28.1%;
+  line-gap-override: 0%;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fraunces Hero Fallback';
+  font-weight: 600;
+  src: local('Georgia Bold'), local('Georgia-Bold');
+  size-adjust: 77.6%;
+  ascent-override: 126.2%;
+  descent-override: 33.5%;
+  line-gap-override: 0%;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Fallback';
+  font-weight: 400 500;
+  src: local('Arial'), local('ArialMT');
+  size-adjust: 101.5%;
+  ascent-override: 101.5%;
+  descent-override: 27.6%;
+  line-gap-override: 0%;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Fallback';
+  font-weight: 600 700;
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  size-adjust: 98.8%;
+  ascent-override: 104.3%;
+  descent-override: 28.4%;
+  line-gap-override: 0%;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Mono Fallback';
+  font-weight: 400 500;
+  src: local('Courier New'), local('CourierNewPSMT');
+  size-adjust: 100%;
+  ascent-override: 103%;
+  descent-override: 28%;
+  line-gap-override: 0%;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   /* ── Neutrals (light / default) ───────────────────────────────────── */
   --color-bg:              #FAF8F3;   /* warm paper */
@@ -84,9 +141,9 @@
   --accent-soft: var(--color-primary-soft);
 
   /* ── Typography ───────────────────────────────────────────────────── */
-  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
-  --font-sans:    'IBM Plex Sans', system-ui, -apple-system, sans-serif;
-  --font-mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-display: 'Fraunces', 'Fraunces Fallback', 'Iowan Old Style', Georgia, serif;
+  --font-sans:    'IBM Plex Sans', 'IBM Plex Sans Fallback', system-ui, -apple-system, sans-serif;
+  --font-mono:    'IBM Plex Mono', 'IBM Plex Mono Fallback', ui-monospace, 'SF Mono', Menlo, monospace;
 
   --text-xs:   0.6875rem;
   --text-sm:   0.875rem;
@@ -370,7 +427,7 @@ body:not([data-active]) .stage-inner { justify-content: center; }
 }
 
 .banner-name {
-  font-family: var(--font-display);
+  font-family: 'Fraunces', 'Fraunces Hero Fallback', 'Iowan Old Style', Georgia, serif;
   font-size: clamp(3rem, 9vw, 5.75rem);
   font-weight: 600;
   letter-spacing: -0.02em;
