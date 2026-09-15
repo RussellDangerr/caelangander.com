@@ -616,12 +616,13 @@ body[data-active] .tile:hover .tile-back-affordance {
 
 /* ── Panel reveal ───────────────────────────────────────────────────── */
 .panel {
-  display: grid;
+  display: none;   /* closed sections have no box: their lazy screenshots stay unloaded and the long Learn panel isn't laid out on the home view */
   grid-template-rows: 0fr;
   transition: grid-template-rows var(--d-view) var(--ease-out);
 }
 .panel-inner {
   overflow: hidden;
+  overflow: clip;   /* clips like hidden but isn't a scroll container, so the Learn section bar can stick */
   min-height: 0;
   opacity: 0;
   background: var(--color-surface);
@@ -635,6 +636,7 @@ body[data-active] .tile:hover .tile-back-affordance {
 body[data-active="talk"]    .cluster[data-cluster="talk"]    .panel,
 body[data-active="learn"]   .cluster[data-cluster="learn"]   .panel,
 body[data-active="explore"] .cluster[data-cluster="explore"] .panel {
+  display: grid;
   grid-template-rows: 1fr;
 }
 body[data-active="talk"]    .cluster[data-cluster="talk"]    .panel-inner,
@@ -642,6 +644,12 @@ body[data-active="learn"]   .cluster[data-cluster="learn"]   .panel-inner,
 body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   opacity: 1;
   padding: 36px 32px 40px;
+}
+/* the panel appears from display:none, so the content fade needs a starting point */
+@starting-style {
+  body[data-active="talk"]    .cluster[data-cluster="talk"]    .panel-inner,
+  body[data-active="learn"]   .cluster[data-cluster="learn"]   .panel-inner,
+  body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner { opacity: 0; }
 }
 
 /* ── Channels (Talk panel) ──────────────────────────────────────────── */
