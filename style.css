@@ -857,11 +857,37 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   align-items: stretch;
   gap: 0;
   padding: 0;
-  cursor: pointer;
   text-align: left;
   user-select: none;
 }
-.channel-row { display: flex; align-items: center; gap: 16px; padding: 18px 20px; }
+.channel-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 20px;
+  font: inherit;
+  text-align: left;
+}
+/* The card clips its overflow, so the row's own ring sits inset; where :has()
+   exists the card takes the same focus look it had when it was the button. */
+.channel-row:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -4px;
+  border-radius: var(--radius-lg);
+}
+@supports selector(:has(a)) {
+  .channel-row:focus-visible { outline: none; }
+  .channel--dual:has(.channel-row:focus-visible) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent);
+  }
+  .channel--dual:has(.channel-row:focus-visible) .channel-icon--dual {
+    background: var(--accent);
+    color: var(--color-on-accent);
+  }
+}
 .channel--dual.is-open .channel-row { border-bottom: 1px dashed var(--color-hairline); }
 .channel--dual .channel-icon--dual {
   display: flex;
@@ -884,7 +910,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   transition: transform 200ms var(--ease-out), color var(--d-fast) var(--ease-out);
 }
 .channel--dual:hover .channel-toggle-arrow,
-.channel--dual:focus-visible .channel-toggle-arrow { color: var(--accent); }
+.channel-row:focus-visible .channel-toggle-arrow { color: var(--accent); }
 .channel--dual.is-open .channel-toggle-arrow { transform: rotate(180deg); color: var(--accent); }
 
 .channel-popout {

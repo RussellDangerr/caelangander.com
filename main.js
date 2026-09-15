@@ -135,23 +135,24 @@
     });
   });
 
-  /* ── Talk panel: Call/Text dual toggle ── */
-  document.querySelectorAll('[data-toggle-dual]').forEach((el) => {
+  /* ── Talk panel: Call/Text disclosure ── */
+  document.querySelectorAll('[data-dual]').forEach((el) => {
+    const toggle = el.querySelector('[data-dual-toggle]');
+    const popout = el.querySelector('.channel-popout');
+    if (!toggle || !popout) return;
     const setOpen = (open) => {
       el.classList.toggle('is-open', open);
-      el.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      // inert keeps the hidden Call/Text links out of the tab order (WCAG)
+      if (open) popout.removeAttribute('inert');
+      else popout.setAttribute('inert', '');
     };
-    el.addEventListener('click', (e) => {
-      if (e.target.closest('.popout-btn')) return;
-      setOpen(!el.classList.contains('is-open'));
-    });
+    toggle.addEventListener('click', () => setOpen(!el.classList.contains('is-open')));
     el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        setOpen(!el.classList.contains('is-open'));
-      } else if (e.key === 'Escape' && el.classList.contains('is-open')) {
-        e.stopPropagation();
+      if (e.key === 'Escape' && el.classList.contains('is-open')) {
+        e.stopPropagation(); // close only the popout; the section stays open
         setOpen(false);
+        toggle.focus();
       }
     });
   });
