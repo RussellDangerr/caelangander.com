@@ -1386,6 +1386,15 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   letter-spacing: -0.005em;
 }
 .exp-loc { color: var(--color-muted); font-weight: 400; font-size: 0.8125rem; }
+/* Organisation names link out quietly: same colour, underline only on hover or focus */
+.org-link {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.org-link:hover,
+.org-link:focus-visible { text-decoration: underline; }
 .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .exp-bullets li {
   font-size: 0.8125rem;
