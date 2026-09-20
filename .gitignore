@@ -6,3 +6,6 @@ og-image.html
 
 # Local Claude project notes (not for deploy, not for the live site)
 CLAUDE.md
+
+# Working docs (OneDrive junction; never for the public repo)
+docs/
