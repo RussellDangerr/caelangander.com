@@ -1349,14 +1349,19 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   color: var(--color-primary);
   margin-top: 2px;
 }
-.timeline-lede {
+.timeline-points {
+  margin: 8px 0 0;
+  padding-left: 1.1em;
+  max-width: 70ch;
+}
+.timeline-points li {
   font-size: 0.8125rem;
   color: var(--color-muted);
   line-height: 1.55;
-  margin-top: 6px;
-  max-width: 64ch;
+  margin-top: 4px;
   text-wrap: pretty;
 }
+.timeline-points li::marker { color: var(--accent); }
 .timeline-stop--earlier .timeline-role { font-size: 0.9375rem; color: var(--color-muted-strong); }
 .timeline-stop--earlier .timeline-org  { font-weight: 400; color: var(--color-muted); }
 .exp-top {
@@ -1441,13 +1446,6 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 }
 
 /* ── Learn: Toolkit / Domains ───────────────────────────────────────── */
-.learn-details {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  padding-top: 28px;
-  border-top: 1px solid var(--color-hairline);
-}
 .detail-group { margin: 0; }
 .detail-label {
   font-family: var(--font-mono);
@@ -1472,13 +1470,6 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 .pill-list li:hover { border-color: var(--accent); color: var(--color-text); }
 
 /* "Currently learning" reads as in-progress, not claimed: dashed, unfilled pills */
-.learn-learning { margin-top: 28px; }
-.pill-list--learning li {
-  background: transparent;
-  border-style: dashed;
-  color: var(--color-muted);
-}
-.pill-list--learning li:hover { border-color: var(--accent); color: var(--color-text); }
 
 /* ── Learn: earlier roles strip ─────────────────────────────────────── */
 .earlier-label {
@@ -1679,27 +1670,6 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 
 .project-badges--demos { grid-template-columns: repeat(2, 1fr); }
 
-/* Pain Mountain screenshot strip */
-.pm-shots {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  margin: 0 -20px 14px;
-  aspect-ratio: 36 / 10;
-  background: var(--color-surface-2);
-  border-bottom: 1px solid var(--color-hairline);
-}
-.pm-shot {
-  position: relative;
-  overflow: hidden;
-  background: var(--color-surface-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid var(--color-hairline);
-}
-.pm-shot:last-child { border-right: none; }
-.pm-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* ── Intro choreography ─────────────────────────────────────────────── */
 @keyframes intro-up {
@@ -1782,8 +1752,7 @@ body[data-active] .footer { opacity: 0.5; }
     align-items: start;
     padding: 20px;
   }
-  .project-badge--wide .badge-media,
-  .project-badge--wide .pm-shots {
+  .project-badge--wide .badge-media {
     grid-column: 1;
     grid-row: 1 / -1;
     margin: 0;
@@ -1813,7 +1782,6 @@ body[data-active] .footer { opacity: 0.5; }
   body[data-active="explore"] .cluster[data-cluster="explore"] { flex: 0 0 auto; }
   body[data-active] .cluster { flex: 0 0 0; min-height: 0; overflow: hidden; overflow: clip; margin: 0; }   /* clip: not a scroll container, so the Learn bar can stick */
 
-  .learn-details { grid-template-columns: 1fr; gap: 24px; }
   .channels { grid-template-columns: 1fr; }
   .channel--primary { grid-column: auto; }
   .case-grid { grid-template-columns: 1fr; }
@@ -1834,13 +1802,6 @@ body[data-active] .footer { opacity: 0.5; }
   body[data-active] .stage { flex: 0 0 auto; }
   body[data-active] .footer { margin-top: 0; }
 
-  .pm-shots { grid-template-columns: 1fr; aspect-ratio: auto; }
-  .pm-shot {
-    aspect-ratio: 16 / 9;
-    border-right: none;
-    border-bottom: 1px solid var(--color-hairline);
-  }
-  .pm-shot:last-child { border-bottom: none; }
 
   .channel-icon--meet { width: 48px; height: 40px; }
   .channel-value--primary { font-size: 1.0625rem; }
@@ -1950,7 +1911,6 @@ body[data-active] .footer { opacity: 0.5; }
   .case-grid { gap: 12px; margin-bottom: 12px; }
   .section-label { margin: 22px 0 12px; }
   .resume-header { margin-bottom: 18px; padding-bottom: 16px; }
-  .learn-details,
   .edu-detail-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .earlier-list li { grid-template-columns: 1fr 1fr auto; }
   .timeline-stop { break-inside: avoid; padding-bottom: 12px; }

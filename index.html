@@ -27,7 +27,7 @@
 
   <link rel="preload" href="assets/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=38">
+  <link rel="stylesheet" href="style.css?v=39">
 </head>
 <body class="has-intro">
 
@@ -204,9 +204,8 @@
               <p class="print-contact">caelangander.com &middot; caelan.gander@gmail.com &middot; linkedin.com/in/caelangander</p>
 
               <nav class="learn-nav" aria-label="Sections">
-                <a href="#learn-work" aria-current="location">Selected Work</a>
-                <a href="#learn-experience">Experience</a>
-                <a href="#learn-toolkit">Toolkit</a>
+                <a href="#learn-experience" aria-current="location">Experience</a>
+                <a href="#learn-work">Selected Work</a>
                 <a href="#learn-education">Education</a>
               </nav>
 
@@ -218,16 +217,85 @@
                 <dl class="resume-meta">
                   <div class="resume-meta-row">
                     <dt class="resume-meta-label">Skills</dt>
-                    <dd class="resume-meta-value">Revenue Cycle, Eligibility &amp; Insurance Authorizations, Billing &amp; Claims (CMS-1500/UB-04, 837/835), Reimbursement Engines, API Integration, EHR Modernization, HIPAA, Custom Reporting</dd>
+                    <dd class="resume-meta-value">Revenue Cycle, Eligibility &amp; Insurance Authorizations, Billing &amp; Claims (CMS-1500/UB-04, 837/835), Reimbursement Engines, API Integration, EHR Modernization, HIPAA, Custom Reporting, Healthcare SaaS, Federal / VA</dd>
                   </div>
                   <div class="resume-meta-row">
                     <dt class="resume-meta-label">Tools</dt>
-                    <dd class="resume-meta-value">Claude Code, MCPs, CLIs, APIs, Jira, Playwright, Salesforce, ongoing CS50</dd>
+                    <dd class="resume-meta-value">Claude Code, MCPs, APIs, Jira, Salesforce, Confluence, Smartsheet, Scrum, Acceptance Criteria</dd>
                   </div>
                 </dl>
 
                 <p class="resume-summary">Currently I am a Senior Solutions Analyst at WellSky, on the Specialty Care product. I review workflows and find the gaps, and I handle the project-management and stakeholder side: executive outreach, coordination between development teams, and making sure end-user feedback reaches the final design.</p>
               </div>
+
+              <h2 class="section-label" id="learn-experience" tabindex="-1">Experience</h2>
+
+              <ol class="timeline">
+              <li class="timeline-stop timeline-stop--current">
+                <span class="timeline-when">Apr 2024 &ndash; Present</span>
+                <span class="timeline-rail" aria-hidden="true"><span class="timeline-dot"></span></span>
+                <div class="timeline-body">
+                  <h3 class="timeline-role">Sr. Solutions Analyst, Revenue Cycle</h3>
+                  <p class="timeline-org">WellSky <span class="exp-loc">&middot; Overland Park, KS</span></p>
+                  <ul class="timeline-points">
+                    <li>Requirements discovery and solution design on a Fortune 500 legacy-to-SaaS migration: solution integration and implementation consulting for a post-acute revenue-cycle replacement</li>
+                    <li>Product owner for a dedicated scrum team, translating business needs into a prioritized backlog across 200+ system components: 15+ reports, 50+ configurable billing rules, 20+ contract variables, 3 new bill forms and an 8-wave go-live</li>
+                    <li>Designed 30+ platform-wide payer decision rules: eligibility gating and limit enforcement, a tiered rate engine that computes payment amounts, and specified the real-time API that keeps prior-authorization state in sync</li>
+                    <li>Release readiness: acceptance criteria, process documentation, user guides and user acceptance testing</li>
+                    <li>Every build ships on a multi-tenant platform, so each reimbursement workflow is a customize-vs-generalize call, with client-specific behavior gated behind configuration</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="timeline-stop">
+                <span class="timeline-when">Mar 2023 &ndash; Apr 2024</span>
+                <span class="timeline-rail" aria-hidden="true"><span class="timeline-dot"></span></span>
+                <div class="timeline-body">
+                  <h3 class="timeline-role">Program Analyst</h3>
+                  <p class="timeline-org">Aptive Resources <span class="exp-loc">&middot; VA</span></p>
+                  <ul class="timeline-points">
+                    <li>Embedded client-side on the VA&rsquo;s Electronic Health Record Modernization, a national enterprise deployment</li>
+                    <li>Facilitated clinical councils and workgroups of senior clinicians, whose input drove design decisions on the vendor&rsquo;s build</li>
+                    <li>Reviewed current-state workflows to identify gaps and next steps, and tracked design, build and test actions across project teams</li>
+                    <li>Brought hands-on Cerner delivery experience to the customer side, bridging vendor and customer views on scope, feasibility and rollout sequencing</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="timeline-stop">
+                <span class="timeline-when">Sep 2021 &ndash; Mar 2023</span>
+                <span class="timeline-rail" aria-hidden="true"><span class="timeline-dot"></span></span>
+                <div class="timeline-body">
+                  <h3 class="timeline-role">Implementation Consultant</h3>
+                  <p class="timeline-org">Cerner <span class="exp-loc">&middot; now Oracle</span></p>
+                  <ul class="timeline-points">
+                    <li>Delivered 16 full-cycle go-live implementations, each a legacy-system migration for a small-to-mid-size healthcare provider, on time and compliant</li>
+                    <li>Ran on-site requirements and configuration across scheduling, billing and AR, carrying each engagement through to first clean claims and posted payments via the TriZetto clearinghouse</li>
+                    <li>Trained superusers and supported front-line staff through their first live checkouts</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="timeline-stop">
+                <span class="timeline-when">Oct 2019 &ndash; Sep 2021</span>
+                <span class="timeline-rail" aria-hidden="true"><span class="timeline-dot"></span></span>
+                <div class="timeline-body">
+                  <h3 class="timeline-role">Project Manager, Business Development</h3>
+                  <p class="timeline-org">EnergyLink <span class="exp-loc">&middot; Columbia, MO</span></p>
+                  <ul class="timeline-points">
+                    <li>Ran full-cycle pre-sales as project lead: RFP analysis, proposals, pricing estimates and bids with utility partners</li>
+                    <li>Closed 6 government and commercial contracts worth $1.18M and sourced $3.3M in additional pipeline</li>
+                    <li>Aurora, CO Water: first-of-its-kind 474 kW array on a water tank and pump station, from RFP through award</li>
+                    <li>Buncombe County, NC: $1.8M, 46-site, 6.8 MW county program that opened the firm&rsquo;s first North Carolina office</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="timeline-stop timeline-stop--earlier">
+                <span class="timeline-when">2017 &ndash; 2019</span>
+                <span class="timeline-rail" aria-hidden="true"><span class="timeline-dot"></span></span>
+                <div class="timeline-body">
+                  <h3 class="timeline-role">Earlier roles</h3>
+                  <p class="timeline-org">Manager, Delivery Driver at Hot Box Cookies &middot; Merchandising Clerk at Southern Glazer's Wine &amp; Spirits</p>
+                </div>
+              </li>
+              </ol>
 
               <h2 class="section-label" id="learn-work" tabindex="-1">Selected Work</h2>
 
@@ -239,7 +307,7 @@
                     <span class="card-year">WellSky &middot; Specialty Care</span>
                   </div>
                   <h3 class="case-title">The division's largest revenue-cycle migration</h3>
-                  <p class="case-scope">Senior Solutions Analyst at WellSky and solutions lead on the program. Forward-deployed as the hub between Solutions, Engineering, Professional Services, PM, and the client.</p>
+                  <p class="case-scope">Senior Solutions Analyst at WellSky and the solutions point of contact on the program, forward-deployed as the hub between Solutions, Engineering, Professional Services, PM, and the client.</p>
                   <p class="case-q">Impact</p>
                   <p class="case-a">15+ financial and compliance reports and 3 bill forms, all net-new for this migration. The platform now runs high-volume, mixed-model authorization billing with step-downs and intricate requirements.</p>
 
@@ -255,10 +323,10 @@
                       <p class="case-a">A Fortune 500 post-acute provider needed to move its billing off a legacy system onto WellSky Specialty Care. Requirements changed week to week, and reporting definitions weren't settled until late.</p>
                       <p class="case-q">My role</p>
                       <ul class="exp-bullets">
-                        <li><strong>Own the team's entire backlog.</strong> I wrote all 1,500+ of its Jira stories and prioritized the work for a team of four developers and an engineering lead, taking implementation requirements from Salesforce intake to production in weeks.</li>
+                        <li><strong>Run the team's backlog.</strong> I write its Jira stories and prioritize the work for a team of four developers and an engineering lead, taking implementation requirements from Salesforce intake to production in weeks.</li>
                         <li><strong>Defined eligibility gating and a new hour-based authorization and reimbursement engine</strong> (day, week, and total-hour limits across step-downs and rollups).</li>
                         <li><strong>Specified a bi-directional, real-time authorization-sync API</strong> between the two platforms.</li>
-                        <li><strong>Authored 50+ billing rules</strong> across CMS-1500 and UB-04 and 3 new bill forms. Wrote acceptance criteria and migrated test features from Flux to Playwright to support go-live readiness.</li>
+                        <li><strong>Authored 50+ billing rules</strong> across CMS-1500 and UB-04 and 3 new bill forms. Wrote the acceptance criteria and testing scenarios that supported go-live readiness.</li>
                       </ul>
                       <p class="case-q">Forward-deployed with the client</p>
                       <p class="case-a">I am embedded with the client, running biweekly working sessions and carrying their decisions into engineering as the point of contact between the client and the build. If requirements are ambiguous, I build mockups with AI to settle it before writing the ticket. I also own release communications, every release note and user-guide update, including the prospect-facing docs.</p>
@@ -266,7 +334,7 @@
                       <ul class="exp-bullets">
                         <li><strong>Multi-level, hour-based authorization engine.</strong> Total-hour limits sit above per-week, which sit above per-day, with hours that can be shared across a group of disciplines for the patient. Getting the precedence and the step-down configuration right is what decides whether a visit is authorized, whether it can be billed, and whether my client gets paid.</li>
                         <li><strong>Tiered, configurable reimbursement engine.</strong> Rates vary by program, payer, and service line, so the engine had to be data-driven rather than hard-coded, with the tiers and contract variables exposed as configuration the client could perform themselves. It's a multi-tenant platform, so I often have to decide how a change affects my client while keeping the platform as a whole in mind, and what opening up a capability means for them and for others.</li>
-                        <li><strong>Authorization-sync API.</strong> I updated the bi-directional, real-time API keeping authorizations in sync between the two systems &ndash; specifying field mappings, sync triggers, and conflict behavior, including mapping each discipline to the correct procedure codes.</li>
+                        <li><strong>Authorization-sync API.</strong> I specified the updates to the bi-directional, real-time API keeping authorizations in sync between the two systems &ndash; specifying field mappings, sync triggers, and conflict behavior, including mapping each discipline to the correct procedure codes.</li>
                       </ul>
                       <p class="case-q">Tracking the money from billed to paid reimbursement</p>
                       <ul class="exp-bullets">
@@ -335,7 +403,7 @@
                   <h3 class="case-title">Lead on a first-of-its-kind solar array</h3>
                   <p class="case-scope">Project Manager and Business Development at EnergyLink, project lead for bid submission and design.</p>
                   <p class="case-q">Impact</p>
-                  <p class="case-a">A first-of-its-kind ~469 kW array for a municipal water utility, plus a county-scale program that expanded the company into a new state.</p>
+                  <p class="case-a">A first-of-its-kind 474 kW array for a municipal water utility, plus a county-scale program that expanded the company into a new state.</p>
 
                   <button class="case-expand" type="button" data-expand aria-expanded="false" aria-controls="case-aurora-detail">
                     <span class="case-expand-label">The full story</span>
@@ -346,7 +414,7 @@
                   <div class="case-detail" id="case-aurora-detail" inert>
                     <div class="case-detail-inner">
                       <p class="case-q">Challenge</p>
-                      <p class="case-a">Aurora, CO Water wanted solar on a city infrastructure build that no firm would have experience with: the Robertsdale Water Tank and Pump Station. It needed a design-build partner that could win the bid and deliver a roughly 469 kW array on an unusual structure, with a performance guarantee behind it.</p>
+                      <p class="case-a">Aurora, CO Water wanted solar on a city infrastructure build that no firm would have experience with: the Robertsdale Water Tank and Pump Station. It needed a design-build partner that could win the bid and deliver a 474 kW array on an unusual structure, with a performance guarantee behind it.</p>
                       <p class="case-q">What I did</p>
                       <ul class="exp-bullets">
                         <li><strong>Led the bid that won EnergyLink the sole design-build contract,</strong> named &ldquo;EnergyLink's lead on the project&rdquo; in the July 2021 announcement.</li>
@@ -376,7 +444,7 @@
                     <span class="card-year">Raven &middot; 2026</span>
                   </div>
                   <h3 class="case-title"><a href="https://raven.caelangander.com" target="_blank" rel="noopener">Raven, a technology atlas &#8599;</a></h3>
-                  <p class="case-scope">A research site I designed, built, and published. It measures how far an idea has moved toward a product from the public record alone, with every number printed beside its denominator and the rule that produced it.</p>
+                  <p class="case-scope">A research site that measures how far an idea has moved toward a product from the public record alone, with every number printed beside its denominator and the rule that produced it.</p>
                   <p class="case-q">Impact</p>
                   <p class="case-a">One published chain, orbital debris and four downstream products, with every score's components printed beside it and an evidence score that never calls itself a probability. The same machinery measures the next chain.</p>
 
@@ -395,7 +463,6 @@
                         <li><strong>Measured four layers by stated rules:</strong> research counted per year beside the whole index, with funding and regulation alongside; citation dependency with a negative control; hand-checked barriers typed by whether they can lift; and speculation kept apart and labelled.</li>
                         <li><strong>Fixed two controls before any chain ran,</strong> so a product's growth is a position between a literature that matured and one that boomed, never a bare number.</li>
                         <li><strong>Built a hand-checked truth set, negatives included,</strong> that every automation is scored against. The keyword baseline recovered 1 of 7 barriers; the model layer is built and has not yet run.</li>
-                        <li><strong>Wrote it in Python with no framework.</strong> The site is a static build, and two builds of the same data are byte-identical.</li>
                       </ul>
                     </div>
                   </div>
@@ -409,105 +476,6 @@
                   </ul>
                 </article>
 
-              </div>
-
-              <h2 class="section-label" id="learn-experience" tabindex="-1">Experience</h2>
-
-              <ol class="timeline">
-                <li class="timeline-stop timeline-stop--current">
-                  <span class="timeline-when">Apr 2024 &ndash; Present</span>
-                  <span class="timeline-rail" aria-hidden="true"><span class="timeline-dot"></span></span>
-                  <div class="timeline-body">
-                    <h3 class="timeline-role">Sr. Solutions Analyst, Revenue Cycle</h3>
-                    <p class="timeline-org">WellSky <span class="exp-loc">&middot; Overland Park, KS</span></p>
-                    <p class="timeline-lede">Forward-deployed on a Fortune 500 legacy-to-SaaS migration onto a multi-tenant platform, from requirements through go-live.</p>
-                  </div>
-                </li>
-                <li class="timeline-stop">
-                  <span class="timeline-when">Mar 2023 &ndash; Apr 2024</span>
-                  <span class="timeline-rail" aria-hidden="true"><span class="timeline-dot"></span></span>
-                  <div class="timeline-body">
-                    <h3 class="timeline-role">Program Analyst</h3>
-                    <p class="timeline-org">Aptive Resources <span class="exp-loc">&middot; VA</span></p>
-                    <p class="timeline-lede">Facilitated the ambulatory pain-management and oncology councils, translating clinician input into prioritized design requirements.</p>
-                  </div>
-                </li>
-                <li class="timeline-stop">
-                  <span class="timeline-when">Sep 2021 &ndash; Mar 2023</span>
-                  <span class="timeline-rail" aria-hidden="true"><span class="timeline-dot"></span></span>
-                  <div class="timeline-body">
-                    <h3 class="timeline-role">Implementation Consultant</h3>
-                    <p class="timeline-org">Cerner <span class="exp-loc">&middot; now Oracle</span></p>
-                    <p class="timeline-lede">16 ambulatory implementations, all delivered on time and compliant, with exceptional client feedback.</p>
-                  </div>
-                </li>
-                <li class="timeline-stop">
-                  <span class="timeline-when">Oct 2019 &ndash; Sep 2021</span>
-                  <span class="timeline-rail" aria-hidden="true"><span class="timeline-dot"></span></span>
-                  <div class="timeline-body">
-                    <h3 class="timeline-role">Project Manager, Business Development</h3>
-                    <p class="timeline-org">EnergyLink <span class="exp-loc">&middot; Columbia, MO</span></p>
-                    <p class="timeline-lede">Developed sales and development proposals for solar energy and battery storage projects for government and commercial sites.</p>
-                  </div>
-                </li>
-                <li class="timeline-stop timeline-stop--earlier">
-                  <span class="timeline-when">2017 &ndash; 2019</span>
-                  <span class="timeline-rail" aria-hidden="true"><span class="timeline-dot"></span></span>
-                  <div class="timeline-body">
-                    <h3 class="timeline-role">Earlier roles</h3>
-                    <p class="timeline-org">Manager, Delivery Driver at Hot Box Cookies &middot; Merchandising Clerk at Southern Glazer's Wine &amp; Spirits</p>
-                  </div>
-                </li>
-              </ol>
-
-              <h2 class="section-label" id="learn-toolkit" tabindex="-1">Toolkit</h2>
-
-              <div class="learn-details">
-                <div class="detail-group">
-                  <h3 class="detail-label">AI &amp; Dev Tooling</h3>
-                  <ul class="pill-list">
-                    <li>Claude</li>
-                    <li>Claude Code</li>
-                    <li>MCP Servers</li>
-                    <li>Playwright</li>
-                    <li>CLIs</li>
-                    <li>ongoing CS50</li>
-                  </ul>
-                </div>
-                <div class="detail-group">
-                  <h3 class="detail-label">Delivery &amp; PM</h3>
-                  <ul class="pill-list">
-                    <li>Jira</li>
-                    <li>Salesforce</li>
-                    <li>Confluence</li>
-                    <li>Smartsheet</li>
-                    <li>Scrum</li>
-                    <li>Acceptance Criteria</li>
-                  </ul>
-                </div>
-                <div class="detail-group">
-                  <h3 class="detail-label">Domains</h3>
-                  <ul class="pill-list">
-                    <li>Healthcare SaaS</li>
-                    <li>Revenue Cycle</li>
-                    <li>Billing &amp; Claims</li>
-                    <li>CMS-1500 / UB-04</li>
-                    <li>EHR Modernization</li>
-                    <li>API Integration</li>
-                    <li>Federal / VA</li>
-                    <li>HIPAA</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="learn-learning">
-                <h3 class="detail-label">Currently learning</h3>
-                <ul class="pill-list pill-list--learning">
-                  <li>FHIR</li>
-                  <li>CMS-0057 (prior-auth mandate)</li>
-                  <li>SQL</li>
-                  <li>Python</li>
-                </ul>
               </div>
 
               <h2 class="section-label" id="learn-education" tabindex="-1">Education</h2>
@@ -589,7 +557,6 @@
                 <span class="preview-row"><strong>Raven</strong> <em>technology atlas &ndash; research site</em></span>
                 <span class="preview-row"><strong>Violencetown</strong> <em>2D browser RPG &ndash; public demo</em></span>
                 <span class="preview-row"><strong>Clown City</strong> <em>HTML5 auto-runner &ndash; public demo</em></span>
-                <span class="preview-row"><strong>Pain Mountain</strong> <em>Godot open-world &ndash; in development</em></span>
               </span>
             </span>
             <span class="tile-back-affordance" aria-hidden="true">
@@ -637,7 +604,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                     </span>
                   </div>
-                  <p class="project-badge-desc">Browser 2D RPG in vanilla JS and Canvas &ndash; top-down, turn-based combat wrapped in a burger-delivery quest loop. Mobile-friendly touch controls; demo currently at v0.17.0.</p>
+                  <p class="project-badge-desc">Browser 2D RPG in vanilla JS and Canvas &ndash; top-down, turn-based combat wrapped in a burger-delivery quest loop. Mobile-friendly touch controls; demo currently at v0.22.1.</p>
                   <ul class="badge-tags">
                     <li>JavaScript</li>
                     <li>Canvas</li>
@@ -658,7 +625,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                     </span>
                   </div>
-                  <p class="project-badge-desc">HTML5 unicycle auto-runner with a hand-built physics loop &ndash; steer, jump, and spray through an endless run under the dark big top. Currently at v0.3.0.</p>
+                  <p class="project-badge-desc">HTML5 unicycle auto-runner with a custom physics loop &ndash; steer, jump, and spray through an endless run under the dark big top. Currently at v0.3.0.</p>
                   <ul class="badge-tags">
                     <li>HTML5</li>
                     <li>Canvas</li>
@@ -668,33 +635,6 @@
                 </a>
 
               </div>
-
-              <h2 class="section-label">In Development</h2>
-
-              <article class="project-badge project-badge--wide">
-                <div class="pm-shots">
-                  <div class="pm-shot">
-                    <img src="assets/painmountain-1.webp?v=1" alt="Pain Mountain screenshot 1" loading="lazy">
-                  </div>
-                  <div class="pm-shot">
-                    <img src="assets/painmountain-2.webp?v=1" alt="Pain Mountain screenshot 2" loading="lazy">
-                  </div>
-                  <div class="pm-shot">
-                    <img src="assets/painmountain-3.webp?v=1" alt="Pain Mountain screenshot 3" loading="lazy">
-                  </div>
-                </div>
-                <div class="project-badge-head">
-                  <h3>Pain Mountain</h3>
-                  <span class="badge-status badge-status--soon">Coming Soon</span>
-                </div>
-                <p class="project-badge-desc">First-person open-world game with a PSX aesthetic, built solo in Godot 4.6. Source repo is private &ndash; paid asset packs (PSX Textures, Nature, Mega Pack II) ship with the build but not the source tree.</p>
-                <ul class="badge-tags">
-                  <li>Godot 4.6</li>
-                  <li>Open World</li>
-                  <li>PSX Style</li>
-                  <li>First Person</li>
-                </ul>
-              </article>
 
               <h2 class="section-label">Source</h2>
 
