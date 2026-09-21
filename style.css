@@ -498,6 +498,7 @@ body:not([data-active]) .cluster > .tile {
      content gives the hover arrow its corner and reads as deliberate space. */
   min-height: clamp(240px, 32vh, 320px);
 }
+body[data-active] .tiles { gap: 0; }   /* the collapsed clusters are 0 wide; their gaps would inset the open one */
 body[data-active] .cluster { flex: 0 0 0; opacity: 0; pointer-events: none; }
 body[data-active="talk"]    .cluster[data-cluster="talk"],
 body[data-active="learn"]   .cluster[data-cluster="learn"],
@@ -506,6 +507,11 @@ body[data-active="explore"] .cluster[data-cluster="explore"] {
   opacity: 1;
   pointer-events: auto;
 }
+/* A collapsed cluster's tile keeps its padding width; clip it so it can't
+   spill past the page edge and cause a horizontal scroll. */
+body[data-active="talk"]    .cluster:not([data-cluster="talk"]),
+body[data-active="learn"]   .cluster:not([data-cluster="learn"]),
+body[data-active="explore"] .cluster:not([data-cluster="explore"]) { overflow: clip; }
 
 /* ── Tile ───────────────────────────────────────────────────────────── */
 .tile {
@@ -588,6 +594,10 @@ body[data-active] .tile {
 }
 body[data-active] .tile::before { opacity: 0; }
 body[data-active] .tile::after { display: none; }
+/* the band is already accent-filled, so its focus ring is drawn inside it */
+body[data-active] .tile:focus-visible { outline: 2px solid var(--color-on-accent); outline-offset: -6px; }
+/* home view: the back control is hidden, so drop its column and give the text that width */
+body:not([data-active]) .tile { grid-template-columns: auto 1fr; grid-template-areas: "icon body"; }
 
 .tile-icon {
   grid-area: icon;
@@ -772,6 +782,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
+  align-items: start;   /* opening Call / Text doesn't stretch the Email card beside it */
 }
 .channel {
   display: flex;
@@ -992,7 +1003,8 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   flex-shrink: 0;
 }
 .channel-icon--meet svg { width: 100%; height: 100%; display: block; }
-.channel--primary:hover .channel-icon--meet { background: #FFFFFF; }
+.channel--primary:hover .channel-icon--meet,
+.channel--primary:focus-visible .channel-icon--meet { background: #FFFFFF; }
 
 .channel-label--primary {
   color: var(--color-on-accent);
@@ -1546,7 +1558,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   transition: transform var(--d-fast) var(--ease-out), box-shadow var(--d-fast) var(--ease-out);
 }
 .github-cta:hover,
-.github-cta:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-md); outline: none; }
+.github-cta:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 .github-cta-icon {
   display: grid;
   place-items: center;
@@ -1712,7 +1724,6 @@ body.has-intro .banner-wrap { transition: none; }
   transition: opacity var(--d-view) var(--ease-out);
   margin-top: auto;
 }
-body[data-active] .footer { opacity: 0.5; }
 .footer-time { font-variant-numeric: tabular-nums; }
 
 /* ── Lit-paper cards: a ~2% top-to-bottom grade so surfaces read as real
@@ -1742,7 +1753,7 @@ body[data-active] .footer { opacity: 0.5; }
   .resume-headline,
   .resume-tagline { grid-column: 1 / -1; }
   .resume-summary { grid-column: 1; max-width: none; }
-  .resume-summary + .resume-summary { margin-top: 1.25rem; }
+  .resume-summary ~ .resume-summary { margin-top: 1.25rem; }   /* ~ not +: the details list sits between them */
   .resume-meta {
     grid-column: 2;
     grid-row: 3 / span 2;
@@ -1779,9 +1790,22 @@ body[data-active] .footer { opacity: 0.5; }
   .project-badge--wide .project-badge-desc { font-size: 0.875rem; max-width: 72ch; }
 }
 
+/* ── Learn: first open ──────────────────────────────────────────────── */
+/* The first time Learn opens, all its text is shaped at once (~260 ms of the
+   tap on a slow phone). Blocks off screen skip that until the panel has
+   painted; main.js then adds .is-warm, everything renders once, and section
+   jumps land exactly. Collapsed stories stay unrendered until expanded. */
+@media screen {
+  #panel-learn:not(.is-warm) :is(.timeline-stop, .case-card, .edu-card, .edu-detail-grid, .internship-list, .earlier-list) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 400px;
+  }
+  .case-card:not(.is-expanded) .case-detail-inner { content-visibility: hidden; }
+}
+
 /* ── Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 960px) {
-  .container { padding: 0 32px; }
+  .container { padding-inline: 32px; }   /* inline only: a `padding` shorthand here would wipe .stage-inner's top and bottom */
   .footer { padding: 28px 32px; }
 
   .tiles { flex-direction: column; }
@@ -1790,6 +1814,7 @@ body[data-active] .footer { opacity: 0.5; }
   body[data-active="learn"]   .cluster[data-cluster="learn"],
   body[data-active="explore"] .cluster[data-cluster="explore"] { flex: 0 0 auto; }
   body[data-active] .cluster { flex: 0 0 0; min-height: 0; overflow: hidden; overflow: clip; margin: 0; }   /* clip: not a scroll container, so the Learn bar can stick */
+  body[data-active] .stage-inner { padding-top: 0; padding-bottom: 24px; }   /* an open panel sits 24px under the header and 24px above the footer */
 
   .channels { grid-template-columns: 1fr; }
   .channel--primary { grid-column: auto; }
@@ -1802,7 +1827,7 @@ body[data-active] .footer { opacity: 0.5; }
 }
 
 @media (max-width: 720px) {
-  .container { padding: 0 24px; }
+  .container { padding-inline: 24px; }
   .footer { padding: 22px 24px; }
   .stage-inner { padding-top: 36px; padding-bottom: 48px; gap: 36px; }
 
@@ -1827,9 +1852,13 @@ body[data-active] .footer { opacity: 0.5; }
 }
 
 @media (max-width: 480px) {
-  .container { padding: 0 16px; }
+  .container { padding-inline: 16px; }
   .footer { padding: 16px; }
   .channel { padding: 14px 16px; gap: 12px; }
+  /* Call / Text: the card is only a frame, its row carries the padding */
+  .channel--dual { padding: 0; gap: 0; }
+  .channel-row { padding: 14px 16px; gap: 12px; }
+  .channel--dual .channel-icon--dual { width: auto; padding: 0; }
   .channel-icon { width: 38px; height: 38px; }
   .panel-inner { padding: 0 18px; }
   body[data-active="talk"]    .cluster[data-cluster="talk"]    .panel-inner,
@@ -1838,6 +1867,10 @@ body[data-active] .footer { opacity: 0.5; }
   .learn-nav { margin: -26px -18px 20px; padding: 10px 18px; }
   .resume-headline { font-size: 1.25rem; }
   .channel--primary { padding: 18px 18px; gap: 14px; }
+}
+
+@media (max-width: 360px) {
+  .channel-value { white-space: normal; }   /* the address and the Meet label wrap instead of clipping */
 }
 
 /* ── Print: the Learn panel alone, whichever section is open ────────── */
@@ -1922,13 +1955,14 @@ body[data-active] .footer { opacity: 0.5; }
   .resume-header { margin-bottom: 18px; padding-bottom: 16px; }
   .edu-detail-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .earlier-list li { grid-template-columns: 1fr 1fr auto; }
-  .timeline-stop { break-inside: avoid; padding-bottom: 12px; }
+  .timeline-stop { padding-bottom: 12px; }   /* a stop may split (kept whole, WellSky left page 1 part-empty); its bullets stay whole */
 
   /* cards may run across pages (keeping them whole left half-empty pages);
      the small pieces inside them stay whole. Pill groups may split: kept
      whole, Chrome strands the Toolkit label at the foot of a page. */
   .resume-meta-row,
   .exp-bullets li,
+  .timeline-points li,
   .earlier-list li,
   .exp-tags,
   .edu-degrees,
