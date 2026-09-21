@@ -2,11 +2,15 @@
   const body = document.body;
   const navVerb = document.querySelector('.nav-verb');
   let markLearnSection = () => {};   // set up by the Learn section bar below
+  const closePopouts = [];           // filled by the Call/Text disclosure below
 
   /* Theme follows the device (prefers-color-scheme); no manual toggle. */
 
   /* ── Cluster expand/collapse ──────────── */
   const validTargets = new Set(['talk', 'learn', 'explore']);
+  const baseTitle = document.title;
+  const learnPanel = document.getElementById('panel-learn');
+  let homeY = 0;   // the home view's scroll position, restored when a section closes back to it
 
   const updateAria = () => {
     const active = body.dataset.active || null;
@@ -14,6 +18,11 @@
       const target = tile.getAttribute('data-go');
       const isOpen = target === active;
       tile.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    document.querySelectorAll('.cluster').forEach((cluster) => {
+      // inert keeps Tab off the tiles of the collapsed clusters (WCAG)
+      if (active && cluster.dataset.cluster !== active) cluster.setAttribute('inert', '');
+      else cluster.removeAttribute('inert');
     });
     document.querySelectorAll('.panel').forEach((panel) => {
       const isOpen = panel.id === `panel-${active}`;
@@ -26,12 +35,28 @@
 
   const applyActive = (next) => {
     if (next && !validTargets.has(next)) next = null;
+    const prev = body.dataset.active || null;
+    const prevPanel = prev && document.getElementById(`panel-${prev}`);
+    const focusWasInside = !!prevPanel && prevPanel.contains(document.activeElement);
     if (next) body.dataset.active = next;
     else delete body.dataset.active;
-    if (navVerb) navVerb.textContent = next ? next[0].toUpperCase() + next.slice(1) : '';
+    const label = next ? next[0].toUpperCase() + next.slice(1) : '';
+    if (navVerb) navVerb.textContent = label;
+    document.title = next ? `${label} – ${baseTitle}` : baseTitle;
     updateAria();
     markLearnSection();
+    if (next !== 'talk') closePopouts.forEach((close) => close());
+    // focus left inside a panel that just went inert would strand keyboard users; hand it to the tile
+    if (focusWasInside && prev !== next) document.querySelector(`[data-go="${next || prev}"]`).focus({ preventScroll: true });
+    if (next === 'learn' && learnPanel && !learnPanel.classList.contains('is-warm')) {
+      // render the rest of Learn once this frame has painted (style.css, "Learn: first open")
+      requestAnimationFrame(() => setTimeout(() => learnPanel.classList.add('is-warm')));
+    }
   };
+
+  // a section opens at its top (on a phone the tiles stack, so the tapped one can sit far down);
+  // home comes back where it was left. 'instant' overrides html's smooth scrolling.
+  const settleScroll = (next) => window.scrollTo({ top: next ? 0 : homeY, behavior: 'instant' });
 
   const readPath = () => {
     const p = location.pathname.slice(1).replace(/\/$/, '');
@@ -48,9 +73,11 @@
       applyActive(target);
     } else {
       // Opening from home – push a flagged entry so back/close can land home again
+      homeY = window.scrollY;
       history.pushState({ cgHome: true }, '', `/${target}`);
       applyActive(target);
     }
+    settleScroll(target);
   };
 
   const close = () => {
@@ -62,6 +89,7 @@
       // Deep-loaded (or already at root): show home in place without leaving the site
       if (location.pathname !== '/') history.replaceState(null, '', '/');
       applyActive(null);
+      settleScroll(null);
     }
   };
 
@@ -98,7 +126,11 @@
     if (e.key === 'Escape' && body.dataset.active) close();
   });
 
-  window.addEventListener('popstate', () => applyActive(readPath()));
+  window.addEventListener('popstate', () => {
+    const next = readPath();
+    applyActive(next);
+    settleScroll(next);
+  });
 
   /* ── Learn section bar: jump without a history entry, mark the section in view ── */
   const learnNav = document.querySelector('.learn-nav');
@@ -220,6 +252,7 @@
       else popout.setAttribute('inert', '');
     };
     toggle.addEventListener('click', () => setOpen(!el.classList.contains('is-open')));
+    closePopouts.push(() => setOpen(false));   // Talk starts closed again after you leave it
     el.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && el.classList.contains('is-open')) {
         e.stopPropagation(); // close only the popout; the section stays open
