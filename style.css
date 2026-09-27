@@ -187,6 +187,7 @@
   --shadow-sm: inset 0 1px 0 var(--edge-highlight), 0 1px 2px rgba(26, 28, 25, 0.05);
   --shadow-md: inset 0 1px 0 var(--edge-highlight), 0 2px 4px rgba(26, 28, 25, 0.05), 0 8px 20px rgba(26, 28, 25, 0.08);
   --shadow-lg: inset 0 1px 0 var(--edge-highlight), 0 4px 8px rgba(26, 28, 25, 0.06), 0 18px 36px rgba(26, 28, 25, 0.14);
+  --shadow-photo: 0 0 0 1px var(--color-hairline), 0 2px 4px rgba(26, 28, 25, 0.06), 0 9px 18px rgba(26, 28, 25, 0.12);
 
   /* ── Motion & layout ──────────────────────────────────────────────── */
   --ease-out:  cubic-bezier(0.2, 0.9, 0.3, 1);
@@ -232,6 +233,8 @@
     --shadow-sm: inset 0 1px 0 var(--edge-highlight), 0 1px 2px rgba(0, 0, 0, 0.3);
     --shadow-md: inset 0 1px 0 var(--edge-highlight), 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.4);
     --shadow-lg: inset 0 1px 0 var(--edge-highlight), 0 4px 8px rgba(0, 0, 0, 0.35), 0 18px 36px rgba(0, 0, 0, 0.5);
+    /* a black shadow vanishes on this ground, so the photo glows in its own background green instead */
+    --shadow-photo: 0 0 0 1px var(--color-hairline), 0 5px 22px rgba(126, 142, 116, 0.30), 0 0 45px rgba(126, 142, 116, 0.14);
 
     --grain-opacity: 0.05;
   }
@@ -441,7 +444,6 @@ body:not([data-active]) .stage-inner { justify-content: center; }
   transition: grid-template-rows var(--d-view) var(--ease-out);
 }
 .banner {
-  overflow: hidden;
   min-height: 0;
   position: relative;
   display: grid;
@@ -457,7 +459,7 @@ body:not([data-active]) .stage-inner { justify-content: center; }
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 0 0 1px var(--color-hairline);
+  box-shadow: var(--shadow-photo);
 }
 .banner-name, .banner-about { grid-column: 2; }
 
@@ -488,7 +490,7 @@ body { font-optical-sizing: auto; }
 
 body[data-active] .banner-wrap { grid-template-rows: 0fr; }
 body[data-active] .stage-inner { gap: 24px; }
-body[data-active] .banner { opacity: 0; transform: translateY(-12px); }
+body[data-active] .banner { opacity: 0; transform: translateY(-12px); overflow: hidden; }   /* clip only while collapsed, so the photo's shadow isn't boxed in at home */
 
 /* ── Tile clusters ──────────────────────────────────────────────────── */
 .tiles {
