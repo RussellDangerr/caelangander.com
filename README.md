@@ -45,6 +45,15 @@ GitFlow-lite:
 
 Feature branches are cut from the tip of `dev`, never from `main` or a stale ancestor.
 
+## Image credits
+
+Third-party images keep their own terms and are not covered by the license below.
+
+- `assets/mizzou-quad.webp`: cropped from ["Jesse Hall Aerial"](https://commons.wikimedia.org/wiki/File:Jesse_Hall_Aerial.jpg) by [Lectrician2](https://commons.wikimedia.org/wiki/User:Lectrician2), licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The cropped version is shared under the same license.
+- `assets/oracle-health-campus.webp`: cropped from ["Innovations first floor"](https://commons.wikimedia.org/wiki/File:Innovations_first_floor.jpg) by Hookmeupbarb, licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The cropped version is shared under the same license.
+- `assets/aurora-install.webp`: © EnergyLink, from its [City of Aurora case study](https://goenergylink.com/case-studies/city-of-aurora/).
+- `assets/logos/`: trademarks of WellSky, Aptive Resources, Oracle and EnergyLink, used only to identify former and current employers. The Oracle mark is from [Simple Icons](https://simpleicons.org/) (CC0).
+
 ## License
 
-All rights reserved.
+All rights reserved, except the third-party images above.
