@@ -444,8 +444,22 @@ body:not([data-active]) .stage-inner { justify-content: center; }
   overflow: hidden;
   min-height: 0;
   position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: clamp(24px, 4vw, 48px);
+  align-items: center;
   transition: opacity var(--d-fast) var(--ease-out), transform var(--d-fast) var(--ease-out);
 }
+.banner-photo {
+  grid-row: 1 / span 2;
+  width: clamp(112px, 15vw, 184px);
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px var(--color-hairline);
+}
+.banner-name, .banner-about { grid-column: 2; }
 
 .banner-name {
   font-family: 'Fraunces', 'Fraunces Hero Fallback', 'Iowan Old Style', Georgia, serif;
@@ -1697,12 +1711,14 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+body.has-intro .banner-photo,
 body.has-intro .banner-name,
 body.has-intro .banner-about,
 body.has-intro .cluster {
   opacity: 0;
   animation: intro-up 720ms var(--ease-out) forwards;
 }
+body.has-intro .banner-photo,
 body.has-intro .banner-name   { animation-delay:   0ms; }
 body.has-intro .banner-about  { animation-delay: 160ms; }
 body.has-intro .cluster:nth-child(1) { animation-delay: 340ms; }
@@ -1853,6 +1869,9 @@ body.has-intro .banner-wrap { transition: none; }
 
 @media (max-width: 480px) {
   .container { padding-inline: 16px; }
+  .banner { grid-template-columns: 1fr; }
+  .banner-photo { grid-row: auto; width: 96px; margin-bottom: 20px; }
+  .banner-name, .banner-about { grid-column: 1; }
   .footer { padding: 16px; }
   .channel { padding: 14px 16px; gap: 12px; }
   /* Call / Text: the card is only a frame, its row carries the padding */
