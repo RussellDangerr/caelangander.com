@@ -1969,6 +1969,7 @@ body.has-intro .banner-wrap { transition: none; }
     column-gap: 14px;
     row-gap: 0;
     align-items: center;
+    align-content: start;   /* the min-height slack sits below the list, as on desktop, not between the rows */
   }
   body:not([data-active]) .cluster > .tile { min-height: max(280px, 32vh); }   /* room for a two-line job title, so the stacked cards stay one height */
   body:not([data-active]) .tile-body { display: contents; }
