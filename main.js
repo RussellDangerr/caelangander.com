@@ -132,6 +132,21 @@
     settleScroll(next);
   });
 
+  /* ── Warm a section's images on intent ──
+     Closed panels are display:none with lazy images, so the home view loads none of them.
+     Pointing at, focusing or touching a tile switches its panel's images to eager, so the
+     requests are already under way when the click lands. Once per panel. */
+  document.querySelectorAll('[data-go]').forEach((tile) => {
+    const panel = document.getElementById(tile.getAttribute('aria-controls'));
+    if (!panel) return;
+    const intents = ['pointerenter', 'focus', 'touchstart', 'pointerdown'];
+    const warm = () => {
+      intents.forEach((type) => tile.removeEventListener(type, warm));
+      panel.querySelectorAll('img[loading="lazy"]').forEach((img) => { img.loading = 'eager'; });
+    };
+    intents.forEach((type) => tile.addEventListener(type, warm, { passive: true }));
+  });
+
   /* ── Learn section bar: jump without a history entry, mark the section in view ── */
   const learnNav = document.querySelector('.learn-nav');
   if (learnNav) {
