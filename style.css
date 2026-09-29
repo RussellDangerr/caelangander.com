@@ -203,8 +203,7 @@
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --grain-opacity: 0.04;
 
-  /* Live glow centre — JS nudges these toward the cursor; these are the
-     resting defaults so the page looks identical with JS off. */
+  /* Glow centre: fixed resting position (the cursor tracking was removed). */
   --gx: 12%;
   --gy: -6%;
 }
@@ -346,7 +345,7 @@ main:focus { outline: none; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--color-bg);   /* opaque, ghost-free. Faux-frost (translucent, no blur) ghosted scrolling headings; a TRUE frosted look needs real backdrop-filter (now safe-ish since the glow is static → only re-blurs on scroll) — left as an opt-in. */
+  background: var(--color-bg);   /* opaque: a translucent header without blur ghosted the headings scrolling under it, and backdrop-filter is off the table for performance */
   border-bottom: 1px solid var(--color-hairline);
   transition: border-color var(--transition);
 }
@@ -377,7 +376,7 @@ body[data-active] .header:hover .logo svg {
 .logo svg {
   display: block;
   border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(21, 128, 61, 0.25);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--color-primary) 25%, transparent);
   transition: box-shadow var(--d-fast) var(--ease-out);
 }
 .logo:hover,
@@ -675,7 +674,7 @@ body[data-active] .tile-sub { color: var(--color-on-accent); opacity: 0.95; }
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 16px;
-  max-height: 240px;   /* ~= tallest preview (181px) + buffer; keeps the collapse eased, not abrupt */
+  max-height: 15rem;   /* above the tallest preview (Learn, ~215px with wrapped titles); rem so a larger default font doesn't clip it */
   overflow: hidden;
   min-width: 0;
   transition:
@@ -716,8 +715,7 @@ body[data-active] .tile-sub { color: var(--color-on-accent); opacity: 0.95; }
   text-wrap: pretty;
 }
 
-.meet-logo,
-.preview-logo { flex-shrink: 0; display: inline-block; vertical-align: middle; }
+.meet-logo { flex-shrink: 0; display: inline-block; vertical-align: middle; }
 .meet-logo { border-radius: 3px; }
 
 body[data-active] .tile-preview {
@@ -1547,6 +1545,8 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   background: var(--color-primary-soft);
   padding: 3px 10px;
   border-radius: var(--radius-pill);
+  white-space: nowrap;   /* on a phone the label beside it wraps instead of this pill */
+  flex-shrink: 0;
 }
 .card-tag--alt { color: var(--color-muted-strong); background: var(--color-surface-2); }
 .card-year {
@@ -1554,9 +1554,10 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   font-size: 0.6875rem;
   color: var(--color-muted);
   font-variant-numeric: tabular-nums;
+  text-align: right;
 }
 
-/* ── Learn: Toolkit / Domains ───────────────────────────────────────── */
+/* ── Learn: education pill groups ───────────────────────────────────── */
 .detail-group { margin: 0; }
 .detail-label {
   font-family: var(--font-mono);
@@ -1579,8 +1580,6 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   transition: border-color var(--transition), color var(--transition);
 }
 .pill-list li:hover { border-color: var(--accent); color: var(--color-text); }
-
-/* "Currently learning" reads as in-progress, not claimed: dashed, unfilled pills */
 
 /* ── Learn: earlier roles strip ─────────────────────────────────────── */
 .earlier-label {
@@ -2086,7 +2085,7 @@ body.has-intro .banner-wrap { transition: none; }
 
   /* cards may run across pages (keeping them whole left half-empty pages);
      the small pieces inside them stay whole. Pill groups may split: kept
-     whole, Chrome strands the Toolkit label at the foot of a page. */
+     whole, Chrome strands a group's label at the foot of a page. */
   .resume-meta-row,
   .exp-bullets li,
   .timeline-points li,
