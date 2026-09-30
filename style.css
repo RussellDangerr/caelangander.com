@@ -198,6 +198,7 @@
   --d-view:    0ms;      /* section reshape is instant — layout animation stepped pixel-by-pixel (jitter) and VT snapshotting was ~700ms/janky; content still fades via --d-fast */
   --transition: 0.12s ease;
   --max-width: clamp(1180px, 60vw, 1600px);
+  --gutter: 48px;   /* the page's side margin: .container and the footer rule both read it */
 
   /* ── Atmosphere ───────────────────────────────────────────────────── */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -306,7 +307,7 @@ button { font-family: inherit; background: none; border: none; color: inherit; c
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 var(--gutter);
   width: 100%;
 }
 
@@ -966,8 +967,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 
 .channel-popout {
   display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 220ms var(--ease-out);
+  grid-template-rows: 0fr;   /* opens instantly like the sections; the row inside fades and slides in */
 }
 .channel-popout-inner { overflow: hidden; min-height: 0; }
 .channel--dual.is-open .channel-popout { grid-template-rows: 1fr; }
@@ -1852,12 +1852,11 @@ body.has-intro .banner-wrap { transition: none; }
 
 /* ── Footer ─────────────────────────────────────────────────────────── */
 .footer {
-  --footer-pad: 48px;   /* matches .container's inline padding at each breakpoint */
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px var(--footer-pad);
+  padding: 28px var(--gutter);
   border-top: 2px solid transparent;   /* keeps the box the same height; the visible rule is ::before */
   font-family: var(--font-sans);
   font-size: 0.875rem;
@@ -1871,8 +1870,8 @@ body.has-intro .banner-wrap { transition: none; }
   content: '';
   position: absolute;
   top: -2px;
-  left: var(--footer-pad);
-  right: var(--footer-pad);
+  left: var(--gutter);
+  right: var(--gutter);
   height: 2px;
   background: var(--color-secondary);
 }
@@ -1956,8 +1955,7 @@ body.has-intro .banner-wrap { transition: none; }
 
 /* ── Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 960px) {
-  .container { padding-inline: 32px; }   /* inline only: a `padding` shorthand here would wipe .stage-inner's top and bottom */
-  .footer { --footer-pad: 32px; }
+  :root { --gutter: 32px; }
 
   .tiles { flex-direction: column; }
   .cluster { flex: 0 0 auto; }
@@ -1981,8 +1979,8 @@ body.has-intro .banner-wrap { transition: none; }
 }
 
 @media (max-width: 720px) {
-  .container { padding-inline: 24px; }
-  .footer { --footer-pad: 24px; padding-block: 22px; }
+  :root { --gutter: 24px; }
+  .footer { padding-block: 22px; }
   .stage-inner { padding-top: 36px; padding-bottom: 48px; gap: 36px; }
 
   /* open panel: stop the stage stretching to fill the viewport so the footer
@@ -2009,11 +2007,11 @@ body.has-intro .banner-wrap { transition: none; }
 }
 
 @media (max-width: 480px) {
-  .container { padding-inline: 16px; }
+  :root { --gutter: 16px; }
   .banner { grid-template-columns: 1fr; }
   .banner-photo { grid-row: auto; width: 96px; margin-bottom: 20px; }
   .banner-name, .banner-about { grid-column: 1; }
-  .footer { --footer-pad: 16px; padding-block: 16px; }
+  .footer { padding-block: 16px; }
   /* home tiles: the icon sits beside the verb and subtitle, and the preview
      list takes the card's full width instead of starting under the icon's column */
   body:not([data-active]) .tile {
