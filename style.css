@@ -1136,6 +1136,8 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 }
 #panel-learn .section-label[id] { scroll-margin-top: 128px; }   /* header + section bar + breathing room */
 #panel-learn .section-label[id]:focus { outline: none; }        /* focused by the bar's jump, like main */
+#panel-learn .case-card[id] { scroll-margin-top: 128px; }       /* a timeline role's "Case study" link lands here */
+#panel-learn .case-card[id]:focus { outline: none; }
 
 /* ── Learn: résumé header ───────────────────────────────────────────── */
 .resume-header {
@@ -1167,6 +1169,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   line-height: 1.65;
   max-width: 72ch;
 }
+.resume-summary + .resume-summary { margin-top: 1.25rem; }
 
 .resume-meta {
   margin: 1.5rem 0;
@@ -1185,6 +1188,10 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   border-bottom: 1px solid var(--color-hairline);
 }
 .resume-meta-row:last-child { border-bottom: none; }
+/* below the two-column layout the table ends the header, whose own rule closes it */
+@media (max-width: 1199px) {
+  .resume-meta { margin-bottom: 0; border-bottom: 0; }
+}
 .resume-meta-label {
   font-family: var(--font-mono);
   font-weight: 600;
@@ -1288,6 +1295,22 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   outline-offset: 3px;
   border-radius: 4px;
 }
+/* a timeline role's jump to its case study, styled like the case cards' own button */
+.timeline-case {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  transition: color var(--d-fast) var(--ease-out);
+}
+.timeline-case:hover { color: var(--color-text); }
+.timeline-case:focus-visible { border-radius: 4px; }
 .case-expand-icon { display: inline-flex; transition: transform 200ms var(--ease-out); }
 .case-card.is-expanded .case-expand-icon { transform: rotate(180deg); }
 
@@ -1634,6 +1657,30 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   border-radius: var(--radius-lg);
 }
 
+/* ── Learn: closing "Get in touch" (opens Talk through the same data-go switch as the tiles) ── */
+.learn-cta {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--color-hairline);
+  text-align: center;
+}
+.learn-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  transition: background var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out);
+}
+.learn-cta-btn:hover { background: var(--accent); color: var(--color-on-accent); }
+
 /* ── Explore: GitHub CTA ────────────────────────────────────────────── */
 .github-cta {
   display: flex;
@@ -1858,7 +1905,6 @@ body.has-intro .banner-wrap { transition: none; }
   .resume-headline,
   .resume-tagline { grid-column: 1 / -1; }
   .resume-summary { grid-column: 1; max-width: none; }
-  .resume-summary ~ .resume-summary { margin-top: 1.25rem; }   /* ~ not +: the details list sits between them */
   .resume-meta {
     grid-column: 2;
     grid-row: 3 / span 2;
@@ -2047,6 +2093,8 @@ body.has-intro .banner-wrap { transition: none; }
   .tile,
   .learn-nav,
   .case-expand,
+  .timeline-case,
+  .learn-cta,
   .cluster:not([data-cluster="learn"]) { display: none !important; }
 
   .container { max-width: none; padding: 0; }
