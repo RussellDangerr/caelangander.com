@@ -14,7 +14,8 @@
 
   const updateAria = () => {
     const active = body.dataset.active || null;
-    document.querySelectorAll('[data-go]').forEach((tile) => {
+    // only the tiles are disclosures; the Learn page's closing "Get in touch" also carries data-go
+    document.querySelectorAll('[data-go][aria-expanded]').forEach((tile) => {
       const target = tile.getAttribute('data-go');
       const isOpen = target === active;
       tile.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
@@ -185,6 +186,17 @@
       markLearnSection();
       heading.focus({ preventScroll: true });   // Tab and screen readers carry on from the section
       heading.scrollIntoView({ block: 'start' });
+    });
+
+    // a timeline role's "Case study" link jumps to its card the same way
+    learnPanel.addEventListener('click', (e) => {
+      const link = e.target.closest('a.timeline-case');
+      if (!link) return;
+      e.preventDefault();
+      const card = document.getElementById(link.hash.slice(1));
+      if (!card) return;
+      card.focus({ preventScroll: true });
+      card.scrollIntoView({ block: 'start' });
     });
 
     markLearnSection = () => {
