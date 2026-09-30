@@ -1350,6 +1350,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   padding-top: 4px;
   white-space: nowrap;
 }
+.timeline-where { display: block; margin-top: 2px; }   /* where the role was, under its dates */
 .timeline-rail {
   grid-area: rail;
   position: relative;
@@ -1435,7 +1436,8 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   color: var(--color-primary);
   letter-spacing: -0.005em;
 }
-.exp-loc { color: var(--color-muted); font-weight: 400; font-size: 0.8125rem; }
+.exp-note { color: var(--color-muted); font-weight: 400; font-size: 0.8125rem; }   /* what the company does */
+.exp-note::before { content: '\00B7\00A0'; }
 /* Organisation names link out quietly: same colour, underline only on hover or focus */
 .org-link {
   color: inherit;
@@ -1927,6 +1929,9 @@ body.has-intro .banner-wrap { transition: none; }
   .project-badges--demos { grid-template-columns: 1fr; }
   .earlier-list li { grid-template-columns: 1fr; }
   .earlier-dates { justify-self: start; }
+  /* the company note gets its own line rather than wrapping beside the logo */
+  .exp-note { display: block; margin-top: 2px; text-wrap: pretty; }
+  .exp-note::before { content: none; }
 }
 
 @media (max-width: 720px) {
@@ -1949,7 +1954,10 @@ body.has-intro .banner-wrap { transition: none; }
     column-gap: 12px;
     padding-bottom: 20px;
   }
-  .timeline-when { text-align: left; padding-top: 0; margin-bottom: 4px; }
+  .timeline-when { text-align: left; padding-top: 0; margin-bottom: 4px; white-space: normal; }
+  /* one line above the role: dates, then place */
+  .timeline-where { display: inline; margin-top: 0; }
+  .timeline-where::before { content: '\00A0\00B7\00A0'; }
   .timeline-dot { top: 2px; }
   .timeline-stop--earlier .timeline-dot { top: 4px; }
 }
