@@ -354,9 +354,11 @@ main:focus { outline: none; }
 /* When a section is open, the whole sticky bar is a click target for home;
    the logo button stays the keyboard / screen-reader control. */
 body[data-active] .header { cursor: pointer; }
-body[data-active] .header:hover .logo { transform: translateY(-1px) scale(1.05); }
-body[data-active] .header:hover .logo svg {
-  box-shadow: 0 6px 16px color-mix(in srgb, var(--color-primary) 38%, transparent);
+@media (hover: hover) {
+  body[data-active] .header:hover .logo { transform: translateY(-1px) scale(1.05); }
+  body[data-active] .header:hover .logo svg {
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--color-primary) 38%, transparent);
+  }
 }
 
 .nav {
@@ -378,12 +380,13 @@ body[data-active] .header:hover .logo svg {
   display: block;
   border-radius: 6px;
   box-shadow: 0 1px 2px color-mix(in srgb, var(--color-primary) 25%, transparent);
-  transition: box-shadow var(--d-fast) var(--ease-out);
 }
-.logo:hover,
 .logo:focus-visible { transform: translateY(-1px) scale(1.05); outline: none; }
-.logo:hover svg,
 .logo:focus-visible svg { box-shadow: 0 6px 16px color-mix(in srgb, var(--color-primary) 38%, transparent); }
+@media (hover: hover) {
+  .logo:hover { transform: translateY(-1px) scale(1.05); outline: none; }
+  .logo:hover svg { box-shadow: 0 6px 16px color-mix(in srgb, var(--color-primary) 38%, transparent); }
+}
 
 .nav-name {
   font-family: var(--font-display);
@@ -549,7 +552,6 @@ body[data-active="explore"] .cluster:not([data-cluster="explore"]) { overflow: c
   overflow: hidden;
   transition:
     transform var(--d-fast) var(--ease-out),
-    box-shadow var(--d-fast) var(--ease-out),
     border-color var(--d-fast) var(--ease-out),
     padding var(--d-view) var(--ease-out),
     background var(--d-fast) var(--ease-out),
@@ -578,17 +580,25 @@ body[data-active="explore"] .cluster:not([data-cluster="explore"]) { overflow: c
   transition: opacity var(--d-fast) var(--ease-out), transform var(--d-fast) var(--ease-out);
   pointer-events: none;
 }
-.tile:hover,
+/* Lifts are split: focus always lifts, hover only where a pointer can hover,
+   so a tap on a phone doesn't leave the card stuck raised (:active is the touch feedback). */
 .tile:focus-visible {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
   border-color: var(--accent);
   outline: none;
 }
-.tile:hover::before,
 .tile:focus-visible::before { opacity: 1; }
-.tile:hover::after,
 .tile:focus-visible::after { opacity: 1; transform: translateX(0); }
+@media (hover: hover) {
+  .tile:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent);
+  }
+  .tile:hover::before { opacity: 1; }
+  .tile:hover::after { opacity: 1; transform: translateX(0); }
+}
 .tile:active {
   transform: translateY(-2px) scale(0.99);
   transition-duration: 80ms;
@@ -633,11 +643,17 @@ body:not([data-active]) .tile { grid-template-columns: auto 1fr; grid-template-a
     width var(--d-view) var(--ease-out),
     height var(--d-view) var(--ease-out);
 }
-.tile:hover .tile-icon,
 .tile:focus-visible .tile-icon {
   background: var(--accent);
   color: var(--color-on-accent);
   transform: rotate(-6deg) scale(1.05);
+}
+@media (hover: hover) {
+  .tile:hover .tile-icon {
+    background: var(--accent);
+    color: var(--color-on-accent);
+    transform: rotate(-6deg) scale(1.05);
+  }
 }
 body[data-active] .tile-icon {
   background: color-mix(in srgb, var(--color-on-accent) 16%, transparent);
@@ -748,9 +764,11 @@ body[data-active] .tile-back-affordance {
   border-color: color-mix(in srgb, var(--color-on-accent) 35%, transparent);
   background: color-mix(in srgb, var(--color-on-accent) 10%, transparent);
 }
-body[data-active] .tile:hover .tile-back-affordance {
-  background: color-mix(in srgb, var(--color-on-accent) 22%, transparent);
-  border-color: var(--color-on-accent);
+@media (hover: hover) {
+  body[data-active] .tile:hover .tile-back-affordance {
+    background: color-mix(in srgb, var(--color-on-accent) 22%, transparent);
+    border-color: var(--color-on-accent);
+  }
 }
 
 /* ── Panel reveal ───────────────────────────────────────────────────── */
@@ -836,15 +854,20 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   overflow: hidden;
   transition:
     transform var(--d-fast) var(--ease-out),
-    box-shadow var(--d-fast) var(--ease-out),
     border-color var(--d-fast) var(--ease-out);
 }
-.channel:hover,
 .channel:focus-visible {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
   border-color: var(--accent);
   outline: none;
+}
+@media (hover: hover) {
+  .channel:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent);
+  }
 }
 .channel:active { transform: translateY(0) scale(0.99); transition-duration: 80ms; }
 
@@ -859,8 +882,10 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   flex-shrink: 0;
   transition: background var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out);
 }
-.channel:hover .channel-icon,
 .channel:focus-visible .channel-icon { background: var(--accent); color: var(--color-on-accent); }
+@media (hover: hover) {
+  .channel:hover .channel-icon { background: var(--accent); color: var(--color-on-accent); }
+}
 
 .channel-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .channel-label {
@@ -951,7 +976,9 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   background: transparent;
   color: var(--accent);
 }
-.channel--dual:hover .channel-icon--dual { background: transparent; color: var(--accent); }
+@media (hover: hover) {
+  .channel--dual:hover .channel-icon--dual { background: transparent; color: var(--accent); }
+}
 .channel--dual .channel-icon--dual svg + svg { margin-left: -4px; }
 
 .channel-toggle-arrow {
@@ -961,8 +988,10 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   flex-shrink: 0;
   transition: transform 200ms var(--ease-out), color var(--d-fast) var(--ease-out);
 }
-.channel--dual:hover .channel-toggle-arrow,
 .channel-row:focus-visible .channel-toggle-arrow { color: var(--accent); }
+@media (hover: hover) {
+  .channel--dual:hover .channel-toggle-arrow { color: var(--accent); }
+}
 .channel--dual.is-open .channel-toggle-arrow { transform: rotate(180deg); color: var(--accent); }
 
 .channel-popout {
@@ -998,11 +1027,9 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   transition:
     transform 140ms var(--ease-out),
     border-color 140ms var(--ease-out),
-    box-shadow 140ms var(--ease-out),
     background 140ms var(--ease-out);
 }
 .popout-btn svg { color: var(--accent); flex-shrink: 0; transition: transform 140ms var(--ease-out); }
-.popout-btn:hover,
 .popout-btn:focus-visible {
   transform: translateY(-1px);
   border-color: var(--accent);
@@ -1010,26 +1037,41 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   background: var(--accent-soft);
   outline: none;
 }
-.popout-btn:hover svg,
 .popout-btn:focus-visible svg { transform: scale(1.08); }
+@media (hover: hover) {
+  .popout-btn:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-sm);
+    background: var(--accent-soft);
+  }
+  .popout-btn:hover svg { transform: scale(1.08); }
+}
 .popout-btn:active { transform: translateY(0) scale(0.98); transition-duration: 80ms; }
 
 /* Google Meet — the marquee CTA, a solid accent-filled button */
 .channel--primary {
   grid-column: 1 / -1;
-  padding: 24px 28px;
+  padding: 23px 27px;               /* 1px less than before, to make room for the border below */
   gap: 22px;
-  border: none;
+  border: 1px solid transparent;    /* invisible normally; High Contrast mode paints it, since it drops shadows */
   background: var(--accent);        /* one green — same as the bands and icons */
   color: var(--color-on-accent);
   box-shadow: var(--shadow-md);
 }
-.channel--primary:hover,
 .channel--primary:focus-visible {
   transform: translateY(-3px);
-  background: var(--accent-deep);   /* the only place the deep green appears — hover only */
+  background: var(--accent-deep);   /* the only place the deep green appears – hover/focus only */
   box-shadow: 0 14px 28px color-mix(in srgb, var(--accent) 46%, transparent);
-  border: none;
+  border-color: transparent;
+}
+@media (hover: hover) {
+  .channel--primary:hover {
+    transform: translateY(-3px);
+    background: var(--accent-deep);
+    box-shadow: 0 14px 28px color-mix(in srgb, var(--accent) 46%, transparent);
+    border-color: transparent;   /* beats .channel:hover's accent border */
+  }
 }
 .channel-icon--meet {
   width: 58px;
@@ -1041,8 +1083,10 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   flex-shrink: 0;
 }
 .channel-icon--meet svg { width: 100%; height: 100%; display: block; }
-.channel--primary:hover .channel-icon--meet,
 .channel--primary:focus-visible .channel-icon--meet { background: #FFFFFF; }
+@media (hover: hover) {
+  .channel--primary:hover .channel-icon--meet { background: #FFFFFF; }
+}
 
 .channel-label--primary {
   color: var(--color-on-accent);
@@ -1067,7 +1111,9 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   flex-shrink: 0;
   transition: transform var(--d-fast) var(--ease-out);
 }
-.channel--primary:hover .channel-arrow { transform: translate(3px, -3px); }
+@media (hover: hover) {
+  .channel--primary:hover .channel-arrow { transform: translate(3px, -3px); }
+}
 
 /* ── Section labels (shared Learn + Explore) ────────────────────────── */
 .section-label {
@@ -1227,14 +1273,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   border: 1px solid var(--color-hairline);
   border-left: 3px solid var(--accent);   /* the cue that says "feature", not "timeline" */
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-}
-.case-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-hairline-strong);
-  border-left-color: var(--accent);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);   /* static: the card itself isn't clickable, so it doesn't lift on hover */
 }
 .case-title {
   font-family: var(--font-display);
@@ -1693,10 +1732,12 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   margin-top: 22px;
   position: relative;
   overflow: hidden;
-  transition: transform var(--d-fast) var(--ease-out), box-shadow var(--d-fast) var(--ease-out);
+  transition: transform var(--d-fast) var(--ease-out);
 }
-.github-cta:hover,
 .github-cta:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+@media (hover: hover) {
+  .github-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+}
 .github-cta-icon {
   display: grid;
   place-items: center;
@@ -1723,7 +1764,9 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   color: var(--color-muted);
   transition: transform var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out);
 }
-.github-cta:hover .github-cta-arrow { color: var(--accent); transform: translate(3px, -3px); }
+@media (hover: hover) {
+  .github-cta:hover .github-cta-arrow { color: var(--accent); transform: translate(3px, -3px); }
+}
 
 /* ── Explore: project badges ────────────────────────────────────────── */
 .project-badges {
@@ -1744,16 +1787,21 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   overflow: hidden;
   transition:
     transform var(--d-fast) var(--ease-out),
-    box-shadow var(--d-fast) var(--ease-out),
     border-color var(--d-fast) var(--ease-out);
 }
-.project-badge:hover,
-.project-badge:focus-visible,
-.project-badge--wide:hover {
+.project-badge:focus-visible {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: var(--accent);
   outline: none;
+}
+@media (hover: hover) {
+  .project-badge:hover,
+  .project-badge--wide:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent);
+  }
 }
 .project-badge--wide { padding: 0 20px 20px; }
 
@@ -1811,7 +1859,9 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   color: var(--color-muted);
   transition: color var(--d-fast) var(--ease-out), transform var(--d-fast) var(--ease-out);
 }
-.project-badge:hover .external { color: var(--accent); transform: translate(2px, -2px); }
+@media (hover: hover) {
+  .project-badge:hover .external { color: var(--accent); transform: translate(2px, -2px); }
+}
 
 .project-badge-desc { font-size: 0.8125rem; color: var(--color-muted); line-height: 1.5; }
 
@@ -1927,8 +1977,7 @@ body.has-intro .banner-wrap { transition: none; }
     grid-row: 1 / -1;
     margin: 0;
     border-radius: var(--radius-md);
-    border: 1px solid var(--color-hairline);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-hairline);   /* a border, not a shadow: it already sits on a raised card */
     overflow: hidden;
   }
   .project-badge--wide .badge-media { aspect-ratio: 1000 / 720; }
@@ -2040,7 +2089,7 @@ body.has-intro .banner-wrap { transition: none; }
   body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner { padding: 26px 18px 30px; }
   .learn-nav { margin: -26px -18px 20px; padding: 10px 18px; }
   .resume-headline { font-size: 1.25rem; }
-  .channel--primary { padding: 18px 18px; gap: 14px; }
+  .channel--primary { padding: 17px; gap: 14px; }
 }
 
 @media (max-width: 360px) {
