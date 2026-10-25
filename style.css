@@ -1726,60 +1726,14 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 }
 .learn-cta-btn:hover { background: var(--accent); color: var(--color-on-accent); }
 
-/* ── Explore: GitHub CTA ────────────────────────────────────────────── */
-.github-cta {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 20px 22px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-text);
-  border-radius: var(--radius-lg);
-  margin-top: 22px;
-  position: relative;
-  overflow: hidden;
-  transition: transform var(--d-fast) var(--ease-out);
-}
-.github-cta:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-@media (hover: hover) {
-  .github-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-}
-.github-cta-icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-lg);
-  background: var(--color-text);
-  color: var(--color-bg);
-  flex-shrink: 0;
-}
-.github-cta-body { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
-.github-cta-label {
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-label);
-  color: var(--color-muted);
-}
-.github-cta-value { font-size: var(--text-md); font-weight: 500; color: var(--color-text); letter-spacing: -0.005em; }
-.github-cta-arrow {
-  display: grid;
-  place-items: center;
-  color: var(--color-muted);
-  transition: transform var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out);
-}
-@media (hover: hover) {
-  .github-cta:hover .github-cta-arrow { color: var(--accent); transform: translate(3px, -3px); }
-}
-
 /* ── Explore: project badges ────────────────────────────────────────── */
 .project-badges {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
 }
+.project-badges--wide { grid-template-columns: minmax(0, 1fr); }
+/* the closing pair stays small beside the wide cards: two squares, not two halves */
+.project-badges--small { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 640px; }
 .project-badge,
 .project-badge--wide {
   display: flex;
@@ -1795,15 +1749,14 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
     transform var(--d-fast) var(--ease-out),
     border-color var(--d-fast) var(--ease-out);
 }
-.project-badge:focus-visible {
+a.project-badge:focus-visible {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: var(--accent);
   outline: none;
 }
 @media (hover: hover) {
-  .project-badge:hover,
-  .project-badge--wide:hover {
+  a.project-badge:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
     border-color: var(--accent);
@@ -1854,7 +1807,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   background: var(--color-primary-soft);
   border-color: color-mix(in srgb, var(--color-primary) 38%, transparent);
 }
-.badge-status--soon {
+.badge-status--dev {
   color: var(--color-secondary);
   background: var(--color-secondary-soft);
   border-color: color-mix(in srgb, var(--color-secondary) 38%, transparent);
@@ -1884,7 +1837,73 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   border-radius: 3px;
 }
 
-.project-badges--demos { grid-template-columns: repeat(2, 1fr); }
+/* ── Explore: small cards (Clown City, GitHub) ── */
+.project-badge--small { padding: 0 16px 16px; }
+.project-badge--small .badge-media { margin: 0 -16px 10px; }
+.project-badge--small .badge-tags { display: none; }   /* tags belong to the big three; the small cards keep to name, status, one line */
+.badge-media--mark { background: var(--color-surface-2); }
+.badge-mark {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-lg);
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+.badge-mark svg { width: 38px; height: 38px; }
+.badge-handle { color: var(--color-text); font-weight: 500; }
+
+/* ── Explore: the Grawlix preview video ──
+   The video stays invisible until it has a poster or a frame to show
+   (main.js adds .has-poster / .has-video), so a missing file leaves the
+   placeholder, never an empty player. */
+.badge-media--video {
+  position: relative;
+  background-color: color-mix(in srgb, var(--accent) 7%, var(--color-surface-2));
+  /* comic-strip halftone behind the placeholder's cursing */
+  background-image: radial-gradient(color-mix(in srgb, var(--accent) 16%, transparent) 1.4px, transparent 1.8px);
+  background-size: 11px 11px;
+}
+.badge-placeholder {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 55%, var(--color-surface-2));
+  transform: rotate(-4deg);
+  user-select: none;
+}
+.badge-media--video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+}
+.badge-media--video:is(.has-poster, .has-video) video { opacity: 1; }
+.badge-play {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid color-mix(in srgb, var(--color-bg) 30%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-text) 72%, transparent);
+  color: var(--color-bg);
+  cursor: pointer;
+}
+.badge-play[hidden] { display: none; }
+.badge-play:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.badge-play .badge-play-play,
+.badge-play.is-paused .badge-play-pause { display: none; }
+.badge-play.is-paused .badge-play-play { display: block; }
 
 
 /* ── Intro choreography ─────────────────────────────────────────────── */
@@ -2025,8 +2044,6 @@ body.has-intro .banner-wrap { transition: none; }
   .channel--primary { grid-column: auto; }
   .case-grid { grid-template-columns: 1fr; }
   .edu-detail-grid { grid-template-columns: 1fr; gap: 18px; }
-  .project-badges,
-  .project-badges--demos { grid-template-columns: 1fr; }
   .earlier-list li { grid-template-columns: 1fr; }
   .earlier-dates { justify-self: start; }
   /* the company note gets its own line rather than wrapping beside the logo */
@@ -2060,6 +2077,22 @@ body.has-intro .banner-wrap { transition: none; }
   .timeline-where::before { content: '\00A0\00B7\00A0'; }
   .timeline-dot { top: 2px; }
   .timeline-stop--earlier .timeline-dot { top: 4px; }
+
+  /* the small pair stays side by side: name and arrow on one line, the status
+     under it, and only the GitHub handle survives of the one-liners */
+  .project-badges--small { gap: 10px; }
+  .project-badge--small { padding: 0 14px 14px; gap: 6px; }
+  .project-badge--small .badge-media { margin: 0 -14px 8px; }
+  .project-badge--small .project-badge-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 8px;
+  }
+  .project-badge--small .project-badge-head .badge-status { grid-row: 2; justify-self: start; }
+  .project-badge--small:not(.project-badge--github) .project-badge-desc,
+  .badge-handle-note { display: none; }
+  .badge-mark { width: 56px; height: 56px; }
+  .badge-mark svg { width: 30px; height: 30px; }
 }
 
 @media (max-width: 480px) {
