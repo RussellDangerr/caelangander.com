@@ -10,7 +10,7 @@ A single-page kiosk with three entry tiles, each deep-linkable via path-routed U
 
 - **Talk** ([caelangander.com/talk](https://caelangander.com/talk)) — scheduling and contact.
 - **Learn** ([caelangander.com/learn](https://caelangander.com/learn)) — background, experience, and current focus, with selected work that includes [Raven](https://raven.caelangander.com).
-- **Explore** ([caelangander.com/explore](https://caelangander.com/explore)) — games, sites, and experiments. Links out to [Raven](https://raven.caelangander.com), a technology atlas, and to side projects like [Violencetown](https://violencetown.russelldangerr.com/game/) and [Clown City](https://clowncity.russelldangerr.com).
+- **Explore** ([caelangander.com/explore](https://caelangander.com/explore)) — games, sites, and experiments. Links out to [Raven](https://raven.caelangander.com), a technology atlas, and to side projects like [Violencetown](https://violencetown.russelldangerr.com/game/) and [Clown City](https://clowncity.russelldangerr.com), and previews Grawlix, a 3D flying game in development.
 
 Routing uses the History API; Cloudflare Pages serves `index.html` for any unmatched path, so refreshes and direct links resolve to the right view without a 404 round-trip.
 
