@@ -28,7 +28,7 @@
 
   <link rel="preload" href="/assets/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=51">
+  <link rel="stylesheet" href="/style.css?v=53">
 </head>
 <body class="has-intro">
 
@@ -639,11 +639,11 @@
                 <div class="project-badge project-badge--wide">
                   <div class="badge-media badge-media--video" data-preview>
                     <span class="badge-placeholder" aria-hidden="true">#@$%&amp;!</span>
-                    <video muted loop playsinline autoplay preload="metadata" poster="/assets/grawlix-preview.jpg?v=1" aria-label="Grawlix gameplay">
+                    <video muted loop playsinline preload="none" poster="/assets/grawlix-preview.jpg?v=1" aria-label="Grawlix gameplay">
                       <source src="/assets/grawlix-preview.webm?v=1" type="video/webm">
                       <source src="/assets/grawlix-preview.mp4?v=1" type="video/mp4">
                     </video>
-                    <button class="badge-play" type="button" aria-label="Pause the Grawlix preview" hidden>
+                    <button class="badge-play" type="button" aria-label="Play the Grawlix preview" hidden>
                       <svg class="badge-play-pause" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
                       <svg class="badge-play-play" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
                     </button>
@@ -669,8 +669,11 @@
               <div class="project-badges project-badges--small">
 
                 <a class="project-badge project-badge--small" href="https://clowncity.russelldangerr.com" target="_blank" rel="noopener">
-                  <div class="badge-media">
-                    <img src="/assets/clowncity.webp?v=1" alt="Clown City gameplay" loading="lazy">
+                  <div class="badge-media badge-media--gallery">
+                    <img src="/assets/clowncity.webp?v=2" alt="The Carousel: Poko the clown on a unicycle, in the air over a bobbing horse, with a brass ring hanging just ahead" width="800" height="450" loading="lazy" decoding="async">
+                    <img src="/assets/clowncity-strongman.webp?v=1" alt="The Strongman: Poko beside his dropped hammer as a red puck flies up the high striker&rsquo;s pole toward the Weakling mark" width="800" height="450" loading="lazy" decoding="async">
+                    <img src="/assets/clowncity-ducks.webp?v=1" alt="The Duck River: Poko hopping over the water between a yellow rubber duck and a pink one with an up arrow above it" width="800" height="450" loading="lazy" decoding="async">
+                    <img src="/assets/clowncity-trapeze.webp?v=1" alt="The Big Drop: Poko hanging from a big trapeze high above a dark ledge in the night sky" width="800" height="450" loading="lazy" decoding="async">
                   </div>
                   <div class="project-badge-head">
                     <h3>Clown City</h3>
@@ -679,13 +682,8 @@
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                     </span>
                   </div>
-                  <p class="project-badge-desc">HTML5 unicycle auto-runner</p>
-                  <ul class="badge-tags">
-                    <li>HTML5</li>
-                    <li>Canvas</li>
-                    <li>Auto-Runner</li>
-                    <li>Physics</li>
-                  </ul>
+                  <p class="project-badge-desc">A browser auto-runner in vanilla JavaScript, no dependencies: Poko the clown on a unicycle, rolling until you make him stop. Five circus levels, including a wall-jump tower that ends at a high striker, a river of rubber ducks, a looping carousel and a trapeze-and-net drop into the big tent. Try the Strongman: the higher you are when you press down, the harder the hammer hits.</p>
+                  <span class="badge-cta">Play in your browser</span>
                 </a>
 
                 <a class="project-badge project-badge--small project-badge--github" href="https://github.com/RussellDangerr" target="_blank" rel="noopener">
@@ -717,6 +715,6 @@
     <span class="footer-time" id="clock"></span>
   </footer>
 
-  <script src="/main.js?v=18"></script>
+  <script src="/main.js?v=19"></script>
 </body>
 </html>

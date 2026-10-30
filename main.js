@@ -310,10 +310,10 @@
   });
 
   /* ── Explore: project preview videos ──
-     A preview plays only while it's on screen, and never by itself under reduced
-     motion (the poster shows; the button still plays it). The video stays hidden
-     until it has a poster or a frame, so a missing file leaves the card's
-     placeholder rather than an empty player. */
+     A preview holds on its poster until the visitor presses play, then plays only
+     while it's on screen. The video and its button stay hidden until the poster
+     loads, so a missing file leaves the card's placeholder rather than an empty
+     player. */
   const calm = matchMedia('(prefers-reduced-motion: reduce)');
   document.querySelectorAll('[data-preview]').forEach((media) => {
     const video = media.querySelector('video');
@@ -321,8 +321,7 @@
     if (!video) return;
     const what = button ? button.getAttribute('aria-label').replace(/^\S+ /, '') : '';
     let onScreen = false;
-    let held = calm.matches;   // paused by the visitor, or by reduced motion until they press play
-    video.autoplay = false;    // the observer below decides when it plays
+    let held = true;           // still until the visitor presses play
 
     const sync = () => {
       if (onScreen && !held) video.play().catch(() => {});
@@ -334,13 +333,15 @@
 
     if (video.poster) {
       const poster = new Image();
-      poster.onload = () => media.classList.add('has-poster');
+      poster.onload = () => {
+        media.classList.add('has-poster');
+        if (button) button.hidden = false;
+      };
       poster.src = video.poster;
     }
     video.addEventListener('loadeddata', () => media.classList.add('has-video'));
-    video.addEventListener('loadedmetadata', () => { if (button) button.hidden = false; });
     if (button) button.addEventListener('click', () => { held = !held; sync(); });
-    calm.addEventListener('change', () => { held = calm.matches; sync(); });
+    calm.addEventListener('change', () => { if (calm.matches) { held = true; sync(); } });
 
     new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; sync(); }).observe(media);
   });

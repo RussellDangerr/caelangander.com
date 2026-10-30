@@ -1732,8 +1732,11 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   gap: 14px;
 }
 .project-badges--wide { grid-template-columns: minmax(0, 1fr); }
-/* the closing pair stays small beside the wide cards: two squares, not two halves */
-.project-badges--small { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 640px; }
+/* the closing pair fills the row at 2:1 (flex bases in that ratio, so it holds at any
+   width) and stacks by itself once the two no longer fit */
+.project-badges--small { display: flex; flex-wrap: wrap; }
+.project-badges--small .project-badge { flex: 2 1 440px; min-width: 0; }
+.project-badges--small .project-badge--github { flex: 1 1 220px; }
 .project-badge,
 .project-badge--wide {
   display: flex;
@@ -1840,8 +1843,27 @@ a.project-badge:focus-visible {
 /* ── Explore: small cards (Clown City, GitHub) ── */
 .project-badge--small { padding: 0 16px 16px; }
 .project-badge--small .badge-media { margin: 0 -16px 10px; }
-.project-badge--small .badge-tags { display: none; }   /* tags belong to the big three; the small cards keep to name, status, one line */
-.badge-media--mark { background: var(--color-surface-2); }
+/* one big shot beside three small ones: 3:1 columns of 16:9 frames come out level */
+.badge-media--gallery {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  aspect-ratio: 64 / 27;
+  background: var(--color-hairline);
+}
+.badge-media--gallery img { min-width: 0; min-height: 0; }
+.badge-media--gallery img:first-child { grid-row: 1 / -1; }
+.badge-cta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-primary-deep);
+  margin-top: auto;
+  padding-top: 4px;
+}
+/* the GitHub mark takes whatever height its neighbour leaves */
+.badge-media--mark { background: var(--color-surface-2); aspect-ratio: auto; flex: 1 1 auto; min-height: 120px; }
 .badge-mark {
   display: grid;
   place-items: center;
@@ -1904,6 +1926,14 @@ a.project-badge:focus-visible {
 .badge-play .badge-play-play,
 .badge-play.is-paused .badge-play-pause { display: none; }
 .badge-play.is-paused .badge-play-play { display: block; }
+/* at rest it's the card's one invitation: big and central, then a small corner pause */
+.badge-play.is-paused {
+  right: calc(50% - 28px);
+  bottom: calc(50% - 28px);
+  width: 56px;
+  height: 56px;
+}
+.badge-play.is-paused svg { width: 24px; height: 24px; }
 
 
 /* ── Intro choreography ─────────────────────────────────────────────── */
@@ -2078,19 +2108,17 @@ body.has-intro .banner-wrap { transition: none; }
   .timeline-dot { top: 2px; }
   .timeline-stop--earlier .timeline-dot { top: 4px; }
 
-  /* the small pair stays side by side: name and arrow on one line, the status
-     under it, and only the GitHub handle survives of the one-liners */
   .project-badges--small { gap: 10px; }
   .project-badge--small { padding: 0 14px 14px; gap: 6px; }
   .project-badge--small .badge-media { margin: 0 -14px 8px; }
-  .project-badge--small .project-badge-head {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 6px 8px;
+  /* too narrow for a side column: the big shot on top, the other three under it */
+  .badge-media--gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    aspect-ratio: auto;
   }
-  .project-badge--small .project-badge-head .badge-status { grid-row: 2; justify-self: start; }
-  .project-badge--small:not(.project-badge--github) .project-badge-desc,
-  .badge-handle-note { display: none; }
+  .badge-media--gallery img { height: auto; aspect-ratio: 16 / 9; }
+  .badge-media--gallery img:first-child { grid-row: auto; grid-column: 1 / -1; }
   .badge-mark { width: 56px; height: 56px; }
   .badge-mark svg { width: 30px; height: 30px; }
 }
