@@ -362,12 +362,6 @@ main:focus { outline: none; }
 /* When a section is open, the whole sticky bar is a click target for home;
    the logo button stays the keyboard / screen-reader control. */
 body[data-active] .header { cursor: pointer; }
-@media (hover: hover) {
-  body[data-active] .header:hover .logo { transform: translateY(-1px) scale(1.05); }
-  body[data-active] .header:hover .logo svg {
-    box-shadow: 0 6px 16px color-mix(in srgb, var(--color-primary) 38%, transparent);
-  }
-}
 
 .nav {
   display: flex;
@@ -602,11 +596,8 @@ body[data-active="explore"] .cluster:not([data-cluster="explore"]) { overflow: c
 @media (hover: hover) {
   .tile:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
     border-color: var(--accent);
   }
-  .tile:hover::before { opacity: 1; }
-  .tile:hover::after { opacity: 1; transform: translateX(0); }
 }
 .tile:active {
   transform: translateY(-2px) scale(0.99);
@@ -656,13 +647,6 @@ body:not([data-active]) .tile { grid-template-columns: auto 1fr; grid-template-a
   background: var(--accent);
   color: var(--color-on-accent);
   transform: rotate(-6deg) scale(1.05);
-}
-@media (hover: hover) {
-  .tile:hover .tile-icon {
-    background: var(--accent);
-    color: var(--color-on-accent);
-    transform: rotate(-6deg) scale(1.05);
-  }
 }
 body[data-active] .tile-icon {
   background: color-mix(in srgb, var(--color-on-accent) 16%, transparent);
@@ -1648,9 +1632,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   border: 1px solid var(--color-hairline);
   padding: 5px 14px;
   border-radius: var(--radius-pill);
-  transition: border-color var(--transition), color var(--transition);
 }
-.pill-list li:hover { border-color: var(--accent); color: var(--color-text); }
 
 /* ── Learn: earlier roles strip ─────────────────────────────────────── */
 .earlier-label {
