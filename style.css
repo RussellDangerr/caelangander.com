@@ -265,6 +265,11 @@ html {
   scroll-behavior: smooth;
   background: var(--color-bg);
 }
+/* Tab and jumps stop clear of the sticky bars. Margins on the content rather than scroll-padding
+   on html, which would also scroll the page whenever focus landed in the bars themselves. */
+main :is(a, button) { scroll-margin-top: 73px; }   /* the header + 12px */
+#panel-learn :is(a, button, [id]) { scroll-margin-top: calc(110px + 1.1rem); }   /* + the section bar: 37px of padding and borders and its line of text, in rem so it tracks a larger default font */
+#panel-learn .learn-nav a { scroll-margin-top: 0; }
 
 body {
   font-family: var(--font-sans);
@@ -357,12 +362,6 @@ main:focus { outline: none; }
 /* When a section is open, the whole sticky bar is a click target for home;
    the logo button stays the keyboard / screen-reader control. */
 body[data-active] .header { cursor: pointer; }
-@media (hover: hover) {
-  body[data-active] .header:hover .logo { transform: translateY(-1px) scale(1.05); }
-  body[data-active] .header:hover .logo svg {
-    box-shadow: 0 6px 16px color-mix(in srgb, var(--color-primary) 38%, transparent);
-  }
-}
 
 .nav {
   display: flex;
@@ -597,11 +596,8 @@ body[data-active="explore"] .cluster:not([data-cluster="explore"]) { overflow: c
 @media (hover: hover) {
   .tile:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
     border-color: var(--accent);
   }
-  .tile:hover::before { opacity: 1; }
-  .tile:hover::after { opacity: 1; transform: translateX(0); }
 }
 .tile:active {
   transform: translateY(-2px) scale(0.99);
@@ -651,13 +647,6 @@ body:not([data-active]) .tile { grid-template-columns: auto 1fr; grid-template-a
   background: var(--accent);
   color: var(--color-on-accent);
   transform: rotate(-6deg) scale(1.05);
-}
-@media (hover: hover) {
-  .tile:hover .tile-icon {
-    background: var(--accent);
-    color: var(--color-on-accent);
-    transform: rotate(-6deg) scale(1.05);
-  }
 }
 body[data-active] .tile-icon {
   background: color-mix(in srgb, var(--color-on-accent) 16%, transparent);
@@ -766,11 +755,11 @@ body[data-active] .tile-preview {
 body[data-active] .tile-back-affordance {
   display: inline-flex;
   border-color: color-mix(in srgb, var(--color-on-accent) 35%, transparent);
-  background: color-mix(in srgb, var(--color-on-accent) 10%, transparent);
+  background: color-mix(in srgb, var(--accent-deep) 45%, transparent);   /* the deep accent, not on-accent: a fill toward the label's own colour costs it contrast (white on green fell to 4.17:1) */
 }
 @media (hover: hover) {
   body[data-active] .tile:hover .tile-back-affordance {
-    background: color-mix(in srgb, var(--color-on-accent) 22%, transparent);
+    background: var(--accent-deep);
     border-color: var(--color-on-accent);
   }
 }
@@ -908,9 +897,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-wrap: anywhere;   /* wraps at any width or text size rather than clipping */
 }
 .channel-aux {
   display: block;
@@ -1065,7 +1052,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
 }
 .channel--primary:focus-visible {
   transform: translateY(-3px);
-  background: var(--accent-deep);   /* the only place the deep green appears – hover/focus only */
+  background: var(--accent-deep);   /* deep green is otherwise only the band's Back pill */
   box-shadow: 0 14px 28px color-mix(in srgb, var(--accent) 46%, transparent);
   border-color: transparent;
 }
@@ -1184,10 +1171,8 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   background: var(--accent);
   border-color: var(--accent);
 }
-#panel-learn .section-label[id] { scroll-margin-top: 128px; }   /* header + section bar + breathing room */
 #panel-learn .section-label[id]:focus { outline: none; }        /* focused by the bar's jump, like main */
-#panel-learn .case-card[id] { scroll-margin-top: 128px; }       /* a timeline role's "Case study" link lands here */
-#panel-learn .case-card[id]:focus { outline: none; }
+#panel-learn .case-card[id]:focus { outline: none; }            /* a timeline role's "Case study" link lands here */
 
 /* ── Learn: résumé header ───────────────────────────────────────────── */
 .resume-header {
@@ -1647,9 +1632,7 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   border: 1px solid var(--color-hairline);
   padding: 5px 14px;
   border-radius: var(--radius-pill);
-  transition: border-color var(--transition), color var(--transition);
 }
-.pill-list li:hover { border-color: var(--accent); color: var(--color-text); }
 
 /* ── Learn: earlier roles strip ─────────────────────────────────────── */
 .earlier-label {
@@ -2157,11 +2140,27 @@ body.has-intro .banner-wrap { transition: none; }
   body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner { padding: 26px 18px 30px; }
   .learn-nav { margin: -26px -18px 20px; padding: 10px 18px; }
   .resume-headline { font-size: var(--text-xl); }
-  .channel--primary { padding: 17px; gap: 14px; }
+  .channel--primary { padding: 17px; gap: 12px; }   /* keeps the Meet label on one line down to about 371px */
 }
 
-@media (max-width: 360px) {
-  .channel-value { white-space: normal; }   /* the address and the Meet label wrap instead of clipping */
+/* ── Forced colours (Windows High Contrast): fills and shadows get repainted,
+   so anything that leans on them needs a stand-in ──────────────────────── */
+@media (forced-colors: active) {
+  /* a masked logo paints with its background colour, which would become the page's */
+  .org-logo { forced-color-adjust: none; background-color: LinkText; }
+  /* these swap the ring for a lift, a shadow and a fill; none of those survive */
+  .tile:focus-visible,
+  .logo:focus-visible,
+  .channel:focus-visible,
+  .popout-btn:focus-visible,
+  a.project-badge:focus-visible { outline: 2px solid Highlight; outline-offset: 3px; }
+  .channel-row:focus-visible { outline: 2px solid Highlight; outline-offset: -4px; }   /* inset: the card clips */
+  .learn-nav a[aria-current] {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+    border-color: Highlight;
+  }
 }
 
 /* ── Print: the Learn panel alone, whichever section is open ────────── */
