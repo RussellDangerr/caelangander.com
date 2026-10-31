@@ -429,6 +429,14 @@ body[data-active="explore"] .nav-verb { background: var(--color-secondary); }
   .nav-name { font-size: var(--text-md); }
 }
 
+/* at about 200% text the chip gives way, so the name stays one line inside the fixed-height bar;
+   the open band below names the section too */
+.nav { container-type: inline-size; }
+.nav-name { white-space: nowrap; }
+@container (max-width: 13.5rem) {
+  .nav-verb { display: none; }
+}
+
 /* ── Stage ──────────────────────────────────────────────────────────── */
 .stage { flex: 1; display: flex; flex-direction: column; }
 .stage-inner {
@@ -690,7 +698,8 @@ body[data-active] .tile-sub { color: var(--color-on-accent); opacity: 0.95; }
   transition:
     opacity var(--d-fast) var(--ease-out),
     max-height var(--d-view) var(--ease-out),
-    margin var(--d-view) var(--ease-out);
+    margin var(--d-view) var(--ease-out),
+    visibility 0s;
 }
 .tile-preview--list { flex-direction: column; gap: 11px; }
 
@@ -733,6 +742,8 @@ body[data-active] .tile-preview {
   max-height: 0;
   margin-top: 0;
   pointer-events: none;
+  visibility: hidden;   /* also takes it out of the open tile's accessible name */
+  transition-delay: 0s, 0s, 0s, var(--d-fast);   /* after the fade */
 }
 
 /* Back affordance inside the active band */
@@ -853,7 +864,6 @@ body[data-active="explore"] .cluster[data-cluster="explore"] .panel-inner {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
   border-color: var(--accent);
-  outline: none;
 }
 @media (hover: hover) {
   .channel:hover {
@@ -2148,7 +2158,7 @@ body.has-intro .banner-wrap { transition: none; }
 @media (forced-colors: active) {
   /* a masked logo paints with its background colour, which would become the page's */
   .org-logo { forced-color-adjust: none; background-color: LinkText; }
-  /* these swap the ring for a lift, a shadow and a fill; none of those survive */
+  /* these lean on a lift, a shadow and a fill; none of those survive, so all get the system ring */
   .tile:focus-visible,
   .logo:focus-visible,
   .channel:focus-visible,
@@ -2161,6 +2171,9 @@ body.has-intro .banner-wrap { transition: none; }
     color: HighlightText;
     border-color: Highlight;
   }
+  /* the transparent border gets painted and the rule's fill gets blanked, which left side stubs */
+  .footer { border-top: 0; }
+  .footer::before { top: 0; forced-color-adjust: none; background: CanvasText; }
 }
 
 /* ── Print: the Learn panel alone, whichever section is open ────────── */
