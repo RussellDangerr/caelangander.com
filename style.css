@@ -1833,40 +1833,67 @@ a.project-badge:focus-visible {
   border-radius: 3px;
 }
 
-/* ── Explore: small cards (Clown City, GitHub) ── */
-.project-badge--small { padding: 0 16px 16px; }
-.project-badge--small .badge-media { margin: 0 -16px 10px; }
-/* one big shot beside three small ones: 3:1 columns of 16:9 frames come out level */
-.badge-media--gallery {
+/* ── Explore: small cards (Clown City, GitHub) ──
+   A capped thumbnail beside the copy, so they stay well under the featured cards at any width */
+.project-badge--small {
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: 2px;
-  aspect-ratio: 64 / 27;
-  background: var(--color-hairline);
+  grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr;
+  gap: 4px 16px;
+  align-items: start;
+  padding: 14px 16px;
 }
-.badge-media--gallery img { min-width: 0; min-height: 0; }
-.badge-media--gallery img:first-child { grid-row: 1 / -1; }
+.project-badge--small .badge-media {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-hairline);
+}
+.project-badge--small :is(.project-badge-head, .project-badge-desc) { grid-column: 2; }
+.project-badge--small .project-badge-head { padding-top: 0; flex-wrap: wrap; }
+.project-badge--small .project-badge-desc { font-size: var(--text-sm); }
+/* the playable demos say so under their status badge */
+.project-badge-head:has(.badge-stack) { align-items: flex-start; flex-wrap: wrap; }
+.project-badge-head:has(.badge-stack) .external { margin-top: 5px; }
+.badge-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
 .badge-cta {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 600;
   color: var(--color-primary-deep);
-  margin-top: auto;
-  padding-top: 4px;
+  white-space: nowrap;
 }
-/* the GitHub mark takes whatever height its neighbour leaves */
-.badge-media--mark { background: var(--color-surface-2); aspect-ratio: auto; flex: 1 1 auto; min-height: 120px; }
+/* the GitHub card is just its mark and two lines, centred in whatever height its neighbour sets */
+.project-badge--github {
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-content: center;
+}
+.project-badge--small .badge-media--mark {
+  aspect-ratio: auto;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  align-self: center;
+}
 .badge-mark {
   display: grid;
   place-items: center;
-  width: 72px;
-  height: 72px;
-  border-radius: var(--radius-lg);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
   background: var(--color-text);
   color: var(--color-bg);
 }
-.badge-mark svg { width: 38px; height: 38px; }
+.badge-mark svg { width: 26px; height: 26px; }
 .badge-handle { color: var(--color-text); font-weight: 500; }
 
 /* ── Explore: the Grawlix preview video ──
@@ -2102,18 +2129,21 @@ body.has-intro .banner-wrap { transition: none; }
   .timeline-stop--earlier .timeline-dot { top: 4px; }
 
   .project-badges--small { gap: 10px; }
-  .project-badge--small { padding: 0 14px 14px; gap: 6px; }
-  .project-badge--small .badge-media { margin: 0 -14px 8px; }
-  /* too narrow for a side column: the big shot on top, the other three under it */
-  .badge-media--gallery {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: auto auto;
-    aspect-ratio: auto;
+  .project-badge--small { padding: 12px 14px; column-gap: 12px; }
+  /* too narrow for copy beside the thumbnail: the name stays beside it, the copy runs full width */
+  .project-badge--small:not(.project-badge--github) {
+    grid-template-columns: 96px minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    row-gap: 8px;
   }
-  .badge-media--gallery img { height: auto; aspect-ratio: 16 / 9; }
-  .badge-media--gallery img:first-child { grid-row: auto; grid-column: 1 / -1; }
-  .badge-mark { width: 56px; height: 56px; }
-  .badge-mark svg { width: 30px; height: 30px; }
+  .project-badge--small:not(.project-badge--github) .badge-media { grid-row: 1; }
+  .project-badge--small:not(.project-badge--github) .project-badge-head { align-self: center; }
+  .project-badge--small:not(.project-badge--github) .project-badge-desc { grid-column: 1 / -1; }
+  /* no room for the stack beside the name: the blurb takes its own line, still under the badge */
+  .project-badge-head:has(.badge-stack) { align-items: center; justify-content: flex-end; row-gap: 4px; }
+  .project-badge-head:has(.badge-stack) .external { margin-top: 0; }
+  .badge-stack { display: contents; }
+  .badge-cta { order: 1; flex-basis: 100%; text-align: right; padding-right: 22px; }
 }
 
 @media (max-width: 480px) {
