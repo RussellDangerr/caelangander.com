@@ -340,6 +340,8 @@
       poster.src = video.poster;
     }
     video.addEventListener('loadeddata', () => media.classList.add('has-video'));
+    // a clip that won't play goes back to its poster and a Play button, not a frozen frame under Pause
+    video.addEventListener('error', () => { held = true; video.load(); sync(); });
     if (button) button.addEventListener('click', () => { held = !held; sync(); });
     calm.addEventListener('change', () => { if (calm.matches) { held = true; sync(); } });
 
