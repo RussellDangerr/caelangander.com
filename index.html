@@ -28,7 +28,7 @@
 
   <link rel="preload" href="/assets/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=59">
+  <link rel="stylesheet" href="/style.css?v=60">
 </head>
 <body class="has-intro">
 
@@ -591,9 +591,40 @@
           <section class="panel" id="panel-explore" aria-hidden="true" inert>
             <div class="panel-inner">
 
-              <h2 class="section-label">Projects</h2>
+              <h2 class="section-label">Tools &amp; research</h2>
 
               <div class="project-badges project-badges--wide">
+
+                <a class="project-badge project-badge--wide" href="/prodject/">
+                  <div class="badge-media badge-media--diagram">
+                    <svg class="pj-diagram" viewBox="0 0 1000 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="The Prodject loop: I add an idea, a builder agent on Claude Sonnet builds it, a checker agent on Claude Haiku checks it, and I make the merge call. Evals measure the agents.">
+                      <rect class="pj-node pj-me" x="80" y="90" width="360" height="150" rx="22"/><text class="pj-t" x="260" y="168" text-anchor="middle">Idea</text><text class="pj-s" x="260" y="208" text-anchor="middle">ME</text>
+                      <rect class="pj-node" x="560" y="90" width="360" height="150" rx="22"/><text class="pj-t" x="740" y="168" text-anchor="middle">Builder</text><text class="pj-s" x="740" y="208" text-anchor="middle">CLAUDE SONNET</text>
+                      <rect class="pj-node" x="560" y="350" width="360" height="150" rx="22"/><text class="pj-t" x="740" y="428" text-anchor="middle">Checker</text><text class="pj-s" x="740" y="468" text-anchor="middle">CLAUDE HAIKU</text>
+                      <rect class="pj-node pj-me" x="80" y="350" width="360" height="150" rx="22"/><text class="pj-t" x="260" y="428" text-anchor="middle">Merge call</text><text class="pj-s" x="260" y="468" text-anchor="middle">ME</text>
+                      <path class="pj-a" d="M448 165 H544"/><polygon class="pj-h" points="556,165 536,153 536,177"/>
+                      <path class="pj-a" d="M740 248 V334"/><polygon class="pj-h" points="740,346 728,326 752,326"/>
+                      <path class="pj-a" d="M552 425 H456"/><polygon class="pj-h" points="444,425 464,413 464,437"/>
+                      <path class="pj-a" d="M260 342 V256"/><polygon class="pj-h" points="260,244 248,264 272,264"/>
+                      <rect class="pj-band" x="80" y="560" width="840" height="96" rx="22"/>
+                      <text class="pj-b" x="500" y="619" text-anchor="middle">Evals measure the agents themselves</text>
+                    </svg>
+                  </div>
+                  <div class="project-badge-head">
+                    <h3>Prodject</h3>
+                    <span class="badge-stack">
+                      <span class="badge-status badge-status--dev">In Development</span>
+                      <span class="badge-cta">Read the write-up</span>
+                    </span>
+                  </div>
+                  <p class="project-badge-desc">How I manage AI coding agents like a small team. I write the requirements and decide every merge; agents build each change on its own branch, and a second agent checks it against the acceptance criteria. Evals measure the agents themselves: the defect scout caught 21 of 27 planted bugs, and a change that didn&rsquo;t help didn&rsquo;t ship.</p>
+                  <ul class="badge-tags">
+                    <li>Claude Code</li>
+                    <li>Node.js</li>
+                    <li>Agent Evals</li>
+                    <li>Git</li>
+                  </ul>
+                </a>
 
                 <a class="project-badge project-badge--wide" href="https://raven.caelangander.com" target="_blank" rel="noopener">
                   <div class="badge-media">
@@ -614,6 +645,12 @@
                     <li>SVG Charts</li>
                   </ul>
                 </a>
+
+              </div>
+
+              <h2 class="section-label">Games built with Prodject</h2>
+
+              <div class="project-badges project-badges--wide">
 
                 <a class="project-badge project-badge--wide" href="https://violencetown.russelldangerr.com/" target="_blank" rel="noopener">
                   <div class="badge-media">
@@ -684,6 +721,7 @@
                   </div>
                   <p class="project-badge-desc">A browser auto-runner in vanilla JavaScript, no dependencies: Poko the clown on a unicycle, rolling until you make him stop. Five circus levels. Try the Strongman: the higher you are when you press down, the harder the hammer hits.</p>
                 </a>
+
 
                 <a class="project-badge project-badge--small project-badge--github" href="https://github.com/RussellDangerr" target="_blank" rel="noopener">
                   <div class="badge-media badge-media--mark" aria-hidden="true">
