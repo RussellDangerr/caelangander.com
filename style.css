@@ -1771,22 +1771,40 @@ a.project-badge:focus-visible {
 }
 .badge-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* the Prodject card: a loop diagram drawn in the site tokens, so it follows light and dark */
+/* Explore card pictures drawn in the site tokens, so they follow light and dark.
+   Prodject: an example checklist, two lines shown and one not. Raven: two research lines, one rising, one flat. */
 .badge-media--diagram { background: var(--color-surface-2); }
-.pj-diagram { width: 100%; height: 100%; display: block; }
-.pj-node { fill: var(--color-surface); stroke: var(--color-hairline-strong); stroke-width: 2; }
-.pj-node.pj-me { fill: var(--color-secondary-soft); stroke: var(--color-secondary); }
-.pj-t { fill: var(--color-text); font-family: var(--font-display); font-weight: 600; font-size: 48px; }
+.pj-diagram, .rv-chart { width: 100%; height: 100%; display: block; }
+.pj-diagram { --pj-ok: var(--color-primary); --pj-no: #9A5B00; }
+@media (prefers-color-scheme: dark) { .pj-diagram { --pj-no: #E0A040; } }
+.pj-sheet { fill: var(--color-surface); stroke: var(--color-hairline-strong); stroke-width: 2; }
+.pj-t { fill: var(--color-text); font-family: var(--font-display); font-weight: 600; font-size: 46px; }
 .pj-s { fill: var(--color-muted); font-family: var(--font-mono); font-size: 22px; letter-spacing: 0.12em; }
-.pj-a { fill: none; stroke: var(--color-secondary); stroke-width: 5; stroke-linecap: round; }
-.pj-h { fill: var(--color-secondary); }
+.pj-rule { fill: none; stroke: var(--color-hairline); stroke-width: 2; }
+.pj-stamp rect { fill: none; stroke: currentColor; stroke-width: 4; }
+.pj-stamp text { fill: currentColor; font-family: var(--font-mono); font-weight: 500; font-size: 28px; letter-spacing: 0.06em; }
+.pj-stamp.pj-ok { color: var(--pj-ok); }
+.pj-stamp.pj-no { color: var(--pj-no); }
+.pj-stamp.pj-no rect { stroke-width: 5; stroke-dasharray: 12 7; }
+.pj-stamp.pj-no text { font-size: 24px; }
+.pj-row { fill: var(--color-text); font-family: var(--font-sans); font-size: 40px; }
 .pj-band { fill: var(--color-surface); stroke: var(--color-hairline-strong); stroke-width: 2; stroke-dasharray: 10 8; }
-.pj-b { fill: var(--color-text); font-family: var(--font-sans); font-weight: 600; font-size: 34px; }
+.pj-b { fill: var(--color-text); font-family: var(--font-sans); font-weight: 600; font-size: 36px; }
+.rv-axis { fill: none; stroke: var(--color-hairline-strong); stroke-width: 2; }
+.rv-line { fill: none; stroke: var(--color-secondary); stroke-width: 10; stroke-linejoin: round; stroke-linecap: round; }
+.rv-flat { fill: none; stroke: var(--color-muted); stroke-width: 8; stroke-dasharray: 0 16; stroke-linecap: round; }
+.rv-dot { fill: var(--color-secondary); }
+.rv-num { fill: var(--color-text); font-family: var(--font-display); font-weight: 600; font-size: 64px; }
+.rv-num--low { font-size: 48px; }
+.rv-lab { fill: var(--color-muted); font-family: var(--font-sans); font-size: 32px; }
+.rv-tick { fill: var(--color-muted); font-family: var(--font-mono); font-size: 30px; letter-spacing: 0.06em; }
 @media (forced-colors: active) {
-  .pj-node, .pj-band { fill: Canvas; stroke: CanvasText; }
-  .pj-t, .pj-s, .pj-b { fill: CanvasText; }
-  .pj-a { stroke: CanvasText; }
-  .pj-h { fill: CanvasText; }
+  .pj-sheet, .pj-band { fill: Canvas; stroke: CanvasText; }
+  .pj-t, .pj-s, .pj-row, .pj-b, .rv-num, .rv-lab, .rv-tick { fill: CanvasText; }
+  .pj-rule, .rv-axis, .rv-flat { stroke: CanvasText; }
+  .pj-stamp { color: CanvasText; }
+  .rv-line { stroke: Highlight; }
+  .rv-dot { fill: Highlight; }
 }
 
 .project-badge-head {
