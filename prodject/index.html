@@ -72,9 +72,9 @@
   </ul>
 
   <p class="label">Guardrails</p>
-  <h2>What the agents can&rsquo;t do</h2>
+  <h2>What the agents aren&rsquo;t allowed to do</h2>
   <ul class="rules">
-    <li><b>Merge without me.</b> Every slice waits for me to approve the merge or ask for changes.</li>
+    <li><b>Merge without me.</b> Every slice waits for my call. Making that a hard lock, not just a rule, is next.</li>
     <li><b>Guess at anything a user would notice.</b> Names, copy, look and tuning numbers come back to me as a question with options and a recommendation.</li>
     <li><b>Wander outside the slice.</b> A guard script checks the branch name, the files touched, that the spec came first, and that no test was removed, skipped or narrowed. Editing an existing assertion is against the builder&rsquo;s rules.</li>
     <li><b>Grade their own homework.</b> The checker is a separate agent on a different model from the builder, and it has to quote the test that proves each line.</li>
@@ -85,7 +85,7 @@
   <h2>How I measure the agents</h2>
   <p>Three of the roles have their own eval, all built the same way: known answers, several runs per case, and a 95% interval on every rate, so a change to how an agent works is judged against noise rather than a hunch.</p>
   <ul class="evals">
-    <li><h3>Defect scout</h3><p>Nine bugs planted in real changes to one of my games, three runs each. It caught 21 of 27, and missed a replay of a real past bug every time (0 of 3). When I added an instruction to check each change more carefully, it caught 20 of 27: no clear change, so the instruction didn&rsquo;t ship.</p></li>
+    <li><h3>Defect scout</h3><p>Nine bugs planted in real changes to one of my games, three runs each. It caught 21 of 27, and missed a replay of a real past bug every time (0 of 3). When I added an instruction to check each change more carefully, it caught 20 of 27: no clear change, so the instruction didn&rsquo;t ship. A cleaner rerun is next.</p></li>
     <li><h3>Checker <span class="status">first run pending</span></h3><p>Its marks compared with my own merge and change calls on past slices from my board, with a model grader that has to agree with my hand labels before it&rsquo;s trusted.</p></li>
     <li><h3>Analyst <span class="status">first run pending</span></h3><p>Five questions with answers I worked out from the data, scored right or wrong, with every cited run checked to exist.</p></li>
   </ul>

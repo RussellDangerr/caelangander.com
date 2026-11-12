@@ -26,9 +26,9 @@
 <ul>
 <li><b>Planted controls.</b> Nine bugs, each folded into a real change so it looks like part of that change. Each imitates a kind of defect the scout found for real before.</li>
 <li><b>A harness check.</b> One blatant bug it should catch almost every time. It caught 3 of 3 before and 3 of 3 after, so the setup works.</li>
-<li><b>Margins, not single runs.</b> Every case runs three times. Rates carry a 95% interval (Wilson), and a change is compared with a second interval (Newcombe). If that interval includes zero, the page says there is no clear change, whatever the sign.</li>
-<li><b>One change at a time.</b> The same cases, the same instructions and the same clean environment each run. Only one block of the scout's instructions differs between the two sides.</li>
-<li><b>Hand-checked.</b> Every graded run was also read in full by Claude, not only scored by the code grader.</li>
+<li><b>Margins, not single runs.</b> Every case runs three times. Rates carry a 95% interval (Wilson), and a change is compared with a second interval (Newcombe). If that interval includes zero, the page says there is no clear change, whatever the sign. These intervals treat every run as independent. Each case tends to go all or nothing, so the real margins are wider.</li>
+<li><b>One change at a time.</b> Only one block of the scout's instructions differs between the two sides. A later audit found most baseline runs used an older setup than the runs after the change, so a cleaner rerun is next.</li>
+<li><b>Hand-checked.</b> Every graded run was also read in full by Claude, not only scored by the code grader. My own labels on a sample are next.</li>
 </ul>
 
 <h2>One real before and after</h2>
