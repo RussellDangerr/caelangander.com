@@ -1911,8 +1911,12 @@ a.project-badge:focus-visible {
 
 .project-badge-desc { font-size: var(--text-md); color: var(--color-muted); line-height: 1.5; }
 .badge-used { font-size: var(--text-sm); color: var(--color-muted-strong); line-height: 1.45; margin: 0; }
-.explore-source { margin: 28px 0 0; font-size: var(--text-sm); color: var(--color-muted); }
-.explore-source a { color: var(--accent); text-underline-offset: 0.18em; }
+/* GitHub: a skinny full-width card closing the panel */
+.project-badge--source { flex-direction: row; align-items: center; gap: 16px; padding: 14px 20px; margin-top: 24px; }
+.project-badge--source .badge-mark { flex: none; width: 44px; height: 44px; }
+.source-text { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; }
+.source-text h3 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+.source-note { font-size: var(--text-sm); color: var(--color-muted); }
 
 .badge-tags { display: flex; gap: 4px; flex-wrap: wrap; list-style: none; margin-top: 4px; }
 .badge-tags li {
