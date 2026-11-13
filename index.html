@@ -28,7 +28,7 @@
 
   <link rel="preload" href="/assets/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=66">
+  <link rel="stylesheet" href="/style.css?v=68">
 </head>
 <body class="has-intro">
 
@@ -597,15 +597,22 @@
 
                 <div class="project-badge project-badge--wide">
                   <div class="badge-media badge-media--diagram">
-                    <svg class="pj-diagram" data-reveal viewBox="0 0 1000 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="An example report from the checker AI on one task, save the game on quit. Two items have proof; the third, save survives a crash, has none, so I send it back. I approve every change before it goes in.">
-                      <rect class="pj-sheet" x="80" y="40" width="840" height="500" rx="22"/>
-                      <text class="pj-s" x="130" y="92">EXAMPLE: WHAT THE CHECKER AI SENDS ME</text><text class="pj-t" x="130" y="140">Task: save the game on quit</text>
-                      <path class="pj-rule" d="M130 170 H870 M130 290 H870 M130 410 H870"/>
-                      <g class="pj-stamp pj-ok"><g transform="rotate(-4 205 230)"><rect x="130" y="201" width="150" height="58" rx="8"/><text x="205" y="241" text-anchor="middle">PROOF</text></g></g><text class="pj-row" x="320" y="243">Game saves</text>
-                      <g class="pj-stamp pj-ok"><g transform="rotate(-4 205 350)"><rect x="130" y="321" width="150" height="58" rx="8"/><text x="205" y="361" text-anchor="middle">PROOF</text></g></g><text class="pj-row" x="320" y="363">Score comes back</text>
-                      <g class="pj-stamp pj-no"><g transform="rotate(-4 205 475)"><rect x="115" y="446" width="180" height="58" rx="8"/><text x="205" y="486" text-anchor="middle">NO PROOF</text></g></g><text class="pj-row" x="320" y="488">Save survives a crash</text>
-                      <text class="pj-out" x="80" y="615">&rarr; I send it back.</text>
-                      <text class="pj-out2" x="80" y="668">I approve every change before it goes in.</text>
+                    <svg class="pj-diagram" data-reveal viewBox="0 0 1000 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="An example of one task&rsquo;s trip through Prodject. I write the task, an AI builds the code, a second AI checks it for proof, and I decide whether it goes in or back. Here the checker found proof that the game saves and that the score returns, but no proof that the save survives a crash, so the task goes back to the builder.">
+                      <text class="pj-s" x="30" y="44">EXAMPLE: ONE TASK&rsquo;S TRIP</text>
+                      <path class="pj-link" d="M250 130 H270 M490 130 H510 M730 130 H750"/>
+                      <g class="pj-node pj-node--me"><rect x="30" y="70" width="220" height="120" rx="18"/><text class="pj-nt" x="140" y="124" text-anchor="middle">I write</text><text class="pj-ns" x="140" y="162" text-anchor="middle">THE TASK</text></g><rect class="pj-ring pj-ring--1" x="24" y="64" width="232" height="132" rx="22"/>
+                      <g class="pj-node"><rect x="270" y="70" width="220" height="120" rx="18"/><text class="pj-nt" x="380" y="124" text-anchor="middle">AI builds</text><text class="pj-ns" x="380" y="162" text-anchor="middle">THE CODE</text></g><rect class="pj-ring pj-ring--2" x="264" y="64" width="232" height="132" rx="22"/>
+                      <g class="pj-node"><rect x="510" y="70" width="220" height="120" rx="18"/><text class="pj-nt" x="620" y="124" text-anchor="middle">AI checks</text><text class="pj-ns" x="620" y="162" text-anchor="middle">FOR PROOF</text></g><rect class="pj-ring pj-ring--3" x="504" y="64" width="232" height="132" rx="22"/>
+                      <g class="pj-node pj-node--me"><rect x="750" y="70" width="220" height="120" rx="18"/><text class="pj-nt" x="860" y="124" text-anchor="middle">I decide</text><text class="pj-ns" x="860" y="162" text-anchor="middle">IN OR BACK</text></g><rect class="pj-ring pj-ring--4" x="744" y="64" width="232" height="132" rx="22"/>
+                      <rect class="pj-ring pj-ring--5" x="264" y="64" width="232" height="132" rx="22"/>
+                      <path class="pj-tie" d="M620 196 V236"/>
+                      <rect class="pj-sheet" x="405" y="236" width="430" height="282" rx="18"/>
+                      <text class="pj-task" x="425" y="282">Save the game on quit</text>
+                      <g class="pj-stamp pj-stamp--1 pj-ok"><g transform="rotate(-4 485 326)"><rect x="420" y="302" width="130" height="48" rx="7"/><text x="485" y="336" text-anchor="middle">PROOF</text></g></g><text class="pj-row" x="570" y="336">Game saves</text>
+                      <g class="pj-stamp pj-stamp--2 pj-ok"><g transform="rotate(-4 485 392)"><rect x="420" y="368" width="130" height="48" rx="7"/><text x="485" y="402" text-anchor="middle">PROOF</text></g></g><text class="pj-row" x="570" y="402">Score returns</text>
+                      <g class="pj-stamp pj-stamp--3 pj-no"><g transform="rotate(-4 485 458)"><rect x="410" y="434" width="150" height="48" rx="7"/><text x="485" y="468" text-anchor="middle">NO PROOF</text></g></g><text class="pj-row" x="570" y="468">Survives a crash</text>
+                      <g class="pj-back"><path class="pj-back-line" d="M860 196 V560 H380 V208"/><path class="pj-back-head" d="M366 222 L380 200 L394 222"/><text class="pj-back-label" x="620" y="606" text-anchor="middle">Back to the builder: one item has no proof</text></g>
+                      <text class="pj-foot" x="30" y="684">Nothing goes in on the AI&rsquo;s word: every item needs proof.</text>
                     </svg>
                   </div>
                   <div class="project-badge-head">
