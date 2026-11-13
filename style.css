@@ -1794,6 +1794,12 @@ a.project-badge:focus-visible {
 .rv-line { fill: none; stroke: var(--color-secondary); stroke-width: 10; stroke-linejoin: round; stroke-linecap: round; }
 .rv-flat { fill: none; stroke: var(--color-muted); stroke-width: 8; stroke-dasharray: 0 16; stroke-linecap: round; }
 .rv-dot { fill: var(--color-secondary); }
+.rv-chart { --rv-c3: #C2410C; }
+@media (prefers-color-scheme: dark) { .rv-chart { --rv-c3: #FB923C; } }
+.rv-l2 { fill: none; stroke: var(--color-primary); stroke-width: 7; stroke-linejoin: round; stroke-linecap: round; }
+.rv-l3 { fill: none; stroke: var(--rv-c3); stroke-width: 7; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 18 10; }
+.rv-k { fill: var(--color-muted); font-family: var(--font-sans); font-size: 28px; }
+.rv-kn { fill: var(--color-text); font-family: var(--font-display); font-weight: 600; font-size: 34px; }
 .rv-num { fill: var(--color-text); font-family: var(--font-display); font-weight: 600; font-size: 64px; }
 .rv-lab { fill: var(--color-muted); font-family: var(--font-sans); font-size: 32px; }
 .rv-tick { fill: var(--color-muted); font-family: var(--font-mono); font-size: 30px; letter-spacing: 0.06em; }
@@ -1815,8 +1821,8 @@ a.project-badge:focus-visible {
 }
 @media (forced-colors: active) {
   .pj-sheet { fill: Canvas; stroke: CanvasText; }
-  .pj-t, .pj-s, .pj-row, .pj-out, .pj-out2, .rv-num, .rv-lab, .rv-tick { fill: CanvasText; }
-  .pj-rule, .rv-axis, .rv-flat { stroke: CanvasText; }
+  .pj-t, .pj-s, .pj-row, .pj-out, .pj-out2, .rv-k, .rv-kn, .rv-num, .rv-lab, .rv-tick { fill: CanvasText; }
+  .pj-rule, .rv-axis, .rv-flat, .rv-l2, .rv-l3 { stroke: CanvasText; }
   .pj-stamp { color: CanvasText; }
   .rv-line { stroke: Highlight; }
   .rv-dot { fill: Highlight; }
