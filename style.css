@@ -1910,8 +1910,6 @@ a.project-badge:focus-visible {
 }
 
 .project-badge-desc { font-size: var(--text-md); color: var(--color-muted); line-height: 1.5; }
-/* who did what, the same line on every project card */
-.badge-role { font-size: var(--text-sm); color: var(--color-text); line-height: 1.45; margin: 0; }
 .badge-used { font-size: var(--text-sm); color: var(--color-muted-strong); line-height: 1.45; margin: 0; }
 .explore-source { margin: 28px 0 0; font-size: var(--text-sm); color: var(--color-muted); }
 .explore-source a { color: var(--accent); text-underline-offset: 0.18em; }
@@ -2154,7 +2152,6 @@ body.has-intro .banner-wrap { transition: none; }
   .project-badge--wide .badge-media { aspect-ratio: 1000 / 720; }
   .project-badge--wide .badge-media img { object-position: top; }
   .project-badge--wide .project-badge-head,
-  .project-badge--wide .badge-role,
   .project-badge--wide .project-badge-desc,
   .project-badge--wide .badge-used,
   .project-badge--wide .badge-tags { grid-column: 2; }

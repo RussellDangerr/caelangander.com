@@ -28,7 +28,7 @@
 
   <link rel="preload" href="/assets/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=69">
+  <link rel="stylesheet" href="/style.css?v=70">
 </head>
 <body class="has-intro">
 
@@ -579,7 +579,7 @@
               <span class="tile-sub">games, sites, &amp; experiments:</span>
               <span class="tile-preview tile-preview--list">
                 <span class="preview-row"><strong>Prodject</strong> <em>how I run AI coding agents &ndash; in development</em></span>
-                <span class="preview-row"><strong>Raven</strong> <em>sci-fi tech, measured &ndash; public site</em></span>
+                <span class="preview-row"><strong>Raven</strong> <em>tracking sci-fi tech &ndash; public site</em></span>
                 <span class="preview-row"><strong>Violencetown</strong> <em>browser RPG &ndash; public demo</em></span>
               </span>
             </span>
@@ -597,8 +597,8 @@
 
                 <div class="project-badge project-badge--wide">
                   <div class="badge-media badge-media--diagram">
-                    <svg class="pj-diagram" data-reveal viewBox="0 0 1000 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="An example of one task&rsquo;s trip through Prodject. I write the task, an AI builds the code, a second AI checks it for proof, and I decide whether it goes in or back. Here the checker found proof that the game saves and that the score returns, but no proof that the save survives a crash, so the task goes back to the builder.">
-                      <text class="pj-s" x="30" y="44">EXAMPLE: ONE TASK&rsquo;S TRIP</text>
+                    <svg class="pj-diagram" data-reveal viewBox="0 0 1000 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="One example task in Prodject. I write the task, an AI builds the code, a second AI checks it for proof, and I decide whether it goes in or back. Here the checker found proof that the game saves and that the score returns, and none that the save survives a crash, so the task goes back to the builder.">
+                      <text class="pj-s" x="30" y="44">ONE EXAMPLE TASK</text>
                       <path class="pj-link" d="M250 130 H270 M490 130 H510 M730 130 H750"/>
                       <g class="pj-node pj-node--me"><rect x="30" y="70" width="220" height="120" rx="18"/><text class="pj-nt" x="140" y="124" text-anchor="middle">I write</text><text class="pj-ns" x="140" y="162" text-anchor="middle">THE TASK</text></g><rect class="pj-ring pj-ring--1" x="24" y="64" width="232" height="132" rx="22"/>
                       <g class="pj-node"><rect x="270" y="70" width="220" height="120" rx="18"/><text class="pj-nt" x="380" y="124" text-anchor="middle">AI builds</text><text class="pj-ns" x="380" y="162" text-anchor="middle">THE CODE</text></g><rect class="pj-ring pj-ring--2" x="264" y="64" width="232" height="132" rx="22"/>
@@ -613,18 +613,17 @@
                       <g class="pj-stamp pj-stamp--2 pj-ok"><g transform="rotate(-4 485 392)"><rect x="420" y="368" width="130" height="48" rx="7"/><text x="485" y="402" text-anchor="middle">PROOF</text></g></g><text class="pj-row" x="570" y="402">Score returns</text>
                       <g class="pj-stamp pj-stamp--3 pj-no"><g transform="rotate(-4 485 458)"><rect x="410" y="434" width="150" height="48" rx="7"/><text x="485" y="468" text-anchor="middle">NO PROOF</text></g></g><text class="pj-row" x="570" y="468">Survives a crash</text>
                       <path class="pj-back-line" d="M860 206 V552 H380 V216"/><path class="pj-back-head" d="M366 220 L380 198 L394 220"/>
-                      <text class="pj-back-label pj-back" x="620" y="606" text-anchor="middle">Back to the builder: one item has no proof</text>
+                      <text class="pj-back-label pj-back" x="620" y="606" text-anchor="middle">One item has no proof, so it goes back</text>
                       <g class="pj-dot" aria-hidden="true"><circle class="pj-dot-glow" r="26"/><circle class="pj-dot-core" r="13"/></g>
-                      <text class="pj-foot" x="30" y="684">Nothing goes in on the AI&rsquo;s word: every item needs proof.</text>
+                      <text class="pj-foot" x="30" y="684">I don&rsquo;t take the AI&rsquo;s word for it.</text>
                     </svg>
                   </div>
                   <div class="project-badge-head">
                     <h3>Prodject</h3>
                     <span class="badge-status badge-status--dev">In Development</span>
                   </div>
-                  <p class="badge-role">Code written by AI agents. Design, specs and testing: mine.</p>
-                  <p class="project-badge-desc">My small projects are built this way: I write what each change has to do, one agent builds it, and a second agent marks every item as proven by a test, shown in a screenshot, or not proven. I approve every change. I also test the agents: I hid nine bugs in real code and ran my bug-hunting agent three times on each. It caught them 21 times out of 27, and missed one bug every time.</p>
-                  <p class="badge-used">Used on two of my games: Violencetown and Grawlix, below.</p>
+                  <p class="project-badge-desc">AI agents write the code for everything on this page. I write what each change has to do, one agent builds it, and a second agent checks every item for proof, a passing test or a screenshot. Then I decide what goes in. I also test the agents themselves. I hid nine bugs in real code and ran my bug-hunting agent three times on each. It caught them 21 times out of 27, and one of the nine it never caught.</p>
+                  <p class="badge-used">I use it on two of my games, Violencetown and Grawlix, both below.</p>
                   <ul class="badge-tags">
                     <li>Claude Code</li>
                     <li>Node.js</li>
@@ -660,8 +659,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                     </span>
                   </div>
-                  <p class="badge-role">Code written by AI agents. Design, specs and testing: mine.</p>
-                  <p class="project-badge-desc">Raven checks how close sci-fi technologies are to becoming real products, using only public records: research papers, grants, patents, regulation and who builds on whose work, starting from the science fiction that imagined them. Four so far: orbital debris, humanoid robots, quantum entanglement and wearable computing.</p>
+                  <p class="project-badge-desc">Raven tracks how far sci-fi technologies have moved toward real products, using only the public record. It counts research papers, grants, patents and regulations, checks who builds on whose work, and starts from the science fiction behind each idea. So far it covers orbital debris, humanoid robots, quantum entanglement and wearable computing.</p>
                   <ul class="badge-tags">
                     <li>Python</li>
                     <li>OpenAlex</li>
@@ -690,8 +688,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                     </span>
                   </div>
-                  <p class="badge-role">Code written by AI agents. Design, specs and testing: mine.</p>
-                  <p class="project-badge-desc">A top-down role-playing game that runs in your browser, written in plain JavaScript. Turn-based fights under fog of war, one radial menu for every action, gear you can trade, throw or wear, and touch controls for phones. Before any change goes in, a script plays the first quest on its own, so a balance change shows up as a number, not a guess.</p>
+                  <p class="project-badge-desc">A top-down role-playing game you can play in your browser, written in plain JavaScript. Fights are turn-based under fog of war, one radial menu holds every action, and gear can be traded, thrown or worn. It works on phones too. Before any change goes in, a script plays the first quest by itself, so I can see if the game got harder or easier.</p>
                   <ul class="badge-tags">
                     <li>JavaScript</li>
                     <li>Canvas</li>
@@ -714,8 +711,7 @@
                     <h3>Grawlix</h3>
                     <span class="badge-status badge-status--dev">In Development</span>
                   </div>
-                  <p class="badge-role">Code written by AI agents. Design, specs and testing: mine.</p>
-                  <p class="project-badge-desc">A 3D flying game in Godot. Dive out of the sky at full speed, carve across a small Missouri town inside a volcano, and plough through anything in your way. No on-screen meters and no damage numbers: hits burst into cartoon cursing instead.</p>
+                  <p class="project-badge-desc">A 3D flying game in Godot. You dive out of the sky at full speed and carve through a small Missouri town inside a volcano, smashing whatever&rsquo;s in the way. Every hit bursts into cartoon cursing instead of damage numbers.</p>
                   <ul class="badge-tags">
                     <li>Godot 4.6</li>
                     <li>GDScript</li>
@@ -740,8 +736,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                     </span>
                   </div>
-                  <p class="badge-role">Code written by AI agents. Design, specs and testing: mine.</p>
-                  <p class="project-badge-desc">A small browser game in plain JavaScript: Poko the clown rides his unicycle through six circus levels until you make him stop. Try the Strongman: the higher Poko bounces before the hammer drops, the harder it hits.</p>
+                  <p class="project-badge-desc">A small browser game in plain JavaScript. Poko the clown rides his unicycle through six circus levels and keeps rolling until you make him stop. On the Strongman level, the higher Poko bounces before the hammer drops, the harder it hits.</p>
                 </a>
               </div>
 
