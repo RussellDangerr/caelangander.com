@@ -348,6 +348,23 @@
     new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; sync(); }).observe(media);
   });
 
+  /* ── Explore: card pictures settle in once ──
+     The stamps press in and Raven's lines draw across the first time a picture
+     is mostly on screen. Skipped for reduced motion and forced colours. */
+  if ('IntersectionObserver' in window && !calm.matches && !matchMedia('(forced-colors: active)').matches) {
+    const reveal = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      // mostly on screen, or filling most of a short screen (a phone held sideways)
+      const tall = entry.rootBounds && entry.intersectionRect.height >= 0.6 * entry.rootBounds.height;
+      if (!entry.isIntersecting || (entry.intersectionRatio < 0.6 && !tall)) return;
+      entry.target.classList.add('is-in');
+      reveal.unobserve(entry.target);
+    }), { threshold: [0, 0.25, 0.6] });
+    document.querySelectorAll('[data-reveal]').forEach((pic) => {
+      pic.classList.add('is-armed');
+      reveal.observe(pic);
+    });
+  }
+
   /* ── Footer clock + year ──────────────── */
   const clock = document.getElementById('clock');
   const yearEl = document.getElementById('year');
