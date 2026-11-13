@@ -353,10 +353,12 @@
      is mostly on screen. Skipped for reduced motion and forced colours. */
   if ('IntersectionObserver' in window && !calm.matches && !matchMedia('(forced-colors: active)').matches) {
     const reveal = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
+      // mostly on screen, or filling most of a short screen (a phone held sideways)
+      const tall = entry.rootBounds && entry.intersectionRect.height >= 0.6 * entry.rootBounds.height;
+      if (!entry.isIntersecting || (entry.intersectionRatio < 0.6 && !tall)) return;
       entry.target.classList.add('is-in');
       reveal.unobserve(entry.target);
-    }), { threshold: 0.6 });
+    }), { threshold: [0, 0.25, 0.6] });
     document.querySelectorAll('[data-reveal]').forEach((pic) => {
       pic.classList.add('is-armed');
       reveal.observe(pic);
