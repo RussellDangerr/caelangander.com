@@ -28,7 +28,7 @@
 
   <link rel="preload" href="/assets/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=72">
+  <link rel="stylesheet" href="/style.css?v=73">
 </head>
 <body class="has-intro">
 
@@ -595,7 +595,7 @@
 
               <div class="project-badges project-badges--wide">
 
-                <div class="project-badge project-badge--wide">
+                <a class="project-badge project-badge--wide" href="/prodject/">
                   <div class="badge-media badge-media--diagram">
                     <svg class="pj-diagram" data-reveal viewBox="0 0 1000 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A made-up example of one task in Prodject. I write the task, an AI builds the code, a second AI checks it for proof, and I decide whether it goes in or back. In this example the checker finds proof that the game saves and that the score returns, and none that the save survives a crash, so the task goes back to the builder.">
                       <text class="pj-s" x="30" y="44">ONE EXAMPLE TASK</text>
@@ -620,17 +620,20 @@
                   </div>
                   <div class="project-badge-head">
                     <h3>Prodject</h3>
-                    <span class="badge-status badge-status--dev">In Development</span>
+                    <span class="badge-stack">
+                      <span class="badge-status badge-status--dev">In Development</span>
+                      <span class="badge-cta">Read the write-up</span>
+                    </span>
                   </div>
-                  <p class="project-badge-desc">AI agents write the code for everything on this page. I approve what each change has to do, and one agent builds it. A second agent then checks each item against a test that covers it, or points me to a screenshot, and I decide what goes in. I also test the agents themselves. I had nine bugs hidden in real code and ran my bug-hunting agent three times on each. It caught them 21 times out of 27 and missed one bug all three times.</p>
-                  <p class="badge-used">I use it on two of my games, Violencetown and Grawlix, both below.</p>
+                  <p class="project-badge-desc">AI agents write the code for everything on this page. I approve what each noticeable change has to do, and one agent builds it. A second agent then checks each item against a test that covers it, or points me to a screenshot, and I decide what goes in. I also test the agents themselves. I had 9 bugs hidden in real code and ran my bug-hunting agent 3 times on each. It caught them 21 of 27 times and missed 1 bug all 3 times.</p>
+                  <p class="badge-used">I use it on 2 of my games, Violencetown and Grawlix, both below.</p>
                   <ul class="badge-tags">
                     <li>Claude Code</li>
                     <li>Node.js</li>
                     <li>Agent Evals</li>
                     <li>Git</li>
                   </ul>
-                </div>
+                </a>
 
               </div>
 

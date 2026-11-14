@@ -8,7 +8,17 @@
 <meta name="description" content="A test of one AI reviewer with 9 hidden bugs and 3 tries each, and what happened when I changed something about it. 21 of 27 before, 20 of 27 after, no clear change.">
 <meta name="theme-color" content="#FAF8F3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E1413" media="(prefers-color-scheme: dark)">
-<link rel="canonical" href="https://caelangander.com/prodject/report.html">
+<link rel="canonical" href="https://caelangander.com/prodject/report">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Does my bug-hunting agent find the bugs I hide? &ndash; Caelan Gander">
+<meta property="og:description" content="9 hidden bugs, 3 tries each, and what happened when I changed something about the agent. 21 of 27 before, 20 of 27 after, no clear change.">
+<meta property="og:url" content="https://caelangander.com/prodject/report">
+<meta property="og:image" content="https://caelangander.com/og-image.png?v=5">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Caelan Gander">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
 <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
 <link rel="stylesheet" href="/prodject/report.css?v=3">
@@ -24,7 +34,7 @@
 
 <h2>How the test works</h2>
 <ul>
-<li><b>9 hidden bugs.</b> A script folds each one into a real Violencetown change, so it looks like part of that change. Each copies a kind of bug the agent has really found before.</li>
+<li><b>9 hidden bugs.</b> A script folds each one into a real Violencetown change, so it looks like part of that change. Most copy a kind of bug the agent has really found before.</li>
 <li><b>1 obvious bug,</b> to check that the test itself works. The agent caught it 3 of 3 times before the change and 3 of 3 after.</li>
 <li><b>1 real past bug, replayed.</b> It missed it every time, before and after.</li>
 <li><b>3 tries per bug,</b> because the agent can answer differently each time.</li>

@@ -30,7 +30,7 @@
   <a class="back" href="/explore"><span aria-hidden="true">&larr; </span>Back to Explore</a>
 
   <h1>Prodject</h1>
-  <p class="lede">Prodject is how I build projects with AI agents, and how I check that they&rsquo;re working well. I write the idea cards and answer the questions only I can answer. An agent breaks each idea into small changes, each with a checklist, and I approve the checklist. One agent builds each change, a second checks every item against the tests or points me to a screenshot, and I decide what is shipped to production. AI agents write all of the code.</p>
+  <p class="lede">Prodject is how I build projects with AI agents, and how I check that they&rsquo;re working well. I write the idea cards and answer the questions only I can answer. An agent breaks each idea into small changes, each with a checklist, and I approve the checklist for anything a player would notice. One agent builds each change, a second checks every item against the tests or points me to a screenshot, and I decide what is shipped to production. AI agents write all of the code.</p>
 
   <h2>What it has built</h2>
   <p>My games <a href="https://violencetown.russelldangerr.com/" target="_blank" rel="noopener">Violencetown</a> and Grawlix both run on it. Since each game picked up the loop in late October, about 220 changes have merged into Violencetown and about 120 into Grawlix.</p>
@@ -56,13 +56,13 @@
     <figcaption>Each row is 1 hidden bug, tried 3 times before the added instruction and 3 times after. A filled dot is a catch. The ringed pair is the only run that changed.</figcaption>
   </figure>
 
-  <p>Two honest limits. A test of 3 runs on 9 bugs is small, and the runs before the change used an older setup than the runs after. I&rsquo;d want a cleaner rerun before trusting either number.</p>
-  <p>On real code with nothing hidden in it, the same agent found 2 Violencetown bugs nobody knew about, and raised 1 false alarm.</p>
-  <a class="go" href="/prodject/report.html">Read the full report<span aria-hidden="true"> &rarr;</span></a>
+  <p>2 honest limits. A test of 3 runs on 9 bugs is small, and the runs before the change used an older setup than the runs after. I&rsquo;d want a cleaner rerun before trusting either number.</p>
+  <p>On real code with nothing hidden in it, the version with the added instruction found 2 Violencetown bugs nobody knew about, and raised 1 false alarm.</p>
+  <a class="go" href="/prodject/report">Read the full report<span aria-hidden="true"> &rarr;</span></a>
 
   <h2>Lately</h2>
   <ul class="lately">
-    <li><time datetime="2026-11-11">Nov 11</time><span>An outside review fixed this page<span class="sep" aria-hidden="true"> &middot; </span>one rules file for Claude and Gemini<span class="sep" aria-hidden="true"> &middot; </span>the bug hunter runs on Gemini, read-only<span class="sep" aria-hidden="true"> &middot; </span>Raven&rsquo;s document reader scored 3 of 15 on its first test (a keyword search got 4)</span></li>
+    <li><time datetime="2026-11-11">Nov 11</time><span>An outside review led to fixes on this page<span class="sep" aria-hidden="true"> &middot; </span>one rules file for Claude and Gemini<span class="sep" aria-hidden="true"> &middot; </span>the bug hunter can now run on Gemini, read-only<span class="sep" aria-hidden="true"> &middot; </span>Raven&rsquo;s document reader scored 3 of 15 on its first test (a keyword search got 4)</span></li>
     <li><time datetime="2026-11-10">Nov 10</time><span>The bug hunter found 2 real Violencetown bugs on code with nothing hidden in it</span></li>
   </ul>
 
