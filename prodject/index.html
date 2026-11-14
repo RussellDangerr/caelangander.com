@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prodject &ndash; Caelan Gander</title>
+  <meta name="description" content="How I build projects with AI agents, and how I check that they&rsquo;re working well.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#FAF8F3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1413" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
+  <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+  <link rel="canonical" href="https://caelangander.com/prodject/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Prodject &ndash; Caelan Gander">
+  <meta property="og:description" content="How I build projects with AI agents, and how I check that they&rsquo;re working well.">
+  <meta property="og:url" content="https://caelangander.com/prodject/">
+  <meta property="og:image" content="https://caelangander.com/og-image.png?v=5">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Caelan Gander">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prodject &ndash; Caelan Gander">
+  <meta name="twitter:description" content="How I build projects with AI agents, and how I check that they&rsquo;re working well.">
+  <link rel="stylesheet" href="/prodject/prodject.css?v=5">
+</head>
+<body>
+<main>
+  <a class="back" href="/explore"><span aria-hidden="true">&larr; </span>Back to Explore</a>
+
+  <h1>Prodject</h1>
+  <p class="lede">Prodject is how I build projects with AI agents, and how I check that they&rsquo;re working well. I write the idea cards and answer the questions only I can answer. An agent breaks each idea into small changes, each with a checklist, and I approve the checklist for anything a player would notice. One agent builds each change, a second checks every item against the tests or points me to a screenshot, and I decide what is shipped to production. AI agents write all of the code.</p>
+
+  <h2>What it has built</h2>
+  <p>My games <a href="https://violencetown.russelldangerr.com/" target="_blank" rel="noopener">Violencetown</a> and Grawlix both run on it. Since each game picked up the loop in late October, about 220 changes have merged into Violencetown and about 120 into Grawlix.</p>
+
+  <h2>How I test the agents</h2>
+  <p>Agents report success with the same confidence whether or not it&rsquo;s true, so I test them the way I&rsquo;d test anything else. I&rsquo;ve run tests where I hide known bugs in real code and count how often an agent finds them.</p>
+  <p>My bug-hunting agent reads new code and reports what looks wrong. I had 9 bugs hidden in real Violencetown changes and ran it 3 times on each. It found them 21 of 27 times. It missed 1 bug every time, even though it read the line the bug was on.</p>
+  <p>Then I added 1 instruction, telling it to check each change against its comment, its spec and its test. It found them 20 of 27 times. That&rsquo;s no clear difference, so the instruction didn&rsquo;t ship.</p>
+
+  <figure class="bugs">
+    <div class="bugs-grid" role="table" aria-label="The 9 hidden bugs, each tried 3 times before and 3 times after the added instruction">
+      <div class="bugs-row bugs-head" role="row"><span role="columnheader">Hidden bug</span><span role="columnheader">Before</span><span role="columnheader">After</span></div>
+      <div class="bugs-row" role="row"><span role="rowheader">Ice no longer puts out fire</span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span></div>
+      <div class="bugs-row" role="row"><span role="rowheader">A target&rsquo;s label goes dim</span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span></div>
+      <div class="bugs-row" role="row"><span role="rowheader">An old save dims every zone</span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span></div>
+      <div class="bugs-row" role="row"><span role="rowheader">A fire test that can&rsquo;t fail</span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span></div>
+      <div class="bugs-row" role="row"><span role="rowheader">Muggers recorded after loading</span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span></div>
+      <div class="bugs-row" role="row"><span role="rowheader">A restart keeps the mugger&rsquo;s gold</span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span><span class="tries" role="cell" aria-label="3 of 3"><i class="hit"></i><i class="hit"></i><i class="hit"></i></span></div>
+      <div class="bugs-row" role="row"><span role="rowheader">A check uses &ldquo;or&rdquo; where it needs &ldquo;and&rdquo;</span><span class="tries" role="cell" aria-label="2 of 3"><i class="hit"></i><i class="hit"></i><i></i></span><span class="tries" role="cell" aria-label="2 of 3"><i class="hit"></i><i class="hit"></i><i></i></span></div>
+      <div class="bugs-row" role="row"><span role="rowheader">A mugger&rsquo;s record ignores stolen gold</span><span class="tries" role="cell" aria-label="1 of 3"><i class="hit moved"></i><i></i><i></i></span><span class="tries" role="cell" aria-label="0 of 3"><i class="moved"></i><i></i><i></i></span></div>
+      <div class="bugs-row" role="row"><span role="rowheader">A save forgets the mugger who just robbed you</span><span class="tries" role="cell" aria-label="0 of 3"><i></i><i></i><i></i></span><span class="tries" role="cell" aria-label="0 of 3"><i></i><i></i><i></i></span></div>
+    </div>
+    <figcaption>Each row is 1 hidden bug, tried 3 times before the added instruction and 3 times after. A filled dot is a catch. The ringed pair is the only run that changed.</figcaption>
+  </figure>
+
+  <p>2 honest limits. A test of 3 runs on 9 bugs is small, and the runs before the change used an older setup than the runs after. I&rsquo;d want a cleaner rerun before trusting either number.</p>
+  <p>On real code with nothing hidden in it, the version with the added instruction found 2 Violencetown bugs nobody knew about, and raised 1 false alarm.</p>
+  <a class="go" href="/prodject/report">Read the full report<span aria-hidden="true"> &rarr;</span></a>
+
+  <h2>Lately</h2>
+  <ul class="lately">
+    <li><time datetime="2026-11-11">Nov 11</time><span>An outside review led to fixes on this page<span class="sep" aria-hidden="true"> &middot; </span>one rules file for Claude and Gemini<span class="sep" aria-hidden="true"> &middot; </span>the bug hunter can now run on Gemini, read-only<span class="sep" aria-hidden="true"> &middot; </span>Raven&rsquo;s document reader scored 3 of 15 on its first test (a keyword search got 4)</span></li>
+    <li><time datetime="2026-11-10">Nov 10</time><span>The bug hunter found 2 real Violencetown bugs on code with nothing hidden in it</span></li>
+  </ul>
+
+  <footer>
+    <p>Prodject is a personal project. Its source isn&rsquo;t public yet.</p>
+  </footer>
+</main>
+</body>
+</html>

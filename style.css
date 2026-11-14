@@ -2243,6 +2243,7 @@ body.has-intro .banner-wrap { transition: none; }
   .project-badge-head:has(.badge-stack) .external { margin-top: 0; }
   .badge-stack { display: contents; }
   .badge-cta { order: 1; flex-basis: 100%; text-align: right; padding-right: 22px; }
+  .project-badge-head:not(:has(.external)) .badge-cta { padding-right: 0; }
 }
 
 @media (max-width: 480px) {
