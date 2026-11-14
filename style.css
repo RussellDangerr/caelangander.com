@@ -259,6 +259,17 @@
   --accent-deep: var(--color-secondary-deep);
   --accent-soft: var(--color-secondary-soft);
 }
+/* inside Explore, colour says what kind of thing it is: green for work, purple for play */
+[data-tone="work"] {
+  --accent:      var(--color-primary);
+  --accent-deep: var(--color-primary-deep);
+  --accent-soft: var(--color-primary-soft);
+}
+[data-tone="play"] {
+  --accent:      var(--color-secondary);
+  --accent-deep: var(--color-secondary-deep);
+  --accent-soft: var(--color-secondary-soft);
+}
 
 /* ── Base ────────────────────────────────────────────────────────────── */
 html {
@@ -1779,15 +1790,15 @@ a.project-badge:focus-visible {
 @media (prefers-color-scheme: dark) { .pj-diagram { --pj-no: #E0A040; } }
 .pj-s { fill: var(--color-muted-strong); font-family: var(--font-mono); font-size: 29px; letter-spacing: 0.05em; }
 .pj-node rect { fill: var(--color-surface); stroke: var(--color-hairline-strong); stroke-width: 2; }
-.pj-node--me rect { fill: var(--color-secondary-soft); stroke: var(--color-secondary); }
+.pj-node--me rect { fill: var(--accent-soft); stroke: var(--accent); }
 .pj-nt { fill: var(--color-text); font-family: var(--font-display); font-weight: 600; font-size: 38px; }
 .pj-ns { fill: var(--color-muted-strong); font-family: var(--font-mono); font-size: 28px; letter-spacing: 0.04em; }
-.pj-link { fill: none; stroke: var(--color-secondary); stroke-width: 5; stroke-linecap: round; }
-.pj-rail, .pj-tie { fill: none; stroke: var(--color-secondary); stroke-width: 5; stroke-linecap: round; opacity: 0.5; }
+.pj-link { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; }
+.pj-rail, .pj-tie { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; opacity: 0.5; }
 .pj-dot { opacity: 0; transform-box: view-box; transform-origin: 0 0; }
-.pj-dot-core { fill: var(--color-secondary); }
-.pj-dot-glow { fill: var(--color-secondary); opacity: 0.25; }
-.pj-ring { fill: none; stroke: var(--color-secondary); stroke-width: 6; opacity: 0; }
+.pj-dot-core { fill: var(--accent); }
+.pj-dot-glow { fill: var(--accent); opacity: 0.25; }
+.pj-ring { fill: none; stroke: var(--accent); stroke-width: 6; opacity: 0; }
 .pj-sheet { fill: var(--color-surface); stroke: var(--color-hairline-strong); stroke-width: 2; }
 .pj-task { fill: var(--color-text); font-family: var(--font-display); font-weight: 600; font-size: 32px; }
 .pj-stamp rect { fill: none; stroke: currentColor; stroke-width: 4; }
@@ -1796,17 +1807,17 @@ a.project-badge:focus-visible {
 .pj-stamp.pj-no { color: var(--pj-no); }
 .pj-stamp.pj-no rect { stroke-width: 4.5; stroke-dasharray: 11 6; }
 .pj-row { fill: var(--color-text); font-family: var(--font-sans); font-size: 30px; }
-.pj-back-line, .pj-back-head { fill: none; stroke: var(--color-secondary); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.pj-back-line, .pj-back-head { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
 .pj-back-line { stroke-dasharray: 14 10; }
 .pj-back-label { fill: var(--color-text); font-family: var(--font-sans); font-weight: 600; font-size: 32px; }
 .pj-foot { fill: var(--color-muted-strong); font-family: var(--font-sans); font-size: 28px; }
 .rv-axis { fill: none; stroke: var(--color-hairline-strong); stroke-width: 2; }
-.rv-line { fill: none; stroke: var(--color-secondary); stroke-width: 10; stroke-linejoin: round; stroke-linecap: round; }
+.rv-line { fill: none; stroke: var(--accent); stroke-width: 10; stroke-linejoin: round; stroke-linecap: round; }
 .rv-flat { fill: none; stroke: var(--color-muted); stroke-width: 8; stroke-dasharray: 0 16; stroke-linecap: round; }
-.rv-dot { fill: var(--color-secondary); }
+.rv-dot { fill: var(--accent); }
 .rv-chart { --rv-c3: #C2410C; }
 @media (prefers-color-scheme: dark) { .rv-chart { --rv-c3: #FB923C; } }
-.rv-l2 { fill: none; stroke: var(--color-primary); stroke-width: 7; stroke-linejoin: round; stroke-linecap: round; }
+.rv-l2 { fill: none; stroke: var(--color-muted-strong); stroke-width: 7; stroke-linejoin: round; stroke-linecap: round; }
 .rv-l3 { fill: none; stroke: var(--rv-c3); stroke-width: 7; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 18 10; }
 .rv-k { fill: var(--color-muted); font-family: var(--font-sans); font-size: 30px; }
 .rv-kn { fill: var(--color-text); font-family: var(--font-display); font-weight: 600; font-size: 34px; }
@@ -1888,15 +1899,12 @@ a.project-badge:focus-visible {
   border: 1px solid transparent;
   white-space: nowrap;
 }
-.badge-status--public {
-  color: var(--color-primary-deep);
-  background: var(--color-primary-soft);
-  border-color: color-mix(in srgb, var(--color-primary) 38%, transparent);
-}
+/* status is a fact, not a mood: both badges are neutral, so colour is left to say work or play */
+.badge-status--public,
 .badge-status--dev {
-  color: var(--color-secondary);
-  background: var(--color-secondary-soft);
-  border-color: color-mix(in srgb, var(--color-secondary) 38%, transparent);
+  color: var(--color-muted-strong);
+  background: var(--color-surface-2);
+  border-color: var(--color-hairline-strong);
 }
 
 .project-badge .external {
@@ -1964,7 +1972,7 @@ a.project-badge:focus-visible {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 600;
-  color: var(--color-primary-deep);
+  color: var(--accent-deep);
   white-space: nowrap;
 }
 /* the GitHub card is just its mark and two lines, centred in whatever height its neighbour sets */
