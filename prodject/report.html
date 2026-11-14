@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>Does my bug-hunting agent find the bugs I hide? &ndash; Prodject &ndash; Caelan Gander</title>
-<meta name="description" content="A test of one AI reviewer with 9 hidden bugs and 3 tries each, and what happened when I changed 1 thing about it. 21 of 27 before, 20 of 27 after, no clear change.">
+<meta name="description" content="A test of one AI reviewer with 9 hidden bugs and 3 tries each, and what happened when I changed something about it. 21 of 27 before, 20 of 27 after, no clear change.">
 <meta name="theme-color" content="#FAF8F3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E1413" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://caelangander.com/prodject/report.html">
@@ -17,18 +17,18 @@
 <main>
 <a class="back" href="/prodject/"><span aria-hidden="true">&larr; </span>Back to Prodject</a>
 <h1>Does my bug-hunting agent find the bugs I hide?</h1>
-<p class="lede">A test of one AI reviewer, and what happened when I changed 1 thing about it.</p>
+<p class="lede">A test of one AI reviewer, and what happened when I changed something about it.</p>
 
 <h2>What it tests</h2>
-<p>My bug-hunting agent reads the code that merged since its last look and suggests up to 3 possible bugs. This test asks one question. When I know a bug is there, how often does it say so?</p>
+<p>My bug-hunting agent reads the code that merged since its last look and suggests up to 3 possible bugs. This test asks one question: when a known bug is there, how often is it caught?</p>
 
 <h2>How the test works</h2>
 <ul>
-<li><b>9 hidden bugs.</b> A script folds each one into a real Violencetown change, so it looks like part of that change. Each copies a kind of bug the agent has found for real before.</li>
-<li><b>One obvious bug,</b> to check that the test itself works. The agent caught it 3 of 3 times before the change and 3 of 3 after.</li>
-<li><b>One real past bug, replayed.</b> In the before round it missed it all 3 times.</li>
+<li><b>9 hidden bugs.</b> A script folds each one into a real Violencetown change, so it looks like part of that change. Each copies a kind of bug the agent has really found before.</li>
+<li><b>1 obvious bug,</b> to check that the test itself works. The agent caught it 3 of 3 times before the change and 3 of 3 after.</li>
+<li><b>1 real past bug, replayed.</b> It missed it every time, before and after.</li>
 <li><b>3 tries per bug,</b> because the agent can answer differently each time.</li>
-<li><b>A range around every result.</b> Each rate comes with a 95% range, and the before-and-after difference gets its own range. If that range includes zero, I call it no clear change. These ranges treat all 27 tries as independent, but tries on the same bug tend to go all one way, so the honest margins are wider than shown.</li>
+<li><b>A range around every result.</b> Each rate comes with a 95% range, and the before-and-after difference gets its own range. If that range includes zero, it is called no clear change. These ranges treat all 27 tries as independent, but tries on the same bug tend to go all one way, so the honest margins are wider than shown.</li>
 </ul>
 
 <h2>Before and after</h2>
@@ -37,7 +37,7 @@
 <div class="box"><span>Before</span><b>21 of 27</b><span>range 59&ndash;89%</span></div>
 <div class="box"><span>After the added instruction</span><b>20 of 27</b><span>range 55&ndash;87%</span></div>
 </div>
-<p class="verdict"><b>A drop of 4 points, with a range from &minus;26 to +19. That&rsquo;s no clear change.</b><br>With 27 tries a side, only a move of about 25 points or more would show up.</p>
+<p class="verdict"><b>A drop of 4 points, with a range from &minus;26 to +19. No clear change.</b><br>With 27 tries a side, only a move of about 25 points or more would show up.</p>
 
 <div class="wrap" tabindex="0" role="region" aria-label="Results for each hidden bug">
 <table>
@@ -59,18 +59,15 @@
 
 <h2>What it tells me</h2>
 <ul>
-<li>The added instruction didn&rsquo;t help, and the misses didn&rsquo;t move.</li>
+<li>The added instruction didn&rsquo;t help, and misses didn&rsquo;t move.</li>
 <li>In nearly every miss, the agent read the line with the bug on it and passed it anyway.</li>
-<li>On real code with nothing hidden in it, it made 1 suggestion in 6 runs before the change and 4 in 6 after. Of those 4, 3 pointed at 2 real Violencetown bugs nobody knew about. The other was a false alarm.</li>
+<li>On real code with nothing hidden in it, it made 1 suggestion in 6 runs before the change and 4 in 6 after. 3 of those 4 pointed at 2 real Violencetown bugs nobody knew about. The other was a false alarm.</li>
 <li>The next test, already set up, changes what the agent has to write down about each piece of code.</li>
 </ul>
 
 <h2>What could be off</h2>
 <p>All of the before runs used an older setup than the after runs. A 6-run check in the newer setup matched the old results 6 of 6, but a full rerun would be cleaner. Claude read every graded run in full, on top of the automatic grading.</p>
 
-<footer>
-<p>Running it cost $76.28 for the before round (86 starts, 47 of them broken by a locked file or a usage limit and rerun) and $43.64 for the after round (40 starts), as reported by the tool.</p>
-</footer>
 </main>
 </body>
 </html>
