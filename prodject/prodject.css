@@ -7,7 +7,7 @@
 :root {
   --bg: #FAF8F3; --surface: #FFFFFF; --surface-2: #F1EDE4;
   --text: #1A1C19; --muted: #586059; --hairline: rgba(26, 28, 25, 0.12);
-  --accent: #7E22CE; --warn: #9a5b00;
+  --accent: #15803D; --warn: #9a5b00;
   --display: 'Fraunces', Georgia, serif;
   --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
@@ -17,7 +17,7 @@
   :root {
     --bg: #0E1413; --surface: #161E1B; --surface-2: #1E2723;
     --text: #ECEAE3; --muted: #9AA39C; --hairline: rgba(255, 255, 255, 0.10);
-    --accent: #C084FC; --warn: #e0a040;
+    --accent: #22C55E; --warn: #e0a040;
   }
 }
 
