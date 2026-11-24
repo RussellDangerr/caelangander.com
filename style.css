@@ -2185,8 +2185,53 @@ body.has-intro .banner-wrap { transition: none; }
   .case-card:not(.is-expanded) .case-detail-inner { content-visibility: hidden; }
 }
 
+/* ── Lately: one highlight per project, newest first ─────────────────── */
+/* Home view only. Each entry's top rule takes its tone: green for work, purple for games. */
+body[data-active] .lately { display: none; }
+.lately .section-label { margin: 0 0 18px; }
+.lately-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+}
+.lately-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  padding: 14px 0 0;
+  border: 0;
+  border-top: 2px solid var(--accent);
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.lately-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.lately-name { font-size: var(--text-md); font-weight: 600; color: var(--color-text); }
+.lately-item time {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+.lately-text { font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--color-muted); text-wrap: pretty; }
+.lately-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 2px; }
+@media (hover: hover) {
+  .lately-item:hover .lately-name { color: var(--accent); }
+}
+
 /* ── Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 960px) {
+  .lately-list { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; }
   :root { --gutter: 32px; }
 
   .tiles { flex-direction: column; }
@@ -2256,6 +2301,7 @@ body.has-intro .banner-wrap { transition: none; }
 
 @media (max-width: 480px) {
   :root { --gutter: 16px; }
+  .lately-list { grid-template-columns: 1fr; }
   .banner { grid-template-columns: 1fr; }
   .banner-photo { grid-row: auto; width: 96px; margin-bottom: 20px; }
   .banner-name, .banner-about { grid-column: 1; }
@@ -2301,7 +2347,8 @@ body.has-intro .banner-wrap { transition: none; }
   .logo:focus-visible,
   .channel:focus-visible,
   .popout-btn:focus-visible,
-  a.project-badge:focus-visible { outline: 2px solid Highlight; outline-offset: 3px; }
+  a.project-badge:focus-visible,
+  .lately-item:focus-visible { outline: 2px solid Highlight; outline-offset: 3px; }
   .channel-row:focus-visible { outline: 2px solid Highlight; outline-offset: -4px; }   /* inset: the card clips */
   .learn-nav a[aria-current] {
     forced-color-adjust: none;
@@ -2354,6 +2401,7 @@ body.has-intro .banner-wrap { transition: none; }
   .skip-link,
   .header,
   .banner-wrap,
+  .lately,
   .footer,
   .tile,
   .learn-nav,

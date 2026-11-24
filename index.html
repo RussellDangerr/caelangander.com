@@ -28,7 +28,7 @@
 
   <link rel="preload" href="/assets/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=74">
+  <link rel="stylesheet" href="/style.css?v=75">
 </head>
 <body class="has-intro">
 
@@ -752,6 +752,37 @@
         </article>
 
       </div>
+
+      <!-- ── Lately: one highlight per project, newest first (home view only) ──── -->
+      <section class="lately" aria-labelledby="lately-title">
+        <h2 class="section-label" id="lately-title">Lately</h2>
+        <ol class="lately-list">
+          <li data-tone="work">
+            <a class="lately-item" href="/prodject/">
+              <span class="lately-head"><span class="lately-name">Prodject</span> <time datetime="2026-11-21">Nov 21</time></span>
+              <span class="lately-text">Prodject now checks each game update before release. A script plays the last release and the new build on the same 50 seeds and flags any change in how often a run dies or finishes.</span>
+            </a>
+          </li>
+          <li data-tone="play">
+            <a class="lately-item" href="https://violencetown.russelldangerr.com/" target="_blank" rel="noopener">
+              <span class="lately-head"><span class="lately-name">Violencetown</span> <time datetime="2026-11-19">Nov 19</time></span>
+              <span class="lately-text">Search a grave in the Graveyard and you fall into the Tunnels, where the Molemen live. Each finished quest now hands you a potion that raises the stat you pick.</span>
+            </a>
+          </li>
+          <li data-tone="play">
+            <button class="lately-item" type="button" data-go="explore" aria-controls="panel-explore">
+              <span class="lately-head"><span class="lately-name">Grawlix</span> <time datetime="2026-11-17">Nov 17</time></span>
+              <span class="lately-text">Pterodactyls circle the lava run and dive at you when you fly, and clouds at flight height puff apart as you fly through them.</span>
+            </button>
+          </li>
+          <li data-tone="work">
+            <a class="lately-item" href="https://raven.caelangander.com">
+              <span class="lately-head"><span class="lately-name">Raven</span> <time datetime="2026-11-11">Nov 11</time></span>
+              <span class="lately-text">Each idea page now charts patents against research papers, and every page was rewritten for a general reader and checked twice for overclaiming.</span>
+            </a>
+          </li>
+        </ol>
+      </section>
     </div>
   </main>
 
